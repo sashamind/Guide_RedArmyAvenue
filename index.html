@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Красноармейский проспект — Путеводитель по Туле</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="nav__logo" href="#">КП</a>
+      <ul class="nav__links">
+        <li><a href="#s1778">1778</a></li>
+        <li><a href="#s1850">1850</a></li>
+        <li><a href="#s1880">1880-е</a></li>
+        <li><a href="#s1900">1900-е</a></li>
+        <li><a href="#s1917">1917</a></li>
+        <li><a href="#s1930">1930-е</a></li>
+        <li><a href="#s1941">1941</a></li>
+        <li><a href="#nearby">Рядом</a></li>
+      </ul>
+      <button class="nav__burger" id="navBurger" aria-label="Меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__progress" id="navProgress"></div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════ HERO -->
+  <section class="hero">
+    <div class="hero__left">
+      <span class="label" data-animate="fade-up" data-delay="1">Тула · Путеводитель</span>
+      <h1 class="hero__title" data-animate="fade-up" data-delay="2">
+        Красно&shy;армейский<br>проспект
+      </h1>
+      <p class="hero__sub" data-animate="fade-up" data-delay="3">Прогулка сквозь три века</p>
+      <p class="hero__desc" data-animate="fade-up" data-delay="4">
+        Главная магистраль Тулы хранит три столетия истории —
+        от первых самоварных мастерских до современного
+        пешеходного бульвара.
+      </p>
+      <a class="hero__scroll" href="#s1778" data-animate="fade-up" data-delay="5">
+        <span class="hero__scroll-line"></span>Начать прогулку
+      </a>
+    </div>
+    <div class="hero__right" data-animate="reveal">
+      <img
+        src="https://picsum.photos/seed/kp-hero-tula/900/1200"
+        alt="Красноармейский проспект"
+        data-parallax
+      />
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 1778 -->
+  <section class="era" id="s1778">
+    <div class="era__inner container">
+      <div class="era__date">
+        <span class="label" data-animate="fade-up">Сквозь года</span>
+        <div class="t-year" data-animate="year">1778<br>год</div>
+        <div class="t-era-title" data-animate="fade-up" data-delay="1">
+          Первая<br>самоварная<br>фабрика
+        </div>
+      </div>
+      <div class="era__content">
+        <figure class="era__figure" data-animate="reveal">
+          <img
+            src="https://picsum.photos/seed/samovar-lisitsin-1778/720/540"
+            alt="Самоварное производство, конец XVIII в."
+          />
+          <figcaption>Тула. Самоварное производство. Конец XVIII в.</figcaption>
+        </figure>
+        <div class="era__body" data-animate="fade-up">
+          <p>
+            Первое самоварное заведение появилось в Туле в конце 1778 года,
+            на Штыковой улице, и принадлежало купцам Лисициным. В 1803 году
+            у Ивана и Назара Лисициных работают: тульских мещан — 4 человека,
+            оружейников — 7, ямщиков — 2, крестьян из уездов: Тульского — 6,
+            Алексинского — 7 человек. Всего — 26 человек.
+          </p>
+          <p>
+            Именно вдоль будущего Красноармейского проспекта и прилегающих
+            переулков сосредоточились первые самоварные «заведения» —
+            небольшие мастерские, где каждый экземпляр собирался вручную,
+            деталь за деталью.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <div class="quote-block bg-cream">
+    <div class="container">
+      <blockquote class="quote" data-animate="fade-up">
+        <p>«Заведение наше невелико, но работа в нём не прекращается
+        ни летом, ни зимой. Медь, томпак, латунь — каждый металл
+        знает своё место в самоваре, как каждый мастер знает
+        своё место в артели.»</p>
+        <cite>— Из записок тульского мастера. Конец XVIII в.</cite>
+      </blockquote>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-stripe">
+    <div class="container">
+      <div class="stats-stripe__grid" data-animate="stagger">
+        <div class="stat">
+          <div class="stat__num"><span data-counter="26">0</span></div>
+          <div class="stat__unit">рабочих</div>
+          <p class="stat__desc">на первой фабрике Лисициных в 1803 году</p>
+        </div>
+        <div class="stat">
+          <div class="stat__num"><span data-counter="3000">0</span></div>
+          <div class="stat__unit">рублей</div>
+          <p class="stat__desc">начальный капитал предприятия</p>
+        </div>
+        <div class="stat">
+          <div class="stat__num"><span data-counter="1500">0</span></div>
+          <div class="stat__unit">рублей</div>
+          <p class="stat__desc">годовой доход — ровно половина от капитала</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MATERIALS TABLE -->
+  <div class="mat-table bg-cream">
+    <div class="container">
+      <span class="label" data-animate="fade-up">Из чего делали</span>
+      <h3 class="mat-table__title" data-animate="fade-up" data-delay="1">
+        Металлы самоварного дела
+      </h3>
+      <div class="tbl-scroll">
+        <table class="arch-tbl" data-animate="fade-up" data-delay="2">
+          <thead>
+            <tr>
+              <th>Металл</th>
+              <th>Состав</th>
+              <th>Свойства</th>
+              <th>Применение</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Медь зелёная</td>
+              <td>Cu 99%</td>
+              <td>Мягкая, пластичная, хорошо лудится</td>
+              <td>Корпус, кран, ручки</td>
+            </tr>
+            <tr>
+              <td>Латунь</td>
+              <td>Cu 50–56%, Zn 44–50%</td>
+              <td>Прочнее меди, золотистый цвет</td>
+              <td>Детали отделки, краны</td>
+            </tr>
+            <tr>
+              <td>Томпак</td>
+              <td>Cu 80–88%, Zn 12–20%</td>
+              <td>Имитирует золото, хорошо полируется</td>
+              <td>Представительские самовары</td>
+            </tr>
+            <tr>
+              <td>Мельхиор</td>
+              <td>Cu 80%, Ni 20%</td>
+              <td>Белый, устойчив к коррозии</td>
+              <td>Парадные и экспортные модели</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ к 1850-му -->
+  <section class="era era--flip" id="s1850">
+    <div class="era__inner container">
+      <div class="era__date">
+        <span class="label" data-animate="fade-up">Сквозь года</span>
+        <div class="t-year" data-animate="year">к&nbsp;1850<br>-му</div>
+        <div class="t-era-title" data-animate="fade-up" data-delay="1">
+          Расцвет<br>торговых рядов
+        </div>
+        <blockquote class="era__aside-quote" data-animate="fade-up" data-delay="2">
+          <p>«К середине столетия на улице насчитывалось
+          более двадцати восьми самоварных заведений —
+          и это не считая оружейников и пряничников.»</p>
+        </blockquote>
+      </div>
+      <div class="era__content">
+        <figure class="era__figure" data-animate="reveal">
+          <img
+            src="https://picsum.photos/seed/tula-trade-1850/720/540"
+            alt="Торговые ряды Тулы, 1860-е"
+          />
+          <figcaption>Торговые ряды. Тула, 1860-е гг.</figcaption>
+        </figure>
+        <div class="era__body" data-animate="fade-up">
+          <p>
+            К середине XIX века улица стала главной торговой артерией города.
+            <strong>28 фабрик и больше 120&thinsp;000 самоваров в год</strong> —
+            такова мощь тульского производства к 1850 году.
+          </p>
+          <p>
+            Вдоль дороги выросли каменные купеческие дома с широкими воротами
+            и подвалами-складами. Торговали не только самоварами: оружие,
+            пряники, калачи, кожи — Тула умела удивить любого гостя.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ PORTRAITS -->
+  <section class="portraits bg-dark">
+    <div class="container">
+      <header class="portraits__hdr">
+        <span class="label" data-animate="fade-up">Люди проспекта</span>
+        <h2 class="portraits__title" data-animate="fade-up" data-delay="1">
+          Те, кто<br>строил улицу
+        </h2>
+      </header>
+      <div class="portraits__grid" data-animate="stagger">
+        <article class="person-card">
+          <div class="person-card__img">
+            <img src="https://picsum.photos/seed/person-belo/400/500" alt="" />
+          </div>
+          <div class="person-card__body">
+            <span class="person-card__role">Городской голова</span>
+            <div class="person-card__name">Иван Белолипецкий</div>
+            <div class="person-card__years">1842 — 1858</div>
+            <p class="person-card__bio">
+              При нём проложили первую мощёную мостовую вдоль
+              главной улицы и установили газовые фонари.
+            </p>
+          </div>
+        </article>
+        <article class="person-card">
+          <div class="person-card__img">
+            <img src="https://picsum.photos/seed/person-sokol/400/500" alt="" />
+          </div>
+          <div class="person-card__body">
+            <span class="person-card__role">Губернский архитектор</span>
+            <div class="person-card__name">Николай Сокольников</div>
+            <div class="person-card__years">1867 — 1889</div>
+            <p class="person-card__bio">
+              Спроектировал доходные дома в стиле эклектики,
+              задавшие характер застройки проспекта на десятилетия.
+            </p>
+          </div>
+        </article>
+        <article class="person-card">
+          <div class="person-card__img">
+            <img src="https://picsum.photos/seed/person-kamin/400/500" alt="" />
+          </div>
+          <div class="person-card__body">
+            <span class="person-card__role">Революционный комиссар</span>
+            <div class="person-card__name">Г. Н. Каминский</div>
+            <div class="person-card__years">1917 — 1920</div>
+            <p class="person-card__bio">
+              Руководил советизацией города. При нём главная улица
+              получила новое имя — Красноармейский проспект.
+            </p>
+          </div>
+        </article>
+        <article class="person-card">
+          <div class="person-card__img">
+            <img src="https://picsum.photos/seed/person-zhilin/400/500" alt="" />
+          </div>
+          <div class="person-card__body">
+            <span class="person-card__role">Советский архитектор</span>
+            <div class="person-card__name">В. И. Жилин</div>
+            <div class="person-card__years">1930 — 1955</div>
+            <p class="person-card__bio">
+              Проектировал конструктивистские жилые дома и здание
+              горисполкома, формируя новый облик проспекта.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 1880-е -->
+  <section class="era" id="s1880">
+    <div class="era__inner container">
+      <div class="era__date">
+        <span class="label" data-animate="fade-up">Сквозь года</span>
+        <div class="t-year" data-animate="year">1880<br>-е</div>
+        <div class="t-era-title" data-animate="fade-up" data-delay="1">
+          Конка<br>и телеграф
+        </div>
+      </div>
+      <div class="era__content">
+        <figure class="era__figure" data-animate="reveal">
+          <img
+            src="https://picsum.photos/seed/tula-konka-1883/720/540"
+            alt="Конка в Туле, 1883"
+          />
+          <figcaption>Конно-железная дорога в Туле. 1883 г.</figcaption>
+        </figure>
+        <div class="era__body" data-animate="fade-up">
+          <p>
+            Прокладка конно-железной дороги по главной улице города
+            в 1883 году стала символом наступавшей эпохи прогресса.
+            Горожане высыпали смотреть на диковину: лошадь везёт
+            вагон по рельсам — невидаль!
+          </p>
+          <p>
+            Вслед за конкой появились телеграфные столбы, а к концу
+            десятилетия — электрическое освещение в купеческих лавках.
+            Улица приобретала городской, «столичный» облик.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <div class="quote-block bg-cream">
+    <div class="container">
+      <blockquote class="quote" data-animate="fade-up">
+        <p>«Нынче по главной улице пустили конку — и теперь мещане
+        из Чулково добираются до базара вдвое скорее прежнего.
+        Говорят, к следующей весне протянут и электрический провод.»</p>
+        <cite>— Из письма тульского купца. 1884 г.</cite>
+      </blockquote>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ 1900-е -->
+  <section class="era era--flip" id="s1900">
+    <div class="era__inner container">
+      <div class="era__date">
+        <span class="label" data-animate="fade-up">Сквозь года</span>
+        <div class="t-year" data-animate="year">1900<br>-е</div>
+        <div class="t-era-title" data-animate="fade-up" data-delay="1">
+          Доходные<br>дома и банки
+        </div>
+        <blockquote class="era__aside-quote" data-animate="fade-up" data-delay="2">
+          <p>«Новый век принёс архитектуру эклектики —
+          фасады обросли лепниной и балконами.»</p>
+        </blockquote>
+      </div>
+      <div class="era__content">
+        <figure class="era__figure" data-animate="reveal">
+          <img
+            src="https://picsum.photos/seed/tula-avenue-1902/720/540"
+            alt="Главная улица Тулы, начало XX в."
+          />
+          <figcaption>Главная улица Тулы. Начало XX в.</figcaption>
+        </figure>
+        <div class="era__body" data-animate="fade-up">
+          <p>
+            На рубеже веков улица застраивалась доходными домами в стиле
+            эклектики и раннего модерна. Открылись первые банковские конторы,
+            аптеки с зеркальными витринами, фотографические ателье.
+          </p>
+          <p>
+            Богатые купцы соревновались в роскоши отделки фасадов,
+            выписывая архитекторов из Москвы и Санкт-Петербурга.
+            Улица стала витриной купеческого успеха.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCH TABLE -->
+  <div class="mat-table bg-cream">
+    <div class="container">
+      <span class="label" data-animate="fade-up">Архитектурный словарь</span>
+      <h3 class="mat-table__title" data-animate="fade-up" data-delay="1">
+        Стили, оставившие след
+      </h3>
+      <div class="tbl-scroll">
+        <table class="arch-tbl" data-animate="fade-up" data-delay="2">
+          <thead>
+            <tr>
+              <th>Стиль</th>
+              <th>Период</th>
+              <th>Признаки</th>
+              <th>Пример на проспекте</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Классицизм</td>
+              <td>1800 — 1860</td>
+              <td>Симметрия, колонны, треугольные фронтоны</td>
+              <td>Дворянское собрание</td>
+            </tr>
+            <tr>
+              <td>Эклектика</td>
+              <td>1860 — 1900</td>
+              <td>Смешение исторических стилей, богатый декор</td>
+              <td>Доходные дома № 14, 22</td>
+            </tr>
+            <tr>
+              <td>Модерн</td>
+              <td>1900 — 1917</td>
+              <td>Плавные линии, растительный орнамент, эркеры</td>
+              <td>Банк Тульского общества</td>
+            </tr>
+            <tr>
+              <td>Конструктивизм</td>
+              <td>1925 — 1940</td>
+              <td>Геометрия, функция, никаких украшений</td>
+              <td>Жилой дом треста № 31</td>
+            </tr>
+            <tr>
+              <td>Сталинский ампир</td>
+              <td>1945 — 1960</td>
+              <td>Монументальность, пилястры, звёзды</td>
+              <td>Горисполком, гостиница «Тула»</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ 1917 -->
+  <section class="era" id="s1917">
+    <div class="era__inner container">
+      <div class="era__date">
+        <span class="label" data-animate="fade-up">Сквозь года</span>
+        <div class="t-year" data-animate="year">1917<br>год</div>
+        <div class="t-era-title" data-animate="fade-up" data-delay="1">
+          Революция<br>и новое имя
+        </div>
+      </div>
+      <div class="era__content">
+        <figure class="era__figure" data-animate="reveal">
+          <img
+            src="https://picsum.photos/seed/tula-revolution-1917/720/540"
+            alt="Митинг в Туле, 1917"
+          />
+          <figcaption>Митинг на главной улице. Тула, 1917 г.</figcaption>
+        </figure>
+        <div class="era__body" data-animate="fade-up">
+          <p>
+            Революционные события 1917 года докатились до Тулы волной
+            митингов и собраний прямо на главной улице. Новые городские
+            власти переименовали её в Красноармейский проспект —
+            в честь только что созданной Красной армии.
+          </p>
+          <p>
+            Купеческие лавки перешли в руки советских кооперативов,
+            на фасадах появились красные транспаранты. Прежний купеческий
+            уклад сломался в несколько месяцев — но архитектура
+            осталась прежней.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS 2 -->
+  <div class="stats-stripe">
+    <div class="container">
+      <div class="stats-stripe__grid" data-animate="stagger">
+        <div class="stat">
+          <div class="stat__num"><span data-counter="70">0</span></div>
+          <div class="stat__unit">фабрик</div>
+          <p class="stat__desc">самоварных предприятий в Туле к 1917 году</p>
+        </div>
+        <div class="stat">
+          <div class="stat__num">
+            <span data-counter="110">0</span><span class="stat__suffix">&thinsp;тыс.</span>
+          </div>
+          <div class="stat__unit">самоваров</div>
+          <p class="stat__desc">производилось в год крупнейшими заводами</p>
+        </div>
+        <div class="stat">
+          <div class="stat__num"><span data-counter="30">0</span></div>
+          <div class="stat__unit">из 70</div>
+          <p class="stat__desc">фабрик принадлежало потомственным мастерам</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ 1930-е -->
+  <section class="era era--flip" id="s1930">
+    <div class="era__inner container">
+      <div class="era__date">
+        <span class="label" data-animate="fade-up">Сквозь года</span>
+        <div class="t-year" data-animate="year">1930<br>-е</div>
+        <div class="t-era-title" data-animate="fade-up" data-delay="1">
+          Советский<br>конструктивизм
+        </div>
+        <blockquote class="era__aside-quote" data-animate="fade-up" data-delay="2">
+          <p>«Проспект перестраивался — старые купеческие усадьбы
+          уступали место лаконичным рабочим домам.»</p>
+        </blockquote>
+      </div>
+      <div class="era__content">
+        <figure class="era__figure" data-animate="reveal">
+          <img
+            src="https://picsum.photos/seed/tula-constr-1934/720/540"
+            alt="Тула, 1930-е"
+          />
+          <figcaption>Новостройки Красноармейского. 1934 г.</figcaption>
+        </figure>
+        <div class="era__body" data-animate="fade-up">
+          <p>
+            Советская индустриализация изменила облик проспекта кардинально.
+            Конструктивистские жилые дома, здание горисполкома,
+            широкие тротуары — всё строилось с размахом.
+          </p>
+          <p>
+            В 1935 году по проспекту прошёл первый электрический трамвай,
+            заменивший конку. По вечерам зажигались новые фонари —
+            улица стала светлее, чем когда-либо прежде.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL BLEED -->
+  <figure class="full-bleed" data-animate="fade-up">
+    <img
+      src="https://picsum.photos/seed/tula-panorama-1938/1600/700"
+      alt="Панорама Красноармейского проспекта"
+    />
+    <figcaption class="container">
+      Красноармейский проспект. Конец 1930-х гг.
+    </figcaption>
+  </figure>
+
+  <!-- ═══════════════════════════════════════ 1941 -->
+  <section class="era bg-dark" id="s1941">
+    <div class="era__inner container">
+      <div class="era__date">
+        <span class="label label--amber" data-animate="fade-up">Сквозь года</span>
+        <div class="t-year t-year--ghost" data-animate="year">1941<br>год</div>
+        <div class="t-era-title t-era-title--amber" data-animate="fade-up" data-delay="1">
+          Оборона<br>Тулы
+        </div>
+      </div>
+      <div class="era__content">
+        <figure class="era__figure" data-animate="reveal">
+          <img
+            src="https://picsum.photos/seed/tula-defense-1941/720/540"
+            alt="Оборона Тулы, 1941"
+          />
+          <figcaption class="figcaption--light">
+            Тула в дни осады. Октябрь–декабрь 1941 г.
+          </figcaption>
+        </figure>
+        <div class="era__body era__body--light" data-animate="fade-up">
+          <p>
+            В октябре 1941 года немецкие войска вплотную подошли к Туле.
+            Красноармейский проспект превратился в рубеж обороны:
+            на перекрёстках строились баррикады, устанавливались орудия.
+          </p>
+          <p>
+            Город выстоял в 45-дневной осаде. В 1976 году Тула была
+            удостоена звания «Город-герой». Ни один захватчик
+            не прошёл по главной улице города.
+          </p>
+          <div class="era__pull-stat">
+            <strong>45 дней</strong> — длительность осады.<br>
+            <strong>0 метров</strong> — насколько противник продвинулся в город.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ NEARBY -->
+  <section class="nearby bg-cream" id="nearby">
+    <div class="container">
+      <header class="nearby__hdr">
+        <div>
+          <span class="label" data-animate="fade-up">Рядом с проспектом</span>
+          <h2 class="nearby__title" data-animate="fade-up" data-delay="1">
+            Что ещё<br>посмотреть
+          </h2>
+        </div>
+        <p class="nearby__desc" data-animate="fade-up" data-delay="2">
+          В радиусе пятнадцати минут пешком от проспекта
+          сосредоточено всё главное в Туле. Самовары, кремль,
+          пряники и памятники — всё рядом.
+        </p>
+      </header>
+      <div class="nearby__grid" data-animate="stagger">
+        <a class="nearby-card" href="#">
+          <figure class="nearby-card__fig">
+            <img src="https://picsum.photos/seed/kremlin-tula-kp/600/380" alt="Тульский кремль" />
+          </figure>
+          <div class="nearby-card__body">
+            <span class="nearby-card__dist">2 мин пешком</span>
+            <h3 class="nearby-card__name">Тульский кремль</h3>
+            <p class="nearby-card__desc">
+              Основан в 1514 году по указу Василия III.
+              Один из лучших образцов русского военного зодчества XVI века.
+            </p>
+          </div>
+        </a>
+        <a class="nearby-card" href="#">
+          <figure class="nearby-card__fig">
+            <img src="https://picsum.photos/seed/samovar-museum-kp/600/380" alt="Музей самоваров" />
+          </figure>
+          <div class="nearby-card__body">
+            <span class="nearby-card__dist">5 мин пешком</span>
+            <h3 class="nearby-card__name">Музей самоваров</h3>
+            <p class="nearby-card__desc">
+              500 самоваров XVIII–XXI веков —
+              от крохотных дорожных до огромных трактирных.
+            </p>
+          </div>
+        </a>
+        <a class="nearby-card" href="#">
+          <figure class="nearby-card__fig">
+            <img src="https://picsum.photos/seed/victory-square-kp/600/380" alt="Площадь Победы" />
+          </figure>
+          <div class="nearby-card__body">
+            <span class="nearby-card__dist">10 мин пешком</span>
+            <h3 class="nearby-card__name">Площадь Победы</h3>
+            <p class="nearby-card__desc">
+              Главная площадь с монументом Победы
+              и Вечным огнём в память о защитниках Тулы.
+            </p>
+          </div>
+        </a>
+        <a class="nearby-card" href="#">
+          <figure class="nearby-card__fig">
+            <img src="https://picsum.photos/seed/weapons-museum-kp/600/380" alt="Музей оружия" />
+          </figure>
+          <div class="nearby-card__body">
+            <span class="nearby-card__dist">15 мин пешком</span>
+            <h3 class="nearby-card__name">Музей оружия</h3>
+            <p class="nearby-card__desc">
+              История тульского оружейного завода и уникальные образцы
+              вооружения от XVI века до наших дней.
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ СЕГОДНЯ -->
+  <section class="today" id="today">
+    <div class="container">
+      <div class="today__inner">
+        <div class="today__left">
+          <span class="label" data-animate="fade-up">Сквозь года</span>
+          <div class="t-year" data-animate="year">Сего&shy;дня</div>
+          <div class="t-era-title" data-animate="fade-up" data-delay="1">
+            Пешеходная<br>зона и новая жизнь
+          </div>
+          <div class="today__body" data-animate="fade-up" data-delay="2">
+            <p>
+              В 2010-х годах Красноармейский проспект пережил масштабную
+              реконструкцию: исторические фасады отреставрировали, тротуары
+              расширили до бульварного масштаба, часть улицы стала
+              полностью пешеходной.
+            </p>
+            <p>
+              Сегодня проспект — главная туристическая улица и любимое место
+              прогулок туляков. Здесь соседствуют старинные доходные дома
+              и современные кафе, летние ярмарки и рождественские огни.
+            </p>
+          </div>
+        </div>
+        <div class="today__right" data-animate="reveal">
+          <img
+            src="https://picsum.photos/seed/kp-today-modern/700/900"
+            alt="Красноармейский проспект сегодня"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ CREDITS -->
+  <div class="credits bg-cream">
+    <div class="container">
+      <span class="label" data-animate="fade-up">Об этом путеводителе</span>
+      <div class="credits__grid" data-animate="stagger">
+        <div class="credits__col">
+          <div class="credits__role">Идея и текст</div>
+          <div class="credits__name">Студия «Красная нить»</div>
+          <p class="credits__note">Тула, Красноармейский пр-т, д. 18</p>
+        </div>
+        <div class="credits__col">
+          <div class="credits__role">Иллюстрации</div>
+          <div class="credits__name">Архив Тульского краеведческого музея</div>
+          <p class="credits__note">tulamuseum.ru</p>
+        </div>
+        <div class="credits__col">
+          <div class="credits__role">Исторические источники</div>
+          <div class="credits__name">«Тула: памятники истории и культуры»</div>
+          <p class="credits__note">Приокское книжное изд-во, 1985</p>
+        </div>
+        <div class="credits__col">
+          <div class="credits__role">Дизайн и вёрстка</div>
+          <div class="credits__name">Пара Дизайнеров</div>
+          <p class="credits__note">singzings.ru</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ FOOTER -->
+  <footer class="footer bg-dark">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <div class="footer__logo">КП</div>
+          <p class="footer__tagline">
+            Красноармейский проспект<br>Тула — сквозь три века
+          </p>
+        </div>
+        <nav class="footer__nav">
+          <p class="footer__nav-title">Разделы</p>
+          <ul>
+            <li><a href="#s1778">1778 — Первая фабрика</a></li>
+            <li><a href="#s1850">к 1850 — Торговые ряды</a></li>
+            <li><a href="#s1880">1880-е — Конка</a></li>
+            <li><a href="#s1900">1900-е — Доходные дома</a></li>
+            <li><a href="#s1917">1917 — Революция</a></li>
+            <li><a href="#s1930">1930-е — Конструктивизм</a></li>
+            <li><a href="#s1941">1941 — Оборона</a></li>
+            <li><a href="#nearby">Что посмотреть рядом</a></li>
+          </ul>
+        </nav>
+        <div class="footer__info">
+          <p class="footer__nav-title">Как добраться</p>
+          <ul>
+            <li>Трамвай №&thinsp;10, ост. «Центр»</li>
+            <li>Автобусы №&thinsp;1, №&thinsp;14, №&thinsp;19</li>
+            <li>15 минут пешком от вокзала</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2024 — Путеводитель по Красноармейскому проспекту</span>
+        <span>Тула, Россия</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
