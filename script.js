@@ -57,9 +57,11 @@ document.querySelectorAll('[data-counter]').forEach((el) => {
 
 /* ─── 3. PARALLAX ON HERO IMAGE ─── */
 
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 const parallaxImg = document.querySelector('[data-parallax]');
 
-if (parallaxImg) {
+if (parallaxImg && !reducedMotion) {
   let ticking = false;
 
   function applyParallax() {
@@ -126,7 +128,16 @@ setActiveLink();
 
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener('click', (e) => {
-    const target = document.querySelector(anchor.getAttribute('href'));
+    const href = anchor.getAttribute('href');
+
+    // bare "#" (logo link): querySelector('#') would throw — scroll to top instead
+    if (href === '#') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const target = document.querySelector(href);
     if (!target) return;
     e.preventDefault();
     const offset = window.innerWidth <= 860 ? nav.offsetHeight + 16 : 16;
@@ -161,8 +172,9 @@ document.querySelectorAll('.arch-tbl').forEach((tbl) => {
   tableObserver.observe(tbl);
 });
 
-/* ─── 8. CURSOR GLOW (subtle amber trail) ─── */
+/* ─── 8. CURSOR GLOW (subtle blue trail) ─── */
 
+if (!reducedMotion) {
 const glow = document.createElement('div');
 glow.style.cssText = `
   position: fixed;
@@ -171,7 +183,7 @@ glow.style.cssText = `
   width: 360px;
   height: 360px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(239,165,32,0.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(77,109,211,0.06) 0%, transparent 70%);
   transform: translate(-50%,-50%);
   transition: left 0.6s ease, top 0.6s ease;
   will-change: left, top;
@@ -193,6 +205,7 @@ document.addEventListener('mousemove', (e) => {
     glowRaf = true;
   }
 });
+}
 
 /* ─── 9. BURGER MENU ─── */
 
@@ -219,7 +232,21 @@ if (burger && navMenu) {
   });
 }
 
-/* ─── 10. HERO TITLE — letter-by-letter on load ─── */
+/* ─── 10. BACK TO TOP ─── */
+
+const backToTop = document.getElementById('backToTop');
+
+if (backToTop) {
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('is-visible', window.scrollY > 600);
+  }, { passive: true });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+/* ─── 11. HERO TITLE — letter-by-letter on load ─── */
 
 window.addEventListener('DOMContentLoaded', () => {
   const heroTitle = document.querySelector('.hero__title');
@@ -227,3 +254,118 @@ window.addEventListener('DOMContentLoaded', () => {
 
   heroTitle.style.opacity = '1'; // override any animation class initially
 });
+
+/* ─── 12. GUB MAP — интерактивная схема губернии ─── */
+
+const gubData = {
+  tula: {
+    name: 'Тула',
+    text: 'Козырем туляков были богатые залежи каменного угля. Дворянство и купечество пяти уездов писали императору, чтобы Московско-Курская дорога прошла именно здесь. Итог — Тула стала крупным индустриальным центром губернии.',
+  },
+  bogorodick: {
+    name: 'Богородицк',
+    text: 'Железнодорожная ветка прошла рядом — город сохранил масштаб и статус. В конце XIX века Богородицк и Епифань были сопоставимы, но их судьбы разошлись.',
+  },
+  epifan: {
+    name: 'Епифань',
+    text: 'Дорога обошла Епифань стороной. Город, сопоставимый с Богородицком в конце XIX века, постепенно угас и со временем превратился в посёлок.',
+  },
+  plavsk: {
+    name: 'Плавск',
+    text: 'Здесь была лишь станция «Сергиево» в селе Крапивенского уезда. После прокладки железнодорожных путей село выросло в современный город Плавск.',
+  },
+};
+
+const gubName   = document.getElementById('gubName');
+const gubText   = document.getElementById('gubText');
+const gubCities = document.querySelectorAll('.gub-city');
+
+gubCities.forEach((city) => {
+  const select = () => {
+    const data = gubData[city.dataset.city];
+    if (!data) return;
+    gubCities.forEach((c) => c.classList.remove('is-active'));
+    city.classList.add('is-active');
+    gubName.textContent = data.name;
+    gubText.textContent = data.text;
+  };
+
+  city.addEventListener('click', select);
+  city.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      select();
+    }
+  });
+});
+
+/* ─── 13. DOVE EASTER EGG ─── */
+
+const dove       = document.getElementById('doveEgg');
+const doveReveal = document.getElementById('doveReveal');
+
+if (dove && doveReveal) {
+  dove.addEventListener('click', () => {
+    if (!doveReveal.hidden) return;
+    dove.classList.add('found');
+    doveReveal.hidden = false;
+    doveReveal.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'nearest' });
+  });
+}
+
+/* ─── 14. DUCK POND — кормление утки ─── */
+
+const pond = document.getElementById('duckPond');
+
+if (pond) {
+  const svg      = pond.querySelector('svg');
+  const duck     = document.getElementById('duck');
+  const duckFlip = svg.querySelector('.duck-flip');
+  const duckBody = svg.querySelector('.duck-body');
+  const WATER_Y  = 240;            // уровень воды, куда падает крошка
+  const MIN_X    = 60, MAX_X = 580;
+  let duckX      = 320;
+  let crumb      = null;
+  let eatTimer   = null;
+
+  duck.style.transform = 'translate(320px, 0)';
+
+  pond.addEventListener('click', (e) => {
+    const rect = svg.getBoundingClientRect();
+    const x = Math.min(MAX_X, Math.max(MIN_X,
+      ((e.clientX - rect.left) / rect.width) * 640));
+
+    // одна крошка за раз: новая заменяет старую
+    if (crumb) crumb.remove();
+    clearTimeout(eatTimer);
+
+    crumb = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    crumb.setAttribute('class', 'duck-crumb');
+    crumb.setAttribute('r', '5');
+    crumb.setAttribute('cx', x);
+    crumb.setAttribute('cy', '20');
+    svg.appendChild(crumb);
+
+    // падение крошки (cy — CSS-свойство для SVG2)
+    crumb.animate(
+      [{ cy: '20px' }, { cy: WATER_Y + 'px' }],
+      { duration: reducedMotion ? 0 : 450, easing: 'ease-in', fill: 'forwards' }
+    );
+    crumb.setAttribute('cy', WATER_Y);
+
+    // утка плывёт к крошке
+    const swimMs = reducedMotion ? 0 : Math.min(1600, Math.abs(x - duckX) * 4 + 400);
+    duck.style.transitionDuration = swimMs + 'ms';
+    duck.style.transform = `translate(${x}px, 0)`;
+    // повернуть утку по направлению движения (клюв слева)
+    duckFlip.style.transform = x > duckX ? 'scaleX(-1)' : '';
+    duckX = x;
+
+    // доплыла — съела
+    eatTimer = setTimeout(() => {
+      if (crumb) { crumb.remove(); crumb = null; }
+      duckBody.classList.add('eating');
+      setTimeout(() => duckBody.classList.remove('eating'), 750);
+    }, swimMs);
+  });
+}
