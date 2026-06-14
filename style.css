@@ -772,75 +772,6 @@ figcaption {
 }
 
 /* ═══════════════════════════════════════
-   DUCK POND GAME
-═══════════════════════════════════════ */
-
-.duck-pond {
-  position: relative;
-  cursor: pointer;
-  background: var(--cream-bg);
-  overflow: hidden;
-}
-
-.duck-pond svg { display: block; width: 100%; height: auto; }
-
-.pond-water { fill: var(--blue); opacity: 0.18; }
-
-.pond-wave {
-  fill: none;
-  stroke: var(--blue);
-  stroke-width: 2;
-  opacity: 0.5;
-}
-
-.pond-ripple {
-  fill: none;
-  stroke: var(--blue);
-  stroke-width: 1.5;
-  opacity: 0.3;
-}
-
-.duck-fill { fill: var(--blue); }
-.duck-tail { fill: var(--blue); }
-.duck-beak { fill: var(--amber); }
-.duck-eye  { fill: var(--cream-bg); }
-.duck-wing { fill: var(--amber); opacity: 0.85; }
-
-#duck { transition: transform 1.2s cubic-bezier(0.45, 0, 0.25, 1); }
-
-.duck-flip { transition: transform 0.3s ease; }
-
-.duck-body { animation: duck-bob 2.4s ease-in-out infinite; }
-
-@keyframes duck-bob {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50%      { transform: translateY(4px) rotate(1.5deg); }
-}
-
-.duck-body.eating { animation: duck-eat 0.7s ease; }
-
-@keyframes duck-eat {
-  0%, 100% { transform: rotate(0deg); }
-  40%      { transform: rotate(-14deg) translateY(6px); }
-}
-
-.duck-crumb { fill: var(--dark); opacity: 0.75; }
-
-.duck-hint {
-  position: absolute;
-  left: 14px;
-  bottom: 10px;
-  font-family: var(--f-display);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--dark);
-  opacity: 0.45;
-  pointer-events: none;
-}
-
-/* ═══════════════════════════════════════
    ROUTE  (серия из 8 частей)
 ═══════════════════════════════════════ */
 
@@ -1627,9 +1558,6 @@ figcaption {
 
   [data-animate],
   [data-animate] > *,
-  .duck-body,
-  #duck,
-  .duck-flip,
   .dove.found {
     transition: none !important;
     animation: none !important;

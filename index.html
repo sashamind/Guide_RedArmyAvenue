@@ -512,36 +512,21 @@
         </article>
 
         <article class="nearby-card">
-          <div class="duck-pond" id="duckPond">
-            <svg viewBox="0 0 640 360" aria-label="Игра: нажмите на пруд, чтобы бросить утке крошку">
-              <!-- water -->
-              <rect x="0" y="210" width="640" height="150" class="pond-water" />
-              <path d="M0 210 Q 80 202, 160 210 T 320 210 T 480 210 T 640 210" class="pond-wave" />
-              <path d="M40 260 q 30 -8 60 0" class="pond-ripple" />
-              <path d="M420 300 q 30 -8 60 0" class="pond-ripple" />
-              <!-- duck -->
-              <g id="duck" transform="translate(320 0)">
-                <g class="duck-flip">
-                  <g class="duck-body">
-                    <ellipse cx="0" cy="232" rx="38" ry="20" class="duck-fill" />
-                    <path d="M30 224 q 16 -4 12 8 q -8 6 -18 2 z" class="duck-tail" />
-                    <circle cx="-30" cy="204" r="13" class="duck-fill" />
-                    <path d="M-43 202 l -14 4 14 5 z" class="duck-beak" />
-                    <circle cx="-33" cy="200" r="2" class="duck-eye" />
-                    <path d="M-12 226 q 14 -10 26 0 q -10 12 -26 4 z" class="duck-wing" />
-                  </g>
-                </g>
-              </g>
-            </svg>
-            <span class="duck-hint">Нажмите на пруд — бросить крошку</span>
-          </div>
+          <figure class="nearby-card__fig">
+            <picture>
+              <source srcset="https://i.postimg.cc/rmXPmm2n/utki-pattern.webp" type="image/webp" />
+              <img src="https://i.postimg.cc/hjW5jjR2/utki-pattern.jpg"
+                   alt="Иллюстрированный паттерн: вокзал, город и утки на воде"
+                   width="625" height="520" loading="lazy" />
+            </picture>
+          </figure>
           <div class="nearby-card__body">
             <span class="nearby-card__dist">7 мин пешком</span>
             <h3 class="nearby-card__name">Набережная и утки</h3>
             <p class="nearby-card__desc">
               Река Воронка — левый приток Упы — пересекает Красноармейский проспект.
               Жители соседних домов прикормили уток: птицы стайками выходят
-              на берег и подходят близко-близко к людям. Покормите утку и вы.
+              на берег и подходят близко-близко к людям.
             </p>
           </div>
         </article>
