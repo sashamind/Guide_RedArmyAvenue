@@ -925,6 +925,9 @@ figcaption {
 }
 .hub-hero .hero__scroll:hover { animation: none; }
 
+/* стрелка-подсказка — только на мобильном */
+.hero__scroll-arrow { display: none; }
+
 .hub-hero__title {
   font-family: var(--f-display);
   font-size: clamp(48px, 9vw, 132px);
@@ -1875,6 +1878,21 @@ figcaption {
 
   /* ── Hub hero title: уменьшаем и ограничиваем, чтобы влезало по ширине ── */
   .hub-hero__title { font-size: clamp(32px, 11vw, 46px); }
+
+  /* ── Hub hero CTA: вместо текста — мигающая стрелка внизу по центру ── */
+  .hub-hero .container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .hub-hero .hero__scroll {
+    margin: auto auto 0;     /* прижать к низу растянутого .container */
+    padding: 12px;
+    align-self: center;
+  }
+  .hub-hero .hero__scroll-line,
+  .hub-hero .hero__scroll-text { display: none; }
+  .hub-hero .hero__scroll-arrow { display: block; }
 
   /* ── Portraits: 1 col on small phones ── */
   .portraits__grid { grid-template-columns: 1fr; gap: 32px; }

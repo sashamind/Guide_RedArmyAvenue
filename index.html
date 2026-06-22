@@ -44,8 +44,11 @@
         для приезжего, вглубь проспекта. Мы проходим его по остановкам —
         каждая отдельная история, которая выходит своей частью.
       </p>
-      <a class="hero__scroll" href="#route" data-animate="fade-up" data-delay="7">
-        <span class="hero__scroll-line"></span>Выбрать остановку
+      <a class="hero__scroll" href="#route" data-animate="fade-up" data-delay="7" aria-label="Выбрать остановку">
+        <span class="hero__scroll-line"></span><span class="hero__scroll-text">Выбрать остановку</span>
+        <svg class="hero__scroll-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 4v15M5 12l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </a>
     </div>
   </header>
