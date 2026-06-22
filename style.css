@@ -1728,7 +1728,7 @@ figcaption {
   .hub-hero {
     min-height: 100svh;
     justify-content: flex-start;
-    padding: 96px 0 clamp(48px, 9vw, 72px);
+    padding: 32px 0 clamp(48px, 9vw, 72px);
   }
 
   /* ── Nav: top bar ── */
