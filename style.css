@@ -908,14 +908,19 @@ figcaption {
   flex-direction: column;
   justify-content: flex-end;
   padding: 140px 0 clamp(56px, 8vw, 104px);
+  background: var(--blue);   /* отдельный цветовой блок-обложка */
 }
+
+/* hero на синем фоне — светлый текст, розовый акцент на надзаголовке */
+.hub-hero .label { color: var(--amber); opacity: 0.95; }
+.hub-hero .hero__scroll { color: var(--cream); }
 
 .hub-hero__title {
   font-family: var(--f-display);
   font-size: clamp(48px, 9vw, 132px);
   font-weight: 700;
   line-height: 0.9;
-  color: var(--blue);
+  color: var(--cream);
   text-transform: uppercase;
   letter-spacing: -0.01em;
   margin: 18px 0 28px;
@@ -928,8 +933,8 @@ figcaption {
   font-family: var(--f-display);
   font-size: clamp(18px, 2.4vw, 30px);
   font-weight: 500;
-  color: var(--dark);
-  opacity: 0.8;
+  color: var(--cream);
+  opacity: 0.95;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-bottom: 24px;
@@ -939,6 +944,7 @@ figcaption {
   font-family: var(--f-body);
   font-size: 16px;
   line-height: 1.85;
+  color: var(--cream);
   opacity: 0.8;
   max-width: 540px;
   margin-bottom: 52px;
