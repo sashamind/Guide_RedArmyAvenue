@@ -315,6 +315,10 @@ strong { font-weight: 700; }
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--blue);
+  /* буфер хит-области: больше текста, чтобы курсор не «срывался» при росте gap */
+  padding: 14px 20px;
+  margin: -14px -20px;
+  align-self: flex-start;
   transition: gap 0.35s ease;
 }
 
@@ -1188,13 +1192,16 @@ figcaption {
   display: inline-flex;
   align-items: center;
   gap: 16px;
-  margin-top: 40px;
   font-family: var(--f-display);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--blue);
+  /* буфер хит-области (визуальный отступ сверху 40px сохранён) */
+  padding: 14px 20px;
+  margin: 26px -20px -14px;
+  align-self: flex-start;
   transition: gap 0.35s ease;
 }
 
