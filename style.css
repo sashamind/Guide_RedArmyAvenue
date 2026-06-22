@@ -1076,6 +1076,27 @@ figcaption {
   color: var(--blue);
 }
 
+.hub-stop__cta-label {
+  position: relative;
+}
+
+.hub-stop__cta-label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hub-stop--ready .hub-stop__link:hover .hub-stop__cta-label::after {
+  transform: scaleX(1);
+}
+
 .hub-stop__arrow { transition: transform 0.3s ease; }
 
 /* доступная остановка — ссылка */
