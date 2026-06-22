@@ -1457,6 +1457,7 @@ figcaption {
 
 .credits__logo {
   width: 140px;
+  height: auto;          /* иначе берётся height="225" из атрибута → искажение */
   margin-top: 16px;
   opacity: 0.85;
 }
