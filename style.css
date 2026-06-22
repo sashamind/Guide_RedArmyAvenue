@@ -902,8 +902,8 @@ figcaption {
 ═══════════════════════════════════════ */
 
 .hub-hero {
-  min-height: 92vh;
-  min-height: 92svh;
+  min-height: 100vh;
+  min-height: 100svh;       /* всегда полный первый экран */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -914,6 +914,16 @@ figcaption {
 /* hero на синем фоне — светлый текст, розовый акцент на надзаголовке */
 .hub-hero .label { color: var(--amber); opacity: 0.95; }
 .hub-hero .hero__scroll { color: var(--cream); }
+
+/* мягкая пульсация CTA-подсказки (после появления) */
+@keyframes scroll-hint {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+.hub-hero .hero__scroll {
+  animation: scroll-hint 1.8s ease-in-out 2.6s infinite;
+}
+.hub-hero .hero__scroll:hover { animation: none; }
 
 .hub-hero__title {
   font-family: var(--f-display);
@@ -1711,9 +1721,9 @@ figcaption {
 
   body { padding-left: 0; }
 
-  /* ── Hub hero: без пустого верха, заголовок виден сразу ── */
+  /* ── Hub hero: полный экран, контент сверху (без пустого верха) ── */
   .hub-hero {
-    min-height: auto;
+    min-height: 100svh;
     justify-content: flex-start;
     padding: 96px 0 clamp(48px, 9vw, 72px);
   }
@@ -1924,7 +1934,8 @@ figcaption {
 
   [data-animate],
   [data-animate] > *,
-  .dove.found {
+  .dove.found,
+  .hub-hero .hero__scroll {
     transition: none !important;
     animation: none !important;
   }
