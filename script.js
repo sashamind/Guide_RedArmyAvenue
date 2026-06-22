@@ -83,19 +83,21 @@ if (parallaxImg && !reducedMotion) {
 const nav      = document.getElementById('nav');
 const progress = document.getElementById('navProgress');
 
-window.addEventListener('scroll', () => {
-  const scrollY    = window.scrollY;
-  const maxScroll  = document.body.scrollHeight - window.innerHeight;
-  const pct        = maxScroll > 0 ? scrollY / maxScroll : 0;
+if (nav) {
+  window.addEventListener('scroll', () => {
+    const scrollY    = window.scrollY;
+    const maxScroll  = document.body.scrollHeight - window.innerHeight;
+    const pct        = maxScroll > 0 ? scrollY / maxScroll : 0;
 
-  nav.classList.toggle('scrolled', scrollY > 60);
+    nav.classList.toggle('scrolled', scrollY > 60);
 
-  if (window.innerWidth > 860) {
-    progress.style.transform = `scaleY(${pct})`;
-  } else {
-    progress.style.transform = `scaleX(${pct})`;
-  }
-}, { passive: true });
+    if (progress) {
+      progress.style.transform = window.innerWidth > 860
+        ? `scaleY(${pct})`
+        : `scaleX(${pct})`;
+    }
+  }, { passive: true });
+}
 
 /* ─── 5. ACTIVE NAV LINK ON SCROLL ─── */
 
@@ -140,7 +142,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     const target = document.querySelector(href);
     if (!target) return;
     e.preventDefault();
-    const offset = window.innerWidth <= 860 ? nav.offsetHeight + 16 : 16;
+    const offset = (window.innerWidth <= 860 && nav) ? nav.offsetHeight + 16 : 16;
     const top    = target.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top, behavior: 'smooth' });
   });
