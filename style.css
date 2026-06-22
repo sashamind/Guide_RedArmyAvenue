@@ -1705,6 +1705,13 @@ figcaption {
 
   body { padding-left: 0; }
 
+  /* ── Hub hero: без пустого верха, заголовок виден сразу ── */
+  .hub-hero {
+    min-height: auto;
+    justify-content: flex-start;
+    padding: 96px 0 clamp(48px, 9vw, 72px);
+  }
+
   /* ── Nav: top bar ── */
   .nav {
     top: 0; left: 0; right: 0; bottom: auto;
