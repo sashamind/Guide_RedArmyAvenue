@@ -1667,6 +1667,7 @@ figcaption {
 [data-delay="4"] { transition-delay: 0.44s; }
 [data-delay="5"] { transition-delay: 0.56s; }
 [data-delay="6"] { transition-delay: 0.68s; }
+[data-delay="7"] { transition-delay: 0.80s; }
 
 /* Разводящая: увеличенные паузы между строками hero (≈×2) */
 .hub-hero [data-delay="1"] { transition-delay: 0.20s; }
@@ -1675,6 +1676,7 @@ figcaption {
 .hub-hero [data-delay="4"] { transition-delay: 0.88s; }
 .hub-hero [data-delay="5"] { transition-delay: 1.12s; }
 .hub-hero [data-delay="6"] { transition-delay: 1.36s; }
+.hub-hero [data-delay="7"] { transition-delay: 1.60s; }
 
 /* ═══════════════════════════════════════
    RESPONSIVE
