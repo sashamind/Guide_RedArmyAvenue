@@ -1142,8 +1142,13 @@ figcaption {
 
 /* остановка «скоро» — неактивная */
 .hub-stop--soon .hub-stop__node {
-  background: var(--cream);
-  opacity: 0.6;
+  background: var(--cream);        /* непрозрачный — пунктир не просвечивает */
+  border-color: rgba(28, 16, 7, 0.35);
+}
+
+.hub-stop--soon .hub-stop__num {
+  color: var(--dark);
+  opacity: 0.45;
 }
 
 .hub-stop--soon .hub-stop__card {
