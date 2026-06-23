@@ -1140,13 +1140,25 @@ figcaption {
   color: inherit;
 }
 
+/* доступная остановка: цифра нейтральная в покое, синяя — при наведении */
 .hub-stop--ready .hub-stop__node {
+  background: var(--cream);
+  border-color: rgba(28, 16, 7, 0.4);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hub-stop--ready .hub-stop__num {
+  color: var(--dark);
+  transition: color 0.3s ease;
+}
+
+.hub-stop--ready .hub-stop__link:hover .hub-stop__node {
   background: var(--blue);
   border-color: var(--blue);
   box-shadow: 0 0 0 6px rgba(77, 109, 211, 0.18);
 }
 
-.hub-stop--ready .hub-stop__num { color: var(--white); }
+.hub-stop--ready .hub-stop__link:hover .hub-stop__num { color: var(--white); }
 
 .hub-stop--ready .hub-stop__card {
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
