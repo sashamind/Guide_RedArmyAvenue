@@ -1022,6 +1022,8 @@ figcaption {
   justify-content: center;
   z-index: 1;
   flex-shrink: 0;
+  transform: scale(0.667);   /* в покое меньше в 1.5 раза */
+  transition: transform 0.3s ease;
 }
 
 .hub-stop__num {
@@ -1144,7 +1146,7 @@ figcaption {
 .hub-stop--ready .hub-stop__node {
   background: var(--cream);
   border-color: rgba(28, 16, 7, 0.4);
-  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hub-stop--ready .hub-stop__num {
@@ -1156,6 +1158,7 @@ figcaption {
   background: var(--blue);
   border-color: var(--blue);
   box-shadow: 0 0 0 6px rgba(77, 109, 211, 0.18);
+  transform: scale(1);   /* при наведении вырастает до полного размера */
 }
 
 .hub-stop--ready .hub-stop__link:hover .hub-stop__num { color: var(--white); }
