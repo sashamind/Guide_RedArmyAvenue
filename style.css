@@ -1510,13 +1510,23 @@ figcaption {
   opacity: 0.5;
 }
 
-.credits__col picture { display: block; }
+/* ссылка singzings.ru */
+.credits__link { transition: opacity 0.2s ease; }
+.credits__link:hover { text-decoration: underline; }
+
+/* логотип-ссылка: тап-зона = логотип, прижат влево */
+.credits__logo-link {
+  display: inline-block;
+  margin-top: 16px;
+  transition: opacity 0.2s ease;
+}
+
+.credits__logo-link:hover { opacity: 0.6; }
 
 .credits__logo {
   display: block;
   width: 140px;
   height: auto;          /* иначе берётся height="225" из атрибута → искажение */
-  margin: 16px auto 0 0; /* прижать к левому краю */
   opacity: 0.85;
 }
 
