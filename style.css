@@ -1493,10 +1493,13 @@ figcaption {
   opacity: 0.5;
 }
 
+.credits__col picture { display: block; }
+
 .credits__logo {
+  display: block;
   width: 140px;
   height: auto;          /* иначе берётся height="225" из атрибута → искажение */
-  margin-top: 16px;
+  margin: 16px auto 0 0; /* прижать к левому краю */
   opacity: 0.85;
 }
 
