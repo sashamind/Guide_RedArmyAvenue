@@ -1160,6 +1160,20 @@ figcaption {
 
 .hub-stop--ready .hub-stop__link:hover .hub-stop__num { color: var(--white); }
 
+/* текст карточки прозрачный в покое, обычный при наведении */
+.hub-stop--ready .hub-stop__kicker,
+.hub-stop--ready .hub-stop__name,
+.hub-stop--ready .hub-stop__desc {
+  opacity: 0.35;
+  transition: opacity 0.4s ease;
+}
+
+.hub-stop--ready .hub-stop__link:hover .hub-stop__kicker,
+.hub-stop--ready .hub-stop__link:hover .hub-stop__name,
+.hub-stop--ready .hub-stop__link:hover .hub-stop__desc {
+  opacity: 1;
+}
+
 .hub-stop--ready .hub-stop__card {
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
