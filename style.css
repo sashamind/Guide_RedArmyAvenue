@@ -1026,7 +1026,9 @@ figcaption {
 }
 
 /* линия-прогресс маршрута (заполняется по скроллу) */
-.hub-stops__progress {
+/* .hub-stops перед .hub-stops__progress — повышаем специфичность, чтобы
+   transition height не перебивался transition от stagger-анимации */
+.hub-stops .hub-stops__progress {
   position: absolute;
   left: 23px;
   width: 2px;
@@ -1873,7 +1875,7 @@ figcaption {
   }
 
   /* линия-прогресс следует за скроллом без задержки */
-  .hub-stops__progress { transition: none; }
+  .hub-stops .hub-stops__progress { transition: none; }
 
   /* ── Nav: top bar ── */
   .nav {
