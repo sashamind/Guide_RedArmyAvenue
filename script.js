@@ -351,13 +351,23 @@ if (hubStops.length && stopsEl) {
   }
 
   if (hoverMq.matches) {
-    /* ── ДЕСКТОП: прогресс опускается до карточки под курсором ── */
+    /* ── ДЕСКТОП: карточка раскрывается, прогресс опускается до неё ── */
+    let settleTimer;
+    function activate(stop) {
+      render(nodeCenterY(stop.querySelector('.hub-stop__node')), stop);
+      // карточка раскрывается ~0.5s, её узел смещается — пересчитаем после
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(() => {
+        if (stop.classList.contains('is-active')) {
+          render(nodeCenterY(stop.querySelector('.hub-stop__node')), stop);
+        }
+      }, 540);
+    }
+
     hubStops.forEach((stop) => {
-      stop.addEventListener('mouseenter', () => {
-        render(nodeCenterY(stop.querySelector('.hub-stop__node')), stop);
-      });
+      stop.addEventListener('mouseenter', () => activate(stop));
     });
-    stopsEl.addEventListener('mouseleave', () => render(-1e6, null));
+    stopsEl.addEventListener('mouseleave', () => { clearTimeout(settleTimer); render(-1e6, null); });
     render(-1e6, null);
   } else {
     /* ── МОБИЛЬНЫЙ: активна остановка у центра экрана, прогресс по «указателю» ── */

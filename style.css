@@ -1184,7 +1184,8 @@ figcaption {
   transition: clip-path 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.hub-stop--ready .hub-stop__link:hover .hub-stop__cta-label::after {
+/* подчёркивание — при наведении именно на текст «Смотреть главу» */
+.hub-stop__cta-label:hover::after {
   clip-path: inset(0 0 0 0);
 }
 
@@ -1221,23 +1222,24 @@ figcaption {
 
 .hub-stop--ready .hub-stop__link:hover .hub-stop__num { color: var(--white); }
 
-/* текст карточки приглушён в покое (все остановки) */
-.hub-stop__kicker,
-.hub-stop__name,
-.hub-stop__desc {
-  opacity: 0.35;
-  transition: opacity 0.4s ease;
-}
-
 .hub-stop__card {
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-/* ── активная (под курсором / в центре экрана) — раскрытие, для всех ── */
-.hub-stop.is-active .hub-stop__kicker,
-.hub-stop.is-active .hub-stop__name,
-.hub-stop.is-active .hub-stop__desc { opacity: 1; }
+/* раскрывающийся блок (описание + CTA) — по умолчанию открыт (мобильный) */
+.hub-stop__reveal {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+.hub-stop__reveal-in {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+}
 
+/* ── активная (центр экрана на мобильном) — фото и рамка ── */
 .hub-stop.is-active .hub-stop__media img {
   filter: grayscale(20%) contrast(1.04);
   opacity: 1;
@@ -1267,7 +1269,30 @@ figcaption {
 .hub-stop--ready .hub-stop__link:hover .hub-stop__media img { transform: scale(1.05); }
 .hub-stop--ready .hub-stop__link:hover .hub-stop__arrow { transform: translateX(6px); }
 
-.hub-stop--ready.is-active .hub-stop__cta-label::after { transform: scaleX(1); }
+/* ── ДЕСКТОП: карточка свёрнута (только «Часть N» + заголовок),
+      раскрывается при наведении — появляются фото, описание и CTA ── */
+@media (hover: hover) and (pointer: fine) {
+  .hub-stop__card {
+    width: 56%;
+    transition: width 0.5s cubic-bezier(0.33, 1, 0.68, 1),
+                border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hub-stop__media {
+    width: 0;
+    opacity: 0;
+    transition: width 0.5s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.4s ease;
+  }
+  .hub-stop__reveal {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.5s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.35s ease;
+  }
+
+  .hub-stop.is-active .hub-stop__card   { width: 100%; }
+  .hub-stop.is-active .hub-stop__media  { width: clamp(120px, 26vw, 280px); opacity: 1; }
+  .hub-stop.is-active .hub-stop__reveal { grid-template-rows: 1fr; opacity: 1; }
+}
+
 
 /* остановка «скоро» — узел в покое (непрозрачный, пунктир не просвечивает) */
 .hub-stop--soon .hub-stop__node {
