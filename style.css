@@ -1044,6 +1044,9 @@ figcaption {
   gap: clamp(16px, 2.5vw, 28px);
   align-items: center;
   padding: 10px 0;
+  /* без transform: иначе stagger-анимация создаёт stacking context и линия
+     прогресса всплывает над кружками (появление остаётся через opacity) */
+  transform: none !important;
 }
 
 /* соединительная линия — сегмент в колонке узла, от центра к центру */
