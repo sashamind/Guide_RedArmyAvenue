@@ -1034,7 +1034,7 @@ figcaption {
   z-index: 1;            /* над пунктиром (0), под кружками (2) */
   height: 0;
   will-change: height;
-  transition: height 0.35s ease;
+  transition: height 0.55s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .hub-stop {
