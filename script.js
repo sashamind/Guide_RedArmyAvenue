@@ -332,19 +332,15 @@ if (hubStops.length && stopsEl) {
     return (nr.top + nr.height / 2) - sr.top;
   }
 
-  // отрисовка: fillY — докуда залита линия (коорд. списка), active — «голова»
-  // кружки, которых линия достигла, помечаются is-passed (синие),
-  // поэтому линия соединяет только синие кружки и не идёт под серыми
+  // отрисовка: fillY — докуда залита линия (коорд. списка), active — выделенная
+  // синеет только активная остановка; линия доходит до неё
   function render(fillY, activeStop) {
     if (!nodes.length) return;
     const firstY = nodeCenterY(nodes[0]);
     const lastY  = nodeCenterY(nodes[nodes.length - 1]);
-    const track  = Math.max(0, lastY - firstY);
     const clamped = Math.min(lastY, Math.max(firstY, fillY));
 
     hubStops.forEach((s) => {
-      const c = nodeCenterY(s.querySelector('.hub-stop__node'));
-      s.classList.toggle('is-passed', fillY >= c - 1 && activeStop !== null && fillY > firstY - 1);
       s.classList.toggle('is-active', s === activeStop);
     });
 

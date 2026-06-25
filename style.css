@@ -1249,22 +1249,15 @@ figcaption {
 
 .hub-stop--ready .hub-stop__link:hover .hub-stop__arrow { transform: translateX(6px); }
 
-/* ── прогресс маршрута ── */
-/* пройденные и активная остановки — синий кружок (линия соединяет только их) */
-.hub-stop.is-passed .hub-stop__node,
+/* ── выделение: синий только у активной (под курсором / в центре экрана) ── */
 .hub-stop.is-active .hub-stop__node {
   background: var(--blue);
   border-color: var(--blue);
-}
-
-.hub-stop.is-passed .hub-stop__num,
-.hub-stop.is-active .hub-stop__num { color: var(--white); opacity: 1; }
-
-/* активная (под курсором / в центре экрана) — крупнее + свечение */
-.hub-stop.is-active .hub-stop__node {
   transform: scale(1);
   box-shadow: 0 0 0 6px rgba(77, 109, 211, 0.18);
 }
+
+.hub-stop.is-active .hub-stop__num { color: var(--white); opacity: 1; }
 
 /* «скоро» в активном состоянии — слегка подсветить название и рамку */
 .hub-stop--soon.is-active .hub-stop__name { opacity: 0.85; }
