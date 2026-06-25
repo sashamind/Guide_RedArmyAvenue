@@ -359,3 +359,30 @@ if (hubStops.length) {
   updateActiveStop();
 }
 
+/* ─── 15. ТИПОГРАФ — убираем висячие предлоги/союзы в текстах ─── */
+
+(function () {
+  // body-копия (без крупных дисплейных заголовков)
+  const SEL = 'p, li, figcaption, cite, .label, .credits__role, .credits__name,'
+    + '.hub-hero__sub, .hub-stop__kicker, .hub-stop__name, .hub-stop__desc';
+
+  // короткое слово (1–2 буквы: в, на, и, с, от, по, к, о, до, из, за, не, …)
+  // + обычный пробел после него → неразрывный пробел
+  const re = /(^|[\s(«„—])([а-яёa-z]{1,2})[ \t]+/gi;
+
+  function glue(t) {
+    for (let i = 0; i < 2; i++) t = t.replace(re, '$1$2 '); // дважды — для «и в», «а по»
+    return t;
+  }
+
+  document.querySelectorAll(SEL).forEach((el) => {
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((n) => {
+      const v = glue(n.nodeValue);
+      if (v !== n.nodeValue) n.nodeValue = v;
+    });
+  });
+})();
+
