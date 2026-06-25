@@ -315,3 +315,47 @@ if (dove && doveReveal) {
   });
 }
 
+/* ─── 14. HUB STOPS — авто-выделение по центру экрана (мобильный) ─── */
+
+const hubStops = document.querySelectorAll('.hub-stop');
+
+if (hubStops.length) {
+  const touchMq = window.matchMedia('(max-width: 860px)');
+  let stopsTicking = false;
+
+  function updateActiveStop() {
+    stopsTicking = false;
+
+    // на десктопе работает hover — авто-выделение не нужно
+    if (!touchMq.matches) {
+      hubStops.forEach((s) => s.classList.remove('is-active'));
+      return;
+    }
+
+    const mid = window.innerHeight / 2;
+    let best = null;
+    let bestDist = Infinity;
+
+    hubStops.forEach((s) => {
+      const r = s.getBoundingClientRect();
+      const center = r.top + r.height / 2;
+      const dist = Math.abs(center - mid);
+      if (dist < bestDist) { bestDist = dist; best = s; }
+    });
+
+    // выделяем только если ближайшая остановка реально около центра
+    const active = best && bestDist < window.innerHeight * 0.5 ? best : null;
+    hubStops.forEach((s) => s.classList.toggle('is-active', s === active));
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!stopsTicking) {
+      requestAnimationFrame(updateActiveStop);
+      stopsTicking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', updateActiveStop, { passive: true });
+  updateActiveStop();
+}
+
