@@ -315,58 +315,16 @@ if (dove && doveReveal) {
   });
 }
 
-/* ─── 14. HUB STOPS — авто-выделение по центру экрана (мобильный) ─── */
+/* ─── 14. HUB STOPS — выделение + линия-прогресс ─── */
+/* десктоп: по наведению на карточку; мобильный: по центру экрана при скролле */
 
-const hubStops = document.querySelectorAll('.hub-stop');
-
-if (hubStops.length) {
-  const touchMq = window.matchMedia('(max-width: 860px)');
-  let stopsTicking = false;
-
-  function updateActiveStop() {
-    stopsTicking = false;
-
-    // на десктопе работает hover — авто-выделение не нужно
-    if (!touchMq.matches) {
-      hubStops.forEach((s) => s.classList.remove('is-active'));
-      return;
-    }
-
-    const mid = window.innerHeight / 2;
-    let best = null;
-    let bestDist = Infinity;
-
-    hubStops.forEach((s) => {
-      const r = s.getBoundingClientRect();
-      const center = r.top + r.height / 2;
-      const dist = Math.abs(center - mid);
-      if (dist < bestDist) { bestDist = dist; best = s; }
-    });
-
-    // выделяем только если ближайшая остановка реально около центра
-    const active = best && bestDist < window.innerHeight * 0.5 ? best : null;
-    hubStops.forEach((s) => s.classList.toggle('is-active', s === active));
-  }
-
-  window.addEventListener('scroll', () => {
-    if (!stopsTicking) {
-      requestAnimationFrame(updateActiveStop);
-      stopsTicking = true;
-    }
-  }, { passive: true });
-
-  window.addEventListener('resize', updateActiveStop, { passive: true });
-  updateActiveStop();
-}
-
-/* ─── 14b. ЛИНИЯ-ПРОГРЕСС МАРШРУТА — заполняется по мере скролла ─── */
-
+const hubStops     = document.querySelectorAll('.hub-stop');
+const stopsEl      = document.querySelector('.hub-stops');
 const routeProgress = document.querySelector('.hub-stops__progress');
 
-if (routeProgress) {
-  const stopsEl = document.querySelector('.hub-stops');
-  const nodes   = stopsEl.querySelectorAll('.hub-stop__node');
-  let progTicking = false;
+if (hubStops.length && stopsEl) {
+  const nodes    = stopsEl.querySelectorAll('.hub-stop__node');
+  const hoverMq  = window.matchMedia('(hover: hover) and (pointer: fine)');
 
   function nodeCenterY(node) {
     const sr = stopsEl.getBoundingClientRect();
@@ -374,29 +332,63 @@ if (routeProgress) {
     return (nr.top + nr.height / 2) - sr.top;
   }
 
-  function updateProgress() {
-    progTicking = false;
-    if (!nodes.length) return;
-
+  // высота линии-прогресса до точки toY (в координатах списка)
+  function fillTo(toY) {
+    if (!routeProgress || !nodes.length) return;
     const firstY = nodeCenterY(nodes[0]);
     const lastY  = nodeCenterY(nodes[nodes.length - 1]);
     const track  = Math.max(0, lastY - firstY);
-
-    // «указатель» — центр экрана в координатах списка
-    const sr      = stopsEl.getBoundingClientRect();
-    const playhead = (window.innerHeight / 2) - sr.top;
-
-    const fill = Math.min(track, Math.max(0, playhead - firstY));
     routeProgress.style.top    = firstY + 'px';
-    routeProgress.style.height = fill + 'px';
+    routeProgress.style.height = Math.min(track, Math.max(0, toY - firstY)) + 'px';
   }
 
-  window.addEventListener('scroll', () => {
-    if (!progTicking) { requestAnimationFrame(updateProgress); progTicking = true; }
-  }, { passive: true });
-  window.addEventListener('resize', updateProgress, { passive: true });
-  window.addEventListener('load', updateProgress);
-  updateProgress();
+  function setActive(stop) {
+    hubStops.forEach((s) => s.classList.toggle('is-active', s === stop));
+    if (stop) {
+      fillTo(nodeCenterY(stop.querySelector('.hub-stop__node')));
+    } else {
+      fillTo(-1e6); // 0
+    }
+  }
+
+  if (hoverMq.matches) {
+    /* ── ДЕСКТОП: прогресс опускается до карточки под курсором ── */
+    hubStops.forEach((stop) => {
+      stop.addEventListener('mouseenter', () => setActive(stop));
+    });
+    stopsEl.addEventListener('mouseleave', () => setActive(null));
+    setActive(null);
+  } else {
+    /* ── МОБИЛЬНЫЙ: активна остановка у центра экрана, прогресс по «указателю» ── */
+    let ticking = false;
+
+    function onScroll() {
+      ticking = false;
+      const mid = window.innerHeight / 2;
+      let best = null;
+      let bestDist = Infinity;
+
+      hubStops.forEach((s) => {
+        const r = s.getBoundingClientRect();
+        const c = r.top + r.height / 2;
+        const d = Math.abs(c - mid);
+        if (d < bestDist) { bestDist = d; best = s; }
+      });
+
+      const active = best && bestDist < window.innerHeight * 0.5 ? best : null;
+      hubStops.forEach((s) => s.classList.toggle('is-active', s === active));
+
+      const sr = stopsEl.getBoundingClientRect();
+      fillTo((window.innerHeight / 2) - sr.top);
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+    }, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    window.addEventListener('load', onScroll);
+    onScroll();
+  }
 }
 
 /* ─── 15. ТИПОГРАФ — убираем висячие предлоги/союзы в текстах ─── */

@@ -1031,9 +1031,10 @@ figcaption {
   left: 23px;
   width: 2px;
   background: var(--blue);
-  z-index: 1;
+  z-index: 1;            /* над пунктиром (0), под кружками (2) */
   height: 0;
   will-change: height;
+  transition: height 0.35s ease;
 }
 
 .hub-stop {
@@ -1061,8 +1062,8 @@ figcaption {
   z-index: 0;
 }
 
-.hub-stop:first-child::before { top: 50%; }    /* старт у центра первого узла */
-.hub-stop:last-child::before  { bottom: 50%; } /* финиш у центра последнего узла */
+.hub-stop:first-of-type::before { top: 50%; }    /* старт у центра первого узла */
+.hub-stop:last-of-type::before  { bottom: 50%; } /* финиш у центра последнего узла */
 
 .hub-stop__node {
   width: 48px;
@@ -1073,7 +1074,7 @@ figcaption {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  z-index: 2;            /* над линией-прогрессом */
   flex-shrink: 0;
   transform: scale(0.72);   /* в покое меньше */
   transition: transform 0.3s ease;
@@ -1248,16 +1249,23 @@ figcaption {
 
 .hub-stop--ready .hub-stop__link:hover .hub-stop__arrow { transform: translateX(6px); }
 
-/* ── авто-выделение по скроллу (мобильный, вместо hover): класс .is-active ── */
-.hub-stop.is-active .hub-stop__node { transform: scale(1); }
-
-.hub-stop--ready.is-active .hub-stop__node {
+/* ── выделение остановки (.is-active): наведение на десктопе / центр на мобильном ── */
+/* кружок синий + крупнее у ЛЮБОЙ остановки, даже «скоро» */
+.hub-stop.is-active .hub-stop__node {
+  transform: scale(1);
   background: var(--blue);
   border-color: var(--blue);
   box-shadow: 0 0 0 6px rgba(77, 109, 211, 0.18);
 }
 
-.hub-stop--ready.is-active .hub-stop__num { color: var(--white); }
+.hub-stop.is-active .hub-stop__num { color: var(--white); opacity: 1; }
+
+/* «скоро» в активном состоянии — слегка подсветить название и рамку */
+.hub-stop--soon.is-active .hub-stop__name { opacity: 0.85; }
+.hub-stop--soon.is-active .hub-stop__card {
+  border-color: rgba(77, 109, 211, 0.4);
+  background: rgba(77, 109, 211, 0.04);
+}
 
 .hub-stop--ready.is-active .hub-stop__kicker,
 .hub-stop--ready.is-active .hub-stop__name,
@@ -1861,6 +1869,9 @@ figcaption {
     justify-content: flex-start;
     padding: 32px 0 clamp(48px, 9vw, 72px);
   }
+
+  /* линия-прогресс следует за скроллом без задержки */
+  .hub-stops__progress { transition: none; }
 
   /* ── Nav: top bar ── */
   .nav {
