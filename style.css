@@ -950,17 +950,32 @@ figcaption {
   opacity: 0.95;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
+}
+
+/* розовый разделитель между подзаголовком и описанием */
+.hub-hero__rule {
+  display: block;
+  width: 56px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--amber);
+  margin-bottom: 26px;
 }
 
 .hub-hero__desc {
   font-family: var(--f-body);
   font-size: 16px;
   line-height: 1.85;
-  color: var(--cream);
-  opacity: 0.8;
+  color: rgba(216, 223, 247, 0.82);  /* приглушённый cream — выделения ярче */
   max-width: 540px;
   margin-bottom: 52px;
+}
+
+/* выделение ключевых фраз в описании */
+.hub-hero .hl {
+  color: var(--cream);
+  font-weight: 600;
 }
 
 /* ── Route / stops ── */
@@ -1947,6 +1962,7 @@ figcaption {
 
   /* ── Hub hero title: уменьшаем и ограничиваем, чтобы влезало по ширине ── */
   .hub-hero__title { font-size: clamp(32px, 11vw, 46px); }
+  .hub-hero__desc { font-size: 14px; }
 
   /* ── Hub hero CTA: вместо текста — мигающая стрелка внизу по центру ── */
   .hub-hero .container {
