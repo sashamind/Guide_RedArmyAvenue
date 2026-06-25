@@ -332,32 +332,37 @@ if (hubStops.length && stopsEl) {
     return (nr.top + nr.height / 2) - sr.top;
   }
 
-  // высота линии-прогресса до точки toY (в координатах списка)
-  function fillTo(toY) {
-    if (!routeProgress || !nodes.length) return;
+  // отрисовка: fillY — докуда залита линия (коорд. списка), active — «голова»
+  // кружки, которых линия достигла, помечаются is-passed (синие),
+  // поэтому линия соединяет только синие кружки и не идёт под серыми
+  function render(fillY, activeStop) {
+    if (!nodes.length) return;
     const firstY = nodeCenterY(nodes[0]);
     const lastY  = nodeCenterY(nodes[nodes.length - 1]);
     const track  = Math.max(0, lastY - firstY);
-    routeProgress.style.top    = firstY + 'px';
-    routeProgress.style.height = Math.min(track, Math.max(0, toY - firstY)) + 'px';
-  }
+    const clamped = Math.min(lastY, Math.max(firstY, fillY));
 
-  function setActive(stop) {
-    hubStops.forEach((s) => s.classList.toggle('is-active', s === stop));
-    if (stop) {
-      fillTo(nodeCenterY(stop.querySelector('.hub-stop__node')));
-    } else {
-      fillTo(-1e6); // 0
+    hubStops.forEach((s) => {
+      const c = nodeCenterY(s.querySelector('.hub-stop__node'));
+      s.classList.toggle('is-passed', fillY >= c - 1 && activeStop !== null && fillY > firstY - 1);
+      s.classList.toggle('is-active', s === activeStop);
+    });
+
+    if (routeProgress) {
+      routeProgress.style.top    = firstY + 'px';
+      routeProgress.style.height = (activeStop ? (clamped - firstY) : 0) + 'px';
     }
   }
 
   if (hoverMq.matches) {
     /* ── ДЕСКТОП: прогресс опускается до карточки под курсором ── */
     hubStops.forEach((stop) => {
-      stop.addEventListener('mouseenter', () => setActive(stop));
+      stop.addEventListener('mouseenter', () => {
+        render(nodeCenterY(stop.querySelector('.hub-stop__node')), stop);
+      });
     });
-    stopsEl.addEventListener('mouseleave', () => setActive(null));
-    setActive(null);
+    stopsEl.addEventListener('mouseleave', () => render(-1e6, null));
+    render(-1e6, null);
   } else {
     /* ── МОБИЛЬНЫЙ: активна остановка у центра экрана, прогресс по «указателю» ── */
     let ticking = false;
@@ -376,10 +381,8 @@ if (hubStops.length && stopsEl) {
       });
 
       const active = best && bestDist < window.innerHeight * 0.5 ? best : null;
-      hubStops.forEach((s) => s.classList.toggle('is-active', s === active));
-
       const sr = stopsEl.getBoundingClientRect();
-      fillTo((window.innerHeight / 2) - sr.top);
+      render(mid - sr.top, active);
     }
 
     window.addEventListener('scroll', () => {
