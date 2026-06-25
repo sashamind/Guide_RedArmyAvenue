@@ -62,8 +62,13 @@
       <h2 class="hub-route__title" data-animate="fade-up" data-delay="1">
         Восемь остановок
       </h2>
+      <p class="hub-route__meta" data-animate="fade-up" data-delay="2">
+        <span class="hub-route__meta-count">1 / 8</span>
+        первая часть доступна — остальные выходят постепенно
+      </p>
 
       <ol class="hub-stops" data-animate="stagger">
+        <span class="hub-stops__progress" aria-hidden="true"></span>
 
         <!-- 01 — доступна -->
         <li class="hub-stop hub-stop--ready">

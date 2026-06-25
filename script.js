@@ -359,6 +359,46 @@ if (hubStops.length) {
   updateActiveStop();
 }
 
+/* ─── 14b. ЛИНИЯ-ПРОГРЕСС МАРШРУТА — заполняется по мере скролла ─── */
+
+const routeProgress = document.querySelector('.hub-stops__progress');
+
+if (routeProgress) {
+  const stopsEl = document.querySelector('.hub-stops');
+  const nodes   = stopsEl.querySelectorAll('.hub-stop__node');
+  let progTicking = false;
+
+  function nodeCenterY(node) {
+    const sr = stopsEl.getBoundingClientRect();
+    const nr = node.getBoundingClientRect();
+    return (nr.top + nr.height / 2) - sr.top;
+  }
+
+  function updateProgress() {
+    progTicking = false;
+    if (!nodes.length) return;
+
+    const firstY = nodeCenterY(nodes[0]);
+    const lastY  = nodeCenterY(nodes[nodes.length - 1]);
+    const track  = Math.max(0, lastY - firstY);
+
+    // «указатель» — центр экрана в координатах списка
+    const sr      = stopsEl.getBoundingClientRect();
+    const playhead = (window.innerHeight / 2) - sr.top;
+
+    const fill = Math.min(track, Math.max(0, playhead - firstY));
+    routeProgress.style.top    = firstY + 'px';
+    routeProgress.style.height = fill + 'px';
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!progTicking) { requestAnimationFrame(updateProgress); progTicking = true; }
+  }, { passive: true });
+  window.addEventListener('resize', updateProgress, { passive: true });
+  window.addEventListener('load', updateProgress);
+  updateProgress();
+}
+
 /* ─── 15. ТИПОГРАФ — убираем висячие предлоги/союзы в текстах ─── */
 
 (function () {

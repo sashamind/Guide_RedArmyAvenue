@@ -908,7 +908,11 @@ figcaption {
   flex-direction: column;
   justify-content: flex-end;
   padding: 140px 0 clamp(56px, 8vw, 104px);
-  background: var(--blue);   /* отдельный цветовой блок-обложка */
+  /* лёгкая глубина: световое пятно сверху-слева на синем */
+  background:
+    radial-gradient(120% 90% at 22% 8%, rgba(216, 223, 247, 0.10), transparent 55%),
+    radial-gradient(90% 80% at 100% 100%, rgba(28, 16, 7, 0.10), transparent 60%),
+    var(--blue);
 }
 
 /* hero на синем фоне — светлый текст, розовый акцент на надзаголовке */
@@ -991,11 +995,45 @@ figcaption {
   color: var(--blue);
   text-transform: uppercase;
   line-height: 0.92;
-  margin: 8px 0 clamp(36px, 5vw, 56px);
+  margin: 8px 0 16px;
+}
+
+/* индикатор прогресса серии */
+.hub-route__meta {
+  font-family: var(--f-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--dark);
+  opacity: 0.6;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.hub-route__meta-count {
+  display: inline-block;
+  font-family: var(--f-display);
+  font-weight: 700;
+  color: var(--white);
+  background: var(--blue);
+  border-radius: 100px;
+  padding: 3px 11px;
+  margin-right: 8px;
+  opacity: 1;
 }
 
 .hub-stops {
   list-style: none;
+  position: relative;
+}
+
+/* линия-прогресс маршрута (заполняется по скроллу) */
+.hub-stops__progress {
+  position: absolute;
+  left: 23px;
+  width: 2px;
+  background: var(--blue);
+  z-index: 1;
+  height: 0;
+  will-change: height;
 }
 
 .hub-stop {
@@ -1037,7 +1075,7 @@ figcaption {
   justify-content: center;
   z-index: 1;
   flex-shrink: 0;
-  transform: scale(0.667);   /* в покое меньше в 1.5 раза */
+  transform: scale(0.72);   /* в покое меньше */
   transition: transform 0.3s ease;
 }
 
@@ -1253,10 +1291,19 @@ figcaption {
   border-style: dashed;
   border-color: rgba(28, 16, 7, 0.18);
   align-items: center;
+  transition: background 0.25s ease, border-color 0.25s ease;
 }
 
+/* компактные «скоро»: без описания, меньше высота */
+.hub-stop--soon .hub-stop__body { padding-top: 16px; padding-bottom: 16px; }
+.hub-stop--soon .hub-stop__desc { display: none; }
 .hub-stop--soon .hub-stop__name { opacity: 0.5; }
-.hub-stop--soon .hub-stop__desc { opacity: 0.4; }
+
+/* лёгкий отклик при наведении (десктоп) */
+.hub-stop--soon .hub-stop__card:hover {
+  background: rgba(28, 16, 7, 0.03);
+  border-color: rgba(28, 16, 7, 0.28);
+}
 
 .hub-stop__status {
   align-self: center;
@@ -2007,14 +2054,17 @@ figcaption {
   /* ── Nearby cards ── */
   .nearby-card__body { padding: 16px 18px 22px; }
 
-  /* ── Hub: ready-карточка в столбик ── */
+  .hub-stop__status { margin-right: 16px; }
+}
+
+/* ── Hub: ready-карточка складывается в столбик уже на узких планшетах ── */
+@media (max-width: 720px) {
   .hub-stop--ready .hub-stop__card { flex-direction: column; }
   .hub-stop--ready .hub-stop__media {
     width: 100%;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
   }
-  .hub-stop--ready .hub-stop__body { padding: 20px 20px 24px; }
-  .hub-stop__status { margin-right: 16px; }
+  .hub-stop--ready .hub-stop__body { padding: 20px clamp(18px, 4vw, 28px) 26px; }
 }
 
 @media (max-width: 400px) {
