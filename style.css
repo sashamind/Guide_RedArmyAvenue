@@ -125,6 +125,7 @@ strong { font-weight: 700; }
 
 .nav.scrolled .nav__inner {
   background: rgba(28, 16, 7, 0.88);
+  -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
 }
 
@@ -1230,17 +1231,16 @@ figcaption {
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-/* раскрывающийся блок (описание + CTA) — по умолчанию открыт (мобильный) */
+/* раскрывающийся блок (описание + CTA) — по умолчанию открыт (мобильный).
+   max-height вместо grid-template-rows: 0fr/1fr — Safari анимирует max-height
+   надёжно, а grid-track-анимацию долго не поддерживал */
 .hub-stop__reveal {
-  display: grid;
-  grid-template-rows: 1fr;
+  overflow: hidden;
 }
 .hub-stop__reveal-in {
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  min-height: 0;
   padding-bottom: 8px;   /* чтобы подчёркивание CTA не обрезалось overflow */
 }
 
@@ -1274,9 +1274,10 @@ figcaption {
 .hub-stop--ready .hub-stop__link:hover .hub-stop__media img { transform: scale(1.05); }
 .hub-stop--ready .hub-stop__link:hover .hub-stop__arrow { transform: translateX(6px); }
 
-/* ── ДЕСКТОП: карточка свёрнута (только «Часть N» + заголовок),
-      раскрывается при наведении — появляются фото, описание и CTA ── */
-@media (hover: hover) and (pointer: fine) {
+/* ── ДЕСКТОП (>860px): карточка свёрнута (только «Часть N» + заголовок),
+      раскрывается при наведении — появляются фото, описание и CTA.
+      Гейтинг по ширине (надёжнее hover/pointer в разных браузерах). ── */
+@media (min-width: 861px) {
   .hub-stop__card {
     width: 56%;
     transition: width 0.5s cubic-bezier(0.33, 1, 0.68, 1),
@@ -1290,14 +1291,14 @@ figcaption {
   }
   .hub-stop__media img { opacity: 0.9; }
   .hub-stop__reveal {
-    grid-template-rows: 0fr;
+    max-height: 0;
     opacity: 0;
-    transition: grid-template-rows 0.5s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.35s ease;
+    transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.35s ease;
   }
 
   .hub-stop.is-active .hub-stop__card   { width: 100%; }
   .hub-stop.is-active .hub-stop__media  { width: clamp(120px, 26vw, 280px); opacity: 1; }
-  .hub-stop.is-active .hub-stop__reveal { grid-template-rows: 1fr; opacity: 1; }
+  .hub-stop.is-active .hub-stop__reveal { max-height: 260px; opacity: 1; }
 }
 
 
@@ -1905,6 +1906,7 @@ figcaption {
     top: 100%;
     left: 0; right: 0;
     background: rgba(18, 10, 3, 0.97);
+    -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     padding: 8px var(--pad-x) 24px;
     gap: 0;

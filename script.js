@@ -324,7 +324,8 @@ const routeProgress = document.querySelector('.hub-stops__progress');
 
 if (hubStops.length && stopsEl) {
   const nodes    = stopsEl.querySelectorAll('.hub-stop__node');
-  const hoverMq  = window.matchMedia('(hover: hover) and (pointer: fine)');
+  // десктоп = наведение, ≤860 = скролл (совпадает с CSS-гейтингом)
+  const hoverMq  = window.matchMedia('(min-width: 861px)');
 
   function nodeCenterY(node) {
     const sr = stopsEl.getBoundingClientRect();
