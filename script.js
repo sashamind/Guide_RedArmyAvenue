@@ -2,6 +2,26 @@
    КРАСНОАРМЕЙСКИЙ ПРОСПЕКТ — script.js
 ═══════════════════════════════════════════════════════════ */
 
+/* ─── 0. DEBUG: показать JS-ошибки на странице при ?debug ─── */
+if (location.search.indexOf('debug') !== -1) {
+  window.addEventListener('error', function (e) {
+    var d = document.createElement('div');
+    d.style.cssText = 'position:fixed;left:0;bottom:0;right:0;z-index:99999;background:#fff;color:#c00;font:12px/1.4 monospace;padding:10px;white-space:pre-wrap;border-top:2px solid #c00';
+    d.textContent = 'JS ERROR: ' + e.message + '  @ ' + (e.filename || '') + ':' + e.lineno + ':' + e.colno;
+    document.body && document.body.appendChild(d);
+  });
+  window.addEventListener('load', function () {
+    var d = document.createElement('div');
+    d.style.cssText = 'position:fixed;left:0;top:0;z-index:99999;background:#0a0;color:#fff;font:12px/1.4 monospace;padding:8px';
+    d.textContent = 'DEBUG: jsEnd=' + (window.__jsEnd === true)
+      + ' hubInit=' + (window.__hubInit === true)
+      + ' mq861=' + window.matchMedia('(min-width: 861px)').matches
+      + ' progress=' + !!document.querySelector('.hub-stops__progress')
+      + ' nodes=' + document.querySelectorAll('.hub-stop__node').length;
+    document.body && document.body.appendChild(d);
+  });
+}
+
 /* ─── 1. SCROLL ANIMATION OBSERVER ─── */
 
 const animateObserver = new IntersectionObserver(
@@ -346,8 +366,12 @@ if (hubStops.length && stopsEl) {
     });
 
     if (routeProgress) {
+      const span = Math.max(1, lastY - firstY);
       routeProgress.style.top    = firstY + 'px';
-      routeProgress.style.height = (activeStop ? (clamped - firstY) : 0) + 'px';
+      routeProgress.style.height = span + 'px';
+      const ratio = activeStop ? (clamped - firstY) / span : 0;
+      routeProgress.style.transform       = 'scaleY(' + ratio + ')';
+      routeProgress.style.webkitTransform = 'scaleY(' + ratio + ')';
     }
   }
 
@@ -399,6 +423,8 @@ if (hubStops.length && stopsEl) {
     window.addEventListener('load', onScroll);
     onScroll();
   }
+
+  window.__hubInit = true;
 }
 
 /* ─── 15. ТИПОГРАФ — убираем висячие предлоги/союзы в текстах ─── */
@@ -428,3 +454,6 @@ if (hubStops.length && stopsEl) {
   });
 })();
 
+
+/* конец скрипта (маркер для отладки) */
+window.__jsEnd = true;

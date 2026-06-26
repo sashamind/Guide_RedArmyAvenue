@@ -1035,9 +1035,12 @@ figcaption {
   width: 2px;
   background: var(--blue);
   z-index: 1;            /* над пунктиром (0), под кружками (2) */
-  height: 0;
-  will-change: height;
-  transition: height 0.55s cubic-bezier(0.33, 1, 0.68, 1);
+  height: 0;             /* полная длина задаётся инлайн из JS */
+  transform-origin: top center;
+  transform: scaleY(0);  /* доля заливки задаётся инлайн из JS */
+  will-change: transform;
+  -webkit-transition: -webkit-transform 0.55s cubic-bezier(0.33, 1, 0.68, 1);
+  transition: transform 0.55s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .hub-stop {
@@ -1895,7 +1898,7 @@ figcaption {
   }
 
   /* линия-прогресс следует за скроллом без задержки */
-  .hub-stops .hub-stops__progress { transition: none; }
+  .hub-stops .hub-stops__progress { -webkit-transition: none; transition: none; }
 
   /* ── Nav: top bar ── */
   .nav {
