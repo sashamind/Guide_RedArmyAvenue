@@ -1146,7 +1146,6 @@ figcaption {
   font-size: clamp(20px, 3vw, 30px);
   font-weight: 700;
   color: var(--dark);
-  text-transform: uppercase;
   line-height: 1.05;
   opacity: 0.4;                      /* заголовок прозрачный в покое */
   transition: opacity 0.4s ease;
