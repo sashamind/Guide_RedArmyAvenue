@@ -1282,9 +1282,8 @@ figcaption {
       Гейтинг по ширине (надёжнее hover/pointer в разных браузерах). ── */
 @media (min-width: 861px) {
   .hub-stop__card {
-    width: 56%;
-    transition: width 0.5s cubic-bezier(0.33, 1, 0.68, 1),
-                border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;          /* ширина постоянна — при наведении меняется только высота */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
   /* свёрнуто: маленькая картинка видна */
   .hub-stop__media {
@@ -1302,7 +1301,6 @@ figcaption {
   /* раскрытие — чистый CSS :hover (не зависит от JS) + .is-active (резерв) */
   .hub-stop:hover .hub-stop__card,
   .hub-stop.is-active .hub-stop__card {
-    width: 100%;
     border-color: var(--blue);
     box-shadow: 0 12px 32px rgba(28, 16, 7, 0.12);
   }
