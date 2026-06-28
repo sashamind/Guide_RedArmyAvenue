@@ -411,7 +411,9 @@ if (hubStops.length && stopsEl) {
         if (d < bestDist) { bestDist = d; best = s; }
       });
 
-      const active = best && bestDist < window.innerHeight * 0.5 ? best : null;
+      // активной считаем только реально подведённую к центру (а не «где-то рядом»),
+      // иначе первая карточка вспыхивает ещё пока листаешь hero
+      const active = best && bestDist < window.innerHeight * 0.28 ? best : null;
       // линия не ползёт за скроллом, а «проводится» до активной остановки
       if (active) {
         render(nodeCenterY(active.querySelector('.hub-stop__node')), active);
