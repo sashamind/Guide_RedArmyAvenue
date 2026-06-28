@@ -1277,7 +1277,6 @@ figcaption {
 }
 
 .hub-stop--ready .hub-stop__link:hover .hub-stop__media img { transform: scale(1.05); }
-.hub-stop--ready .hub-stop__link:hover .hub-stop__arrow { transform: translateX(6px); }
 
 /* ── ДЕСКТОП (>860px): карточка свёрнута (только «Часть N» + заголовок),
       раскрывается при наведении — появляются фото, описание и CTA.
