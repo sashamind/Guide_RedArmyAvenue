@@ -1898,6 +1898,10 @@ figcaption {
 
   /* линия-прогресс «проводится» до активной остановки (анимация как на десктопе) */
 
+  /* ── у активной карточки: волнистое подчёркивание + стрелка вправо ── */
+  .hub-stop.is-active .hub-stop__cta-label::after { clip-path: inset(0 0 0 0); }
+  .hub-stop.is-active .hub-stop__arrow { transform: translateX(5px); }
+
   /* ── Nav: top bar ── */
   .nav {
     top: 0; left: 0; right: 0; bottom: auto;
