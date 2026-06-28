@@ -412,8 +412,12 @@ if (hubStops.length && stopsEl) {
       });
 
       const active = best && bestDist < window.innerHeight * 0.5 ? best : null;
-      const sr = stopsEl.getBoundingClientRect();
-      render(mid - sr.top, active);
+      // линия не ползёт за скроллом, а «проводится» до активной остановки
+      if (active) {
+        render(nodeCenterY(active.querySelector('.hub-stop__node')), active);
+      } else {
+        render(-1e6, null);
+      }
     }
 
     window.addEventListener('scroll', () => {

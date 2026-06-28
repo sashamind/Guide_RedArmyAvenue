@@ -1896,8 +1896,7 @@ figcaption {
     padding: 32px 0 clamp(48px, 9vw, 72px);
   }
 
-  /* линия-прогресс следует за скроллом без задержки */
-  .hub-stops .hub-stops__progress { -webkit-transition: none; transition: none; }
+  /* линия-прогресс «проводится» до активной остановки (анимация как на десктопе) */
 
   /* ── Nav: top bar ── */
   .nav {
