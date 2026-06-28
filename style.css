@@ -1164,7 +1164,7 @@ figcaption {
 .hub-stop__cta {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   margin-top: 6px;
   font-family: var(--f-display);
   font-size: 11px;
@@ -1197,6 +1197,9 @@ figcaption {
 }
 
 .hub-stop__arrow { transition: transform 0.3s ease; }
+
+/* при наведении на текст «Смотреть главу» стрелка уезжает вправо */
+.hub-stop__cta-label:hover + .hub-stop__arrow { transform: translateX(5px); }
 
 /* доступная остановка — ссылка */
 .hub-stop__link {
