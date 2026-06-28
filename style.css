@@ -1898,6 +1898,17 @@ figcaption {
 
   /* линия-прогресс «проводится» до активной остановки (анимация как на десктопе) */
 
+  /* ── Карточки свёрнуты, раскрываются у активной (центр экрана) ── */
+  .hub-stop__reveal {
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.35s ease;
+  }
+  .hub-stop.is-active .hub-stop__reveal {
+    max-height: 400px;
+    opacity: 1;
+  }
+
   /* ── Nav: top bar ── */
   .nav {
     top: 0; left: 0; right: 0; bottom: auto;
