@@ -1898,9 +1898,10 @@ figcaption {
 
   /* линия-прогресс «проводится» до активной остановки (анимация как на десктопе) */
 
-  /* ── у активной карточки: волнистое подчёркивание + стрелка вправо ── */
-  .hub-stop.is-active .hub-stop__cta-label::after { clip-path: inset(0 0 0 0); }
-  .hub-stop.is-active .hub-stop__arrow { transform: translateX(5px); }
+  /* ── у активной карточки: волнистое подчёркивание + стрелка вправо,
+        с задержкой — появляются чуть позже, когда карточка «осела» по центру ── */
+  .hub-stop.is-active .hub-stop__cta-label::after { clip-path: inset(0 0 0 0); transition-delay: 0.45s; }
+  .hub-stop.is-active .hub-stop__arrow { transform: translateX(5px); transition-delay: 0.45s; }
 
   /* ── Nav: top bar ── */
   .nav {
