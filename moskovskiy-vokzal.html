@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://i.postimg.cc" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260708" />
+  <link rel="stylesheet" href="style.css?v=20260712b" />
 
   <script type="application/ld+json">
   {
@@ -74,32 +74,27 @@
   <!-- ═══════════════════════════════════════ HERO -->
   <section class="hero" id="content">
     <div class="hero__left">
-      <span class="label" data-animate="fade-up" data-delay="1">Путеводитель по Красноармейскому проспекту · Часть 1 из 8</span>
+      <span class="label" data-animate="fade-up" data-delay="1">Путеводитель по <br>Красноармейскому <br>проспекту · Часть 1 из 8</span>
       <h1 class="hero__title" data-animate="fade-up" data-delay="2">
         Московский<br>вокзал
       </h1>
-      <p class="hero__sub" data-animate="fade-up" data-delay="3">Железная дорога как точка исторического выбора</p>
-      <p class="hero__desc" data-animate="fade-up" data-delay="4">
-        Московский вокзал — материальное свидетельство решения,
-        которое Тула приняла более ста лет назад и которое
-        определило дальнейшую судьбу города.
-      </p>
-      <a class="hero__scroll" href="#s1860" data-animate="fade-up" data-delay="5">
-        <span class="hero__scroll-line"></span>Начать прогулку
-      </a>
+      <p class="hero__sub" data-animate="fade-up" data-delay="3">Железная дорога<br>и шаг для Тулы в будущее</p>
     </div>
-    <div class="hero__right" data-animate="reveal">
-      <picture>
-        <source srcset="https://i.postimg.cc/vTG2rNmk/vokzal-xix.webp" type="image/webp" />
-        <img
-          src="https://i.postimg.cc/1tGYNQ9s/vokzal-xix.jpg"
-          alt="Московский вокзал Тулы — каменное здание XIX века"
-          width="1478" height="910"
-          fetchpriority="high"
-          data-parallax
-        />
-      </picture>
-    </div>
+    <figure class="hero__band" data-imgnum="1">
+      <div class="hero__band-inner">
+        <img class="hero__band-img" src="https://i.postimg.cc/T20GHmsc/railway-track-and-stop.png" alt="Железнодорожные пути и остановка — линейная иллюстрация" />
+        <span class="hero__train" data-imgnum="2">
+          <img class="hero__train-img" src="https://i.postimg.cc/ryjcYWHh/train.png" alt="Паровоз" />
+        </span>
+      </div>
+    </figure>
+    <figure class="hero__birds">
+      <img src="https://i.postimg.cc/Kj02kSL3/birds.png" alt="Птицы — линейная иллюстрация" />
+    </figure>
+    <a class="hero__cta" href="#s1860" data-animate="fade-up" data-delay="4">
+      <span class="hero__cta-label">Начать прогулку</span>
+      <span class="hero__cta-arrow" aria-hidden="true">→</span>
+    </a>
   </section>
 
   <!-- ═══════════════════════════════════════ 1860-е: Железная дорога -->
@@ -713,6 +708,9 @@
     </svg>
   </button>
 
-  <script src="script.js?v=20260708"></script>
+  <script src="script.js?v=20260712b"></script>
+  <!-- DEV временно выключен. Вернуть — раскомментировать строку ниже
+       и удалить правило-переключатель в конце style.css (метка «DEV OFF»). -->
+  <!-- <script src="dev-adjust.js"></script> -->
 </body>
 </html>

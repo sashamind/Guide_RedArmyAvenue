@@ -55,27 +55,43 @@ document.querySelectorAll('[data-counter]').forEach((el) => {
   counterObserver.observe(el);
 });
 
-/* ─── 3. PARALLAX ON HERO IMAGE ─── */
+/* ─── 3. TRAIN ALONG THE TRACK (hero, scroll-driven) ─── */
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const parallaxImg = document.querySelector('[data-parallax]');
+const trainImg = document.querySelector('.hero__train-img');
+const heroEl   = document.querySelector('.hero');
 
-if (parallaxImg && !reducedMotion) {
+if (trainImg && heroEl && !reducedMotion) {
   let ticking = false;
 
-  function applyParallax() {
-    const scrollY = window.scrollY;
-    parallaxImg.style.transform = `translateY(${scrollY * 0.28}px)`;
+  function applyScene() {
+    const h = heroEl.offsetHeight || window.innerHeight;
+    // прогресс скролла сквозь первый экран: 0 (верх) … 1 (низ hero)
+    const p = Math.min(1, Math.max(0, window.scrollY / h));
+
+    if (window.innerWidth <= 860) {
+      // мобильный параллакс: поезд влево, дорога (и птицы) слегка вправо.
+      // --road-x ставим на .hero — наследуется и дорогой, и птицами
+      trainImg.style.setProperty('--train-x', `${-p * 100}px`);
+      heroEl.style.setProperty('--road-x', `${p * 30}px`);
+    } else {
+      // десктоп: паровоз едет влево (вперёд) вдвое медленнее, дорога неподвижна
+      trainImg.style.setProperty('--train-x', `${-p * window.innerWidth * 0.65}px`);
+      heroEl.style.setProperty('--road-x', '0px');
+    }
     ticking = false;
   }
 
   window.addEventListener('scroll', () => {
     if (!ticking) {
-      requestAnimationFrame(applyParallax);
+      requestAnimationFrame(applyScene);
       ticking = true;
     }
   }, { passive: true });
+
+  window.addEventListener('resize', applyScene);
+  applyScene();
 }
 
 /* ─── 4. NAV — SCROLL STATE & PROGRESS BAR ─── */
@@ -90,6 +106,9 @@ if (nav) {
     const pct        = maxScroll > 0 ? scrollY / maxScroll : 0;
 
     nav.classList.toggle('scrolled', scrollY > 60);
+
+    // проскроллили дальше — гасим мигание кнопки «Начать прогулку»
+    if (scrollY > 40) document.body.classList.add('cta-stop');
 
     if (progress) {
       progress.style.transform = window.innerWidth > 860
@@ -186,7 +205,7 @@ glow.style.cssText = `
   width: 360px;
   height: 360px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(77,109,211,0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(77,109,211,0.09) 0%, rgba(77,109,211,0.04) 40%, transparent 72%);
   transform: translate(-50%,-50%);
   transition: left 0.6s ease, top 0.6s ease;
   will-change: left, top;
