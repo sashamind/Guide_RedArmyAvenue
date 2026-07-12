@@ -395,7 +395,7 @@ strong { font-weight: 700; }
   display: block;
   width: 100%;
   height: auto;
-  transform: translateX(var(--train-x, 0px));
+  /* сдвиг при скролле ставит JS напрямую (translateX) — надёжно в Safari */
   will-change: transform;
 }
 
@@ -2206,9 +2206,8 @@ figcaption {
     margin: 64px 0;
   }
 
-  /* параллакс при скролле: дорога слегка вправо (--road-x из JS) */
+  /* параллакс при скролле: дорога слегка вправо (translateX ставит JS) */
   .hero__band-img {
-    transform: translateX(var(--road-x, 0px));
     will-change: transform;
   }
 
@@ -2219,9 +2218,7 @@ figcaption {
     margin: 96px auto 0;   /* отступ, чтобы очистить увеличенную сцену */
     right: auto;
     top: auto;
-    /* смещаются вбок вместе с дорогой при скролле (не в масштабированной
-       сцене → множитель, чтобы совпадать по скорости с дорогой) */
-    transform: translateX(calc(var(--road-x, 0px) * 2.5));
+    /* смещаются вбок вместе с дорогой при скролле (translateX ставит JS) */
     will-change: transform;
   }
 

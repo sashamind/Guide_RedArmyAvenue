@@ -60,25 +60,31 @@ document.querySelectorAll('[data-counter]').forEach((el) => {
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const trainImg = document.querySelector('.hero__train-img');
+const roadImg  = document.querySelector('.hero__band-img');
+const birdsEl  = document.querySelector('.hero__birds');
 const heroEl   = document.querySelector('.hero');
 
 if (trainImg && heroEl && !reducedMotion) {
   let ticking = false;
 
+  // transform ставим напрямую (без CSS-переменных) — надёжно в Safari
   function applyScene() {
     const h = heroEl.offsetHeight || window.innerHeight;
     // прогресс скролла сквозь первый экран: 0 (верх) … 1 (низ hero)
     const p = Math.min(1, Math.max(0, window.scrollY / h));
 
     if (window.innerWidth <= 860) {
-      // мобильный параллакс: поезд влево, дорога (и птицы) слегка вправо.
-      // --road-x ставим на .hero — наследуется и дорогой, и птицами
-      trainImg.style.setProperty('--train-x', `${-p * 100}px`);
-      heroEl.style.setProperty('--road-x', `${p * 30}px`);
+      // мобильный параллакс: поезд влево, дорога и птицы слегка вправо
+      const roadX = p * 30;
+      trainImg.style.transform = `translateX(${-p * 100}px)`;
+      if (roadImg)  roadImg.style.transform  = `translateX(${roadX}px)`;
+      // птицы не в масштабированной сцене → множитель, чтобы совпадать с дорогой
+      if (birdsEl)  birdsEl.style.transform  = `translateX(${roadX * 2.5}px)`;
     } else {
-      // десктоп: паровоз едет влево (вперёд) вдвое медленнее, дорога неподвижна
-      trainImg.style.setProperty('--train-x', `${-p * window.innerWidth * 0.65}px`);
-      heroEl.style.setProperty('--road-x', '0px');
+      // десктоп: паровоз едет влево (вперёд) вдвое медленнее, дорога/птицы неподвижны
+      trainImg.style.transform = `translateX(${-p * window.innerWidth * 0.65}px)`;
+      if (roadImg)  roadImg.style.transform  = '';
+      if (birdsEl)  birdsEl.style.transform  = '';
     }
     ticking = false;
   }
