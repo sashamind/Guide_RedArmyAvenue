@@ -96,12 +96,11 @@ const heroEl   = document.querySelector('.hero');
       // translate3d, а не translateX: десктопный Safari без собственного
       // GPU-слоя не перерисовывает transform внутри scale-родителя
       if (w <= 860) {
-        // мобильный параллакс: поезд влево, дорога и птицы слегка вправо
-        const roadX = p * 30;
-        trainImg.style.transform = `translate3d(${-p * 100}px, 0, 0)`;
-        if (roadImg)  roadImg.style.transform  = `translate3d(${roadX}px, 0, 0)`;
-        // птицы не в масштабированной сцене → множитель, чтобы совпадать с дорогой
-        if (birdsEl)  birdsEl.style.transform  = `translate3d(${roadX * 2.5}px, 0, 0)`;
+        // мобильный параллакс: поезд влево, дорога и птицы слегка вправо.
+        // Величины «визуальные»: сцена теперь увеличена шириной, не scale
+        trainImg.style.transform = `translate3d(${-p * 269}px, 0, 0)`;
+        if (roadImg)  roadImg.style.transform  = `translate3d(${p * 80}px, 0, 0)`;
+        if (birdsEl)  birdsEl.style.transform  = `translate3d(${p * 75}px, 0, 0)`;
       } else {
         // десктоп: паровоз едет влево (вперёд) вдвое медленнее, дорога/птицы неподвижны
         trainImg.style.transform = `translate3d(${-p * w * 0.65}px, 0, 0)`;

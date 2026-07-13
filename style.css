@@ -445,11 +445,6 @@ strong { font-weight: 700; }
   margin-bottom: 30px;
 }
 
-/* Переносы в пилюле активны только на мобильном (3 строки);
-   на десктопе скрыты — текст идёт одной строкой */
-@media (min-width: 861px) {
-  .hero__left .label br { display: none; }
-}
 
 .hero__desc {
   font-family: var(--f-body);
@@ -503,8 +498,16 @@ strong { font-weight: 700; }
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--blue);
-  /* плавное мигание, пока не навели/не проскроллили (старт после появления) */
-  animation: cta-pulse 1.9s ease-in-out 1.6s infinite;
+  /* появление по таймеру (не по скроллу — иначе на мобильном кнопка
+     в слепой зоне observer и «подлетала» при первом скролле),
+     затем плавное мигание, пока не навели/не проскроллили */
+  animation: cta-in 0.85s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both,
+             cta-pulse 1.9s ease-in-out 2.4s infinite;
+}
+
+@keyframes cta-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @keyframes cta-pulse {
@@ -2204,11 +2207,15 @@ figcaption {
     z-index: 2;
   }
 
-  /* дорога + поезд (единый контейнер) на мобильном: крупнее,
-     сдвинута правее и ниже */
+  /* дорога + поезд (единый контейнер) на мобильном: крупнее и правее.
+     Увеличение реальной шириной (269%), а не transform-scale: iOS Safari
+     растеризует картинку в размере вёрстки, и scale давал мыло.
+     Отступы пересчитаны так, чтобы визуально совпадать с прежним
+     translate(40%,30%) scale(2.69): h=18.86vw — высота картинки при 100vw */
   .hero__band {
-    transform: translate(40%, 30%) scale(2.69);
-    margin: 64px 0;
+    width: 269%;
+    margin: calc(64px - 10.3vw) 0 calc(64px - 21.6vw) -44.5%;
+    transform: none;
   }
 
   /* параллакс при скролле: дорога слегка вправо (translateX ставит JS) */
@@ -2364,9 +2371,10 @@ figcaption {
     animation: none !important;
   }
 
-  /* дорога и поезд сразу видны, без въезда */
+  /* дорога, поезд и кнопка сразу видны, без въезда/появления */
   .hero__band-img,
-  .hero__band-inner .hero__train {
+  .hero__band-inner .hero__train,
+  .hero__cta {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
