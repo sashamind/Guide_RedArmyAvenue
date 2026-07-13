@@ -2509,6 +2509,9 @@ figcaption {
      и карта выезжает за экран */
   .gub-map__inner { grid-template-columns: minmax(0, 1fr); gap: 32px; }
 
+  /* лейбл — по центру экрана */
+  .gub-embed .label { text-align: center; }
+
   /* карта по центру экрана, целиком во всю ширину колонки;
      описания — горизонтальный слайдер: активная карточка по центру */
   .gub-map__svg { width: 100%; margin: 0 auto; }

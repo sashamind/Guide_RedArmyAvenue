@@ -459,13 +459,14 @@ gubDots.forEach((dot) => {
   dot.addEventListener('click', () => gubSelect(dot.dataset.city));
 });
 
-/* мобилка: свайп слайдера — активной становится карточка у центра экрана */
-var gubScrollT;
+/* мобилка: свайп слайдера — активной сразу становится карточка,
+   ближайшая к центру экрана (без ожидания конца скролла) */
+var gubScrollRaf = 0;
 if (gubTrack) {
   gubTrack.addEventListener('scroll', function () {
-    if (!gubMobile()) return;
-    clearTimeout(gubScrollT);
-    gubScrollT = setTimeout(function () {
+    if (!gubMobile() || gubScrollRaf) return;
+    gubScrollRaf = requestAnimationFrame(function () {
+      gubScrollRaf = 0;
       const center = gubTrack.scrollLeft + gubTrack.clientWidth / 2;
       let best = null;
       let bestD = Infinity;
@@ -476,7 +477,7 @@ if (gubTrack) {
       if (best && !best.classList.contains('is-active')) {
         gubSelect(best.dataset.city, true);
       }
-    }, 120);
+    });
   }, { passive: true });
 }
 
