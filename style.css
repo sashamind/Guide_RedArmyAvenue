@@ -1319,6 +1319,15 @@ figcaption {
   transition: transform 0.55s ease, filter 0.55s ease, opacity 0.55s ease;
 }
 
+/* Иллюстрация вместо фото: фон — цвет hero страницы вокзала,
+   картинка целиком (contain), без фото-фильтров */
+.hub-stop__media--ill { background: var(--amber); }
+
+.hub-stop__media--ill img {
+  object-fit: contain;
+  filter: none !important;
+}
+
 .hub-stop__body {
   display: flex;
   flex-direction: column;
