@@ -73,8 +73,16 @@ if (trainImg && heroEl && !reducedMotion) {
 
   function applyScene() {
     const h = heroEl.offsetHeight || window.innerHeight;
+    // scrollY читаем из всех возможных источников: в Safari при
+    // overflow-x:hidden на html/body скроллером может быть body,
+    // и window.scrollY остаётся 0
+    const y = Math.max(
+      window.scrollY || 0,
+      document.documentElement.scrollTop || 0,
+      document.body.scrollTop || 0
+    );
     // прогресс скролла сквозь первый экран: 0 (верх) … 1 (низ hero)
-    const p = Math.min(1, Math.max(0, window.scrollY / h));
+    const p = Math.min(1, Math.max(0, y / h));
     const w = window.innerWidth;
     const key = p.toFixed(4) + ':' + w;
 
@@ -477,4 +485,33 @@ if (hubStops.length && stopsEl) {
       if (v !== n.nodeValue) n.nodeValue = v;
     });
   });
+})();
+
+/* ─── DEV DEBUG (временно): живые значения скролла для диагностики Safari.
+   Удалить весь блок после починки. ─── */
+(function () {
+  const dbg = document.createElement('div');
+  dbg.style.cssText =
+    'position:fixed;top:8px;right:8px;z-index:99999;' +
+    'background:rgba(0,0,0,.82);color:#7CFC00;' +
+    'font:11px/1.6 ui-monospace,Menlo,monospace;' +
+    'padding:8px 11px;border-radius:6px;pointer-events:none;white-space:pre';
+  document.body.appendChild(dbg);
+
+  const img = document.querySelector('.hero__train-img');
+  let tick = 0;
+
+  (function loop() {
+    tick++;
+    const de = document.documentElement, b = document.body;
+    const se = document.scrollingElement;
+    dbg.textContent =
+      'tick        ' + tick +
+      '\nwin.scrollY ' + Math.round(window.scrollY) +
+      '\ndocEl.top   ' + Math.round(de.scrollTop) +
+      '\nbody.top    ' + Math.round(b.scrollTop) +
+      '\nscrollingEl ' + (se === de ? 'html' : se === b ? 'body' : '?') +
+      '\ntrain       ' + (img ? (img.style.transform || '(нет)') : 'не найден');
+    requestAnimationFrame(loop);
+  })();
 })();
