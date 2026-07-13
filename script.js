@@ -65,39 +65,51 @@ const birdsEl  = document.querySelector('.hero__birds');
 const heroEl   = document.querySelector('.hero');
 
 if (trainImg && heroEl && !reducedMotion) {
-  let ticking = false;
+  // Постоянный rAF-цикл вместо связки «scroll-событие → rAF»: в Safari
+  // события скролла с трекпадом приходят нестабильно, и поезд замирал
+  // после первых пикселей. Цикл читает scrollY каждый кадр и пишет
+  // transform только при изменении — в простое это одно сравнение строк.
+  let lastKey = '';
 
-  // transform ставим напрямую (без CSS-переменных) — надёжно в Safari
   function applyScene() {
     const h = heroEl.offsetHeight || window.innerHeight;
     // прогресс скролла сквозь первый экран: 0 (верх) … 1 (низ hero)
     const p = Math.min(1, Math.max(0, window.scrollY / h));
+    const w = window.innerWidth;
+    const key = p.toFixed(4) + ':' + w;
 
-    if (window.innerWidth <= 860) {
-      // мобильный параллакс: поезд влево, дорога и птицы слегка вправо
-      const roadX = p * 30;
-      trainImg.style.transform = `translateX(${-p * 100}px)`;
-      if (roadImg)  roadImg.style.transform  = `translateX(${roadX}px)`;
-      // птицы не в масштабированной сцене → множитель, чтобы совпадать с дорогой
-      if (birdsEl)  birdsEl.style.transform  = `translateX(${roadX * 2.5}px)`;
-    } else {
-      // десктоп: паровоз едет влево (вперёд) вдвое медленнее, дорога/птицы неподвижны
-      trainImg.style.transform = `translateX(${-p * window.innerWidth * 0.65}px)`;
-      if (roadImg)  roadImg.style.transform  = '';
-      if (birdsEl)  birdsEl.style.transform  = '';
+    if (key !== lastKey) {
+      lastKey = key;
+      if (w <= 860) {
+        // мобильный параллакс: поезд влево, дорога и птицы слегка вправо
+        const roadX = p * 30;
+        trainImg.style.transform = `translateX(${-p * 100}px)`;
+        if (roadImg)  roadImg.style.transform  = `translateX(${roadX}px)`;
+        // птицы не в масштабированной сцене → множитель, чтобы совпадать с дорогой
+        if (birdsEl)  birdsEl.style.transform  = `translateX(${roadX * 2.5}px)`;
+      } else {
+        // десктоп: паровоз едет влево (вперёд) вдвое медленнее, дорога/птицы неподвижны
+        trainImg.style.transform = `translateX(${-p * w * 0.65}px)`;
+        if (roadImg)  roadImg.style.transform  = '';
+        if (birdsEl)  birdsEl.style.transform  = '';
+      }
     }
-    ticking = false;
+    requestAnimationFrame(applyScene);
   }
 
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(applyScene);
-      ticking = true;
-    }
-  }, { passive: true });
+  requestAnimationFrame(applyScene);
 
-  window.addEventListener('resize', applyScene);
-  applyScene();
+  // Safari: после въезда снимаем с обёртки анимацию с fill:forwards —
+  // иначе компоузер продолжает «держать» слой и мешает трансформам ниже
+  const trainWrap = document.querySelector('.hero__train');
+  if (trainWrap) {
+    trainWrap.addEventListener('animationend', (e) => {
+      if (e.animationName === 'train-move') {
+        trainWrap.style.opacity = '1';
+        trainWrap.style.animation = 'none';
+      }
+    });
+  }
 }
 
 /* ─── 4. NAV — SCROLL STATE & PROGRESS BAR ─── */
