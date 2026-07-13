@@ -330,6 +330,12 @@ strong { font-weight: 700; }
   height: auto;
 }
 
+/* порядок появления сцены: дорога+поезд (opacity) → сдвиг поезда → птички */
+.hero__birds {
+  opacity: 0;
+  animation: hero-fade-in 1s ease 3s forwards;
+}
+
 /* Порядок в hero: текст → картинки (пути+поезд) → кнопка.
    Полоса-иллюстрация во всю ширину. */
 .hero__band {
@@ -350,9 +356,9 @@ strong { font-weight: 700; }
   display: block;
   width: 100%;
   height: auto;
-  /* появление дороги (после текстов) */
+  /* появление дороги (после текстов), синхронно с поездом */
   opacity: 0;
-  animation: hero-fade-in 1.1s ease 0.7s forwards;
+  animation: hero-fade-in 0.9s ease 0.7s forwards;
 }
 
 @keyframes hero-fade-in {
@@ -372,13 +378,13 @@ strong { font-weight: 700; }
   width: 30.61%;
   z-index: 3;
   pointer-events: none;
-  /* въезд: появляется правее базовой точки и доезжает до неё,
-     дальше движением управляет только скролл (--train-x на img).
-     Появление (opacity) и движение (translateX) — раздельно:
-     движение вдвое медленнее прозрачности. */
+  /* сценарий: поезд и дорога появляются по прозрачности одновременно,
+     затем поезд медленно (×2) сдвигается в базовую точку, потом птички.
+     fill:both у move — во время паузы поезд стоит в стартовой точке
+     (38% правее), а не прыгает из базовой. */
   opacity: 0;
-  animation: train-fade 1.5s ease 1.05s forwards,
-             train-move 3s cubic-bezier(0.16, 1, 0.3, 1) 1.05s forwards;
+  animation: train-fade 0.9s ease 0.7s both,
+             train-move 5.2s cubic-bezier(0.16, 1, 0.3, 1) 1.7s both;
 }
 
 @keyframes train-fade {
@@ -420,6 +426,9 @@ strong { font-weight: 700; }
   /* оптическое выравнивание: крупный шрифт уходит вправо — тянем влево */
   margin: 0 0 28px -0.055em;
 }
+
+/* перенос только для мобильной раскладки */
+.br-m { display: none; }
 
 .hero__sub {
   font-family: var(--f-display);
@@ -1442,6 +1451,10 @@ figcaption {
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
+/* карточка «Часть 1» (доступная): в покое обводка полностью скрыта,
+   синяя появляется по наведению/активации (правила ниже по каскаду) */
+.hub-stop--ready .hub-stop__card { border-color: transparent; }
+
 /* раскрывающийся блок (описание + CTA) — по умолчанию открыт (мобильный).
    max-height вместо grid-template-rows: 0fr/1fr — Safari анимирует max-height
    надёжно, а grid-track-анимацию долго не поддерживал */
@@ -2257,6 +2270,7 @@ figcaption {
      (крупно, но в пределах экрана) подгоняет fitHeroTitle() в script.js */
   .hero__title { margin-bottom: 22px; font-size: clamp(24px, 8.8vw, 46px); }
   .hero__sub { margin-bottom: 18px; font-size: 11px; }   /* ×1.5 меньше */
+  .br-m { display: inline; }   /* подзаголовок в 3 строки на мобильном */
   .hero__desc {
     max-width: 100%;
     line-height: 1.7;
@@ -2397,9 +2411,10 @@ figcaption {
     animation: none !important;
   }
 
-  /* дорога, поезд и кнопка сразу видны, без въезда/появления */
+  /* дорога, поезд, птички и кнопка сразу видны, без въезда/появления */
   .hero__band-img,
   .hero__band-inner .hero__train,
+  .hero__birds,
   .hero__cta {
     animation: none !important;
     opacity: 1 !important;
