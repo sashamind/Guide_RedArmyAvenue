@@ -2519,6 +2519,12 @@ figcaption {
   .gub-embed { margin-top: 80px; }
   .gub-embed .label { text-align: center; }
 
+  /* пунктир в 1.5 раза толще, подписи городов в 1.5 раза больше */
+  .gub-rail { stroke-width: 4.5; }
+  .gub-rail--thin { stroke-width: 2.25; }
+  .gub-label { font-size: 25.5px; }
+  .gub-label--minor { font-size: 19.5px; }
+
   /* карта по центру экрана, целиком во всю ширину колонки;
      описания — горизонтальный слайдер: активная карточка по центру */
   .gub-map__svg { width: 100%; margin: 0 auto; }
