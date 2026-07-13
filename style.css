@@ -2504,6 +2504,9 @@ figcaption {
   .nearby__hdr { grid-template-columns: 1fr; }
   .nearby__grid { grid-template-columns: 1fr; }
 
+  /* синий блок: двойной отступ от верхней границы до первого текста */
+  #s1860 { padding-top: calc(var(--pad-y) * 2); }
+
   /* ── Gub map ── */
   /* minmax(0,1fr): иначе колонку распирает min-content слайдера
      и карта выезжает за экран */
