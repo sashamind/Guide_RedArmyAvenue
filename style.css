@@ -999,6 +999,11 @@ figcaption {
    соседние видны сверху и снизу — меньше и прозрачнее */
 .gub-info { position: relative; }
 
+/* веб: строки описаний короче на 30% — удобнее читать */
+@media (min-width: 861px) {
+  .gub-map__info { max-width: 70%; }
+}
+
 .gub-info__viewport {
   height: 460px;
   overflow: hidden;
