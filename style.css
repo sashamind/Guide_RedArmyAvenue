@@ -768,7 +768,11 @@ figcaption {
 #s1860 .gub-city--faded .gub-dot { stroke: var(--cream); }
 #s1860 .gub-city--faded.is-active .gub-dot { fill: var(--cream); stroke: var(--cream); }
 
-#s1860 .gub-map__info { border-left-color: var(--amber); border-top-color: var(--amber); }
+#s1860 .gub-map__info {
+  border-left-color: var(--amber);
+  border-top-color: var(--amber);
+  border-bottom-color: var(--amber);
+}
 #s1860 .gub-info__dot  { border-color: var(--cream); }
 #s1860 .gub-info__dot.is-active { background: var(--amber); border-color: var(--amber); }
 #s1860 .gub-map__city { color: var(--amber); }
@@ -2523,9 +2527,11 @@ figcaption {
     flex-direction: column;
     border-left: 0;
     padding-left: 0;
-    /* порядок: линия → точки → описание */
+    /* порядок: линия → точки → описание → линия */
     border-top: 2px solid var(--blue);
+    border-bottom: 2px solid var(--blue);
     padding-top: 20px;
+    padding-bottom: 28px;
   }
   .gub-info__viewport {
     height: auto;
