@@ -80,18 +80,20 @@ if (trainImg && heroEl && !reducedMotion) {
 
     if (key !== lastKey) {
       lastKey = key;
+      // translate3d, а не translateX: десктопный Safari без собственного
+      // GPU-слоя не перерисовывает transform внутри scale-родителя
       if (w <= 860) {
         // мобильный параллакс: поезд влево, дорога и птицы слегка вправо
         const roadX = p * 30;
-        trainImg.style.transform = `translateX(${-p * 100}px)`;
-        if (roadImg)  roadImg.style.transform  = `translateX(${roadX}px)`;
+        trainImg.style.transform = `translate3d(${-p * 100}px, 0, 0)`;
+        if (roadImg)  roadImg.style.transform  = `translate3d(${roadX}px, 0, 0)`;
         // птицы не в масштабированной сцене → множитель, чтобы совпадать с дорогой
-        if (birdsEl)  birdsEl.style.transform  = `translateX(${roadX * 2.5}px)`;
+        if (birdsEl)  birdsEl.style.transform  = `translate3d(${roadX * 2.5}px, 0, 0)`;
       } else {
         // десктоп: паровоз едет влево (вперёд) вдвое медленнее, дорога/птицы неподвижны
-        trainImg.style.transform = `translateX(${-p * w * 0.65}px)`;
-        if (roadImg)  roadImg.style.transform  = '';
-        if (birdsEl)  birdsEl.style.transform  = '';
+        trainImg.style.transform = `translate3d(${-p * w * 0.65}px, 0, 0)`;
+        if (roadImg)  roadImg.style.transform  = 'translate3d(0, 0, 0)';
+        if (birdsEl)  birdsEl.style.transform  = 'translate3d(0, 0, 0)';
       }
     }
     requestAnimationFrame(applyScene);

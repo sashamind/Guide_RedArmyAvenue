@@ -395,7 +395,10 @@ strong { font-weight: 700; }
   display: block;
   width: 100%;
   height: auto;
-  /* сдвиг при скролле ставит JS напрямую (translateX) — надёжно в Safari */
+  /* сдвиг при скролле ставит JS (translate3d). Стартовый translate3d
+     создаёт GPU-слой заранее — без него десктопный Safari не
+     перерисовывает transform внутри scale-родителя */
+  transform: translate3d(0, 0, 0);
   will-change: transform;
 }
 
