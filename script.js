@@ -185,7 +185,7 @@ window.addEventListener('load', function () {
   });
 
   // поезд: Lottie-оверлей ПОВЕРХ картинки, пауза на секунду дольше — 4с
-  initStopMotionLottie(document.querySelector('.hero__train-mover'), SB + 'train_lottie.json', {
+  initStopMotionLottie(document.querySelector('.hero__train-mover'), SB + 'train_lottie.json?v=2', {
     className: 'hero__train-anim', hideImg: false, pauseMs: 4000
   });
 });
