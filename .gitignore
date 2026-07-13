@@ -8,3 +8,6 @@ illustrations/
 
 # macOS
 .DS_Store
+
+# Supabase (секреты — не пушить)
+.supabase-db-password.txt
