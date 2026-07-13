@@ -59,7 +59,7 @@ document.querySelectorAll('[data-counter]').forEach((el) => {
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const trainImg = document.querySelector('.hero__train-img');
+const trainImg = document.querySelector('.hero__train-mover'); // картинка + Lottie-оверлей едут вместе
 const roadImg  = document.querySelector('.hero__band-img');
 const birdsEl  = document.querySelector('.hero__birds');
 const heroEl   = document.querySelector('.hero');
@@ -126,47 +126,46 @@ const heroEl   = document.querySelector('.hero');
   }
 })();
 
-/* ─── 3a. BIRDS — Lottie-анимация вместо статичной картинки.
-   Статичный PNG остаётся фолбэком: без JS/CDN или при reduced-motion.
+/* ─── 3a. LOTTIE-АНИМАЦИИ hero (птицы, поезд) — покадровый режим.
+   Stop-motion: длительность как в файле, но кадр обновляется STEP_FPS
+   раз в секунду; между итерациями пауза. Статичные PNG остаются
+   фолбэком: без JS/CDN или при reduced-motion анимация не стартует.
    Инициализация по window.load — deferred-плеер к этому моменту готов. ─── */
 
-window.addEventListener('load', function initBirdsLottie() {
-  var wrap = document.querySelector('.hero__birds');
+var initStopMotionLottie = function (wrap, path, opts) {
   if (!wrap || reducedMotion || !window.lottie) return;
 
   var img = wrap.querySelector('img');
   var box = document.createElement('div');
-  box.className = 'hero__birds-anim';
+  box.className = opts.className;
   wrap.appendChild(box);
 
   var anim = window.lottie.loadAnimation({
     container: box,
     renderer: 'svg',
     loop: false,
-    autoplay: false,          // ведём воспроизведение вручную — покадрово
-    path: 'https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/birds_lottie.json'
+    autoplay: false,          // воспроизведение вручную — покадрово
+    path: path
   });
 
-  // Покадровый режим (stop-motion): длительность та же, но кадр
-  // обновляется STEP_FPS раз в секунду — шагаем по таймлайну крупно.
   var STEP_FPS = 12;          // визуальная частота кадров
-  var SRC_FPS  = 30;          // фреймрейт таймлайна файла
 
   anim.addEventListener('DOMLoaded', function () {
-    if (img) img.style.display = 'none';
+    if (opts.hideImg && img) img.style.display = 'none';
     anim.setSubframe(false);  // без межкадровой интерполяции
 
-    var total = anim.totalFrames;
-    var frame = 0;
+    var srcFps = anim.frameRate || 30;
+    var total  = anim.totalFrames;
+    var frame  = 0;
 
     var startPlayback = function () {
       var timer = setInterval(function () {
-        frame += SRC_FPS / STEP_FPS;
+        frame += srcFps / STEP_FPS;
         if (frame >= total) {
           clearInterval(timer);
           frame = 0;
           anim.goToAndStop(0, true);
-          setTimeout(startPlayback, 3000);  // пауза между итерациями
+          setTimeout(startPlayback, opts.pauseMs);
           return;
         }
         anim.goToAndStop(frame, true);
@@ -174,6 +173,20 @@ window.addEventListener('load', function initBirdsLottie() {
     };
 
     startPlayback();
+  });
+};
+
+window.addEventListener('load', function () {
+  var SB = 'https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/';
+
+  // птицы: анимация вместо статичной картинки, пауза 3с
+  initStopMotionLottie(document.querySelector('.hero__birds'), SB + 'birds_lottie.json', {
+    className: 'hero__birds-anim', hideImg: true, pauseMs: 3000
+  });
+
+  // поезд: Lottie-оверлей ПОВЕРХ картинки, пауза на секунду дольше — 4с
+  initStopMotionLottie(document.querySelector('.hero__train-mover'), SB + 'train_lottie.json', {
+    className: 'hero__train-anim', hideImg: false, pauseMs: 4000
   });
 });
 

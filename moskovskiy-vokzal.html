@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://i.postimg.cc" />
   <link rel="preconnect" href="https://vxxzyggeogbjxjlrhcus.supabase.co" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260713q" />
+  <link rel="stylesheet" href="style.css?v=20260713r" />
 
   <!-- Lottie (лёгкая SVG-сборка) — анимация птиц в hero -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie_light.min.js" defer></script>
@@ -88,7 +88,10 @@
       <div class="hero__band-inner">
         <img class="hero__band-img" src="https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/railway-track-and-stop.png" alt="Железнодорожные пути и остановка — линейная иллюстрация" />
         <span class="hero__train" data-imgnum="2">
-          <img class="hero__train-img" src="https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/train.png?v=2" alt="Паровоз" />
+          <span class="hero__train-mover">
+            <img class="hero__train-img" src="https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/train.png?v=2" alt="Паровоз" />
+            <!-- сюда JS кладёт Lottie-оверлей .hero__train-anim -->
+          </span>
         </span>
       </div>
     </figure>
@@ -712,7 +715,7 @@
     </svg>
   </button>
 
-  <script src="script.js?v=20260713q"></script>
+  <script src="script.js?v=20260713r"></script>
   <!-- DEV временно выключен. Вернуть — раскомментировать строку ниже
        и удалить правило-переключатель в конце style.css (метка «DEV OFF»). -->
   <!-- <script src="dev-adjust.js"></script> -->

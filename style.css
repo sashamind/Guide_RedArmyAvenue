@@ -401,16 +401,31 @@ strong { font-weight: 700; }
   to   { transform: translateX(0); }
 }
 
+/* мувер: общий контейнер картинки поезда и Lottie-оверлея — сдвиг при
+   скролле JS ставит ему (translate3d), оба слоя едут вместе. Стартовый
+   translate3d создаёт GPU-слой заранее — без него десктопный Safari
+   не перерисовывает transform внутри scale-родителя */
+.hero__train-mover {
+  display: block;
+  position: relative;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
 .hero__train-img {
   display: block;
   width: 100%;
   height: auto;
-  /* сдвиг при скролле ставит JS (translate3d). Стартовый translate3d
-     создаёт GPU-слой заранее — без него десктопный Safari не
-     перерисовывает transform внутри scale-родителя */
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
 }
+
+/* Lottie-оверлей поверх картинки поезда (та же геометрия 1005×498) */
+.hero__train-anim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero__train-anim svg { display: block; }
 
 .hero__left {
   display: flex;
