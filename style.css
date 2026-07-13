@@ -679,6 +679,28 @@ figcaption {
 
 #s1860 .era__aside-quote { border-left-color: var(--amber); }
 
+/* Синий блок: заголовок с подписью выключены вправо, текст — ниже */
+#s1860 .era__date { text-align: right; }
+
+@media (min-width: 861px) {
+  #s1860 .era__inner { display: block; }
+  #s1860 .era__date { position: static; }
+
+  #s1860 .era__content,
+  #s1860 .era__body { display: block; }
+
+  #s1860 .era__body {
+    margin-top: 56px;
+    max-width: 760px;
+  }
+
+  /* лид-текст — крупнее обычного тела */
+  #s1860 .era__body p {
+    font-size: 17px;
+    line-height: 1.95;
+  }
+}
+
 /* схема городов внутри синего блока */
 .gub-embed { margin-top: clamp(40px, 6vw, 72px); }
 
