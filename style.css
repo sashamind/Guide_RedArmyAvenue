@@ -799,6 +799,17 @@ figcaption {
   margin-bottom: 22px;
 }
 
+/* утверждение: фон цвета текста синего блока, крупнее обычной цитаты */
+.quote-block--statement { background: var(--cream); }
+
+.quote-block--statement .quote { max-width: 880px; }
+
+.quote-block--statement .quote p {
+  font-size: clamp(22px, 2.9vw, 34px);
+  line-height: 1.55;
+  margin-bottom: 0;
+}
+
 .quote cite {
   display: block;
   font-family: var(--f-display);
