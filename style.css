@@ -2197,8 +2197,10 @@ figcaption {
   /* ── Hero ── */
   .hero {
     grid-template-columns: 1fr;
-    min-height: 100svh;
-    padding-top: 60px;      /* под верхнюю навигацию-полосу, ближе к ней */
+    height: 100svh;         /* ровно высота экрана: всё влезает в один экран */
+    min-height: 0;
+    padding-top: 60px;      /* под верхнюю навигацию-полосу */
+    padding-bottom: clamp(20px, 6svh, 60px);
   }
 
   .hero__left {
@@ -2214,7 +2216,8 @@ figcaption {
      translate(40%,30%) scale(2.69): h=18.86vw — высота картинки при 100vw */
   .hero__band {
     width: 269%;
-    margin: calc(64px - 10.3vw) 0 calc(64px - 21.6vw) -44.5%;
+    /* вертикальные зазоры резиновые (svh) — сцена вписывается в экран */
+    margin: clamp(10px, 3svh, 40px) 0 0 -44.5%;
     transform: none;
   }
 
@@ -2227,7 +2230,7 @@ figcaption {
   .hero__birds {
     position: static;
     width: 35%;            /* ÷1.5 */
-    margin: 96px auto 0;   /* отступ, чтобы очистить увеличенную сцену */
+    margin: clamp(10px, 3svh, 40px) auto 0;
     right: auto;
     top: auto;
     /* смещаются вбок вместе с дорогой при скролле (translateX ставит JS) */
@@ -2332,6 +2335,13 @@ figcaption {
   .nearby-card__body { padding: 16px 18px 22px; }
 
   .hub-stop__status { margin-right: 16px; }
+}
+
+/* ── Низкие мобильные экраны: hero ужимается, чтобы влезть в 100svh ── */
+@media (max-width: 860px) and (max-height: 700px) {
+  .hero__birds { display: none; }
+  .hero__title { font-size: clamp(22px, 7.6vw, 40px); }
+  .hero__sub { margin-bottom: 12px; }
 }
 
 /* ── Hub: карточки складываются в столбик на узких планшетах ── */
