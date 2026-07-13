@@ -733,10 +733,11 @@ figcaption {
   padding: 0;
   background: none;
   border: 0;
+  /* как у .label («Инфографика · нажмите на город») */
   font-family: var(--f-display);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--blue);
   cursor: pointer;
