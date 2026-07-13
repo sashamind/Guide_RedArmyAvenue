@@ -2237,8 +2237,15 @@ figcaption {
     will-change: transform;
   }
 
-  /* размер от ширины экрана: «МОСКОВСКИЙ» (самая длинная строка, ~9.6px
-     ширины на 1px кегля + отступы) гарантированно помещается */
+  /* пилюля — в полтора раза мельче */
+  .hero__left .label { font-size: 7.5px; padding: 7px 14px; margin-bottom: 22px; }
+
+  /* кнопка — компактнее */
+  .hero__cta { font-size: 12px; gap: 7px; }
+  .hero__cta-arrow { font-size: 16px; }
+
+  /* базовый размер — страховка без JS; точную максимальную величину
+     (крупно, но в пределах экрана) подгоняет fitHeroTitle() в script.js */
   .hero__title { margin-bottom: 22px; font-size: clamp(24px, 8.8vw, 46px); }
   .hero__sub { margin-bottom: 18px; font-size: 11px; }   /* ×1.5 меньше */
   .hero__desc {
@@ -2337,10 +2344,10 @@ figcaption {
   .hub-stop__status { margin-right: 16px; }
 }
 
-/* ── Низкие мобильные экраны: hero ужимается, чтобы влезть в 100svh ── */
+/* ── Низкие мобильные экраны: hero ужимается, чтобы влезть в 100svh.
+   Птицы не прячутся — заезжают на нижнюю часть картинки с дорогой ── */
 @media (max-width: 860px) and (max-height: 700px) {
-  .hero__birds { display: none; }
-  .hero__title { font-size: clamp(22px, 7.6vw, 40px); }
+  .hero__birds { margin-top: clamp(-64px, -7svh, -16px); }
   .hero__sub { margin-bottom: 12px; }
 }
 

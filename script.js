@@ -126,6 +126,31 @@ const heroEl   = document.querySelector('.hero');
   }
 })();
 
+/* ─── 3b. HERO TITLE FIT (мобильный): максимально крупный, но в экран ─── */
+
+(function fitHeroTitle() {
+  var t = document.querySelector('.hero__title');
+  if (!t) return;
+
+  var fit = function () {
+    if (window.innerWidth > 860) { t.style.fontSize = ''; return; }
+    // старт ~13vw (≈ ×1.5 к прежним 8.8vw), потолок 64px
+    var size = Math.min(Math.round(window.innerWidth * 0.13), 64);
+    t.style.fontSize = size + 'px';
+    // ужимаем по пикселю, пока самая длинная строка не поместится
+    var guard = 48;
+    while (guard-- > 0 && t.scrollWidth > t.clientWidth && size > 20) {
+      size -= 1;
+      t.style.fontSize = size + 'px';
+    }
+  };
+
+  window.addEventListener('resize', fit);
+  fit();
+  // пересчитать после загрузки шрифта (метрики меняются)
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+
 /* ─── 4. NAV — SCROLL STATE & PROGRESS BAR ─── */
 
 const nav      = document.getElementById('nav');
