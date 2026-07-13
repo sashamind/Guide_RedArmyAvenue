@@ -496,7 +496,7 @@ strong { font-weight: 700; }
   align-items: center;
   gap: 9px;
   align-self: center;          /* по центру, под картинкой */
-  margin-top: 48px;
+  margin-top: auto;            /* прижата к низу первого экрана (десктоп) */
   font-family: var(--f-display);
   font-size: 15px;             /* было 22 → ÷1.5 */
   font-weight: 500;            /* чуть толще */
@@ -2193,7 +2193,7 @@ figcaption {
   .hero {
     grid-template-columns: 1fr;
     min-height: 100svh;
-    padding-top: 84px;      /* под верхнюю навигацию-полосу */
+    padding-top: 60px;      /* под верхнюю навигацию-полосу, ближе к ней */
   }
 
   .hero__left {
