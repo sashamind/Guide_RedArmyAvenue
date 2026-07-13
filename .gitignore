@@ -11,3 +11,4 @@ illustrations/
 
 # Supabase (секреты — не пушить)
 .supabase-db-password.txt
+supabase/
