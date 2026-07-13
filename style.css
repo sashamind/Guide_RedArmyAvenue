@@ -2555,7 +2555,8 @@ figcaption {
   .gub-info__item {
     flex: 0 0 78%;
     scroll-snap-align: center;
-    transform-origin: center;
+    /* сжатие от верхней границы: соседние карточки на одном уровне с активной */
+    transform-origin: center top;
   }
   /* описание — размером как подписи городов на карте */
   .gub-map__text { font-size: 12px; line-height: 1.7; }
