@@ -126,6 +126,37 @@ const heroEl   = document.querySelector('.hero');
   }
 })();
 
+/* ─── 3a. BIRDS — Lottie-анимация вместо статичной картинки.
+   Статичный PNG остаётся фолбэком: без JS/CDN или при reduced-motion.
+   Инициализация по window.load — deferred-плеер к этому моменту готов. ─── */
+
+window.addEventListener('load', function initBirdsLottie() {
+  var wrap = document.querySelector('.hero__birds');
+  if (!wrap || reducedMotion || !window.lottie) return;
+
+  var img = wrap.querySelector('img');
+  var box = document.createElement('div');
+  box.className = 'hero__birds-anim';
+  wrap.appendChild(box);
+
+  var anim = window.lottie.loadAnimation({
+    container: box,
+    renderer: 'svg',
+    loop: false,             // цикл вручную — с паузой между итерациями
+    autoplay: true,
+    path: 'https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/birds_lottie.json'
+  });
+
+  anim.addEventListener('DOMLoaded', function () {
+    if (img) img.style.display = 'none';
+  });
+
+  // зациклено, но с паузой 3с между проигрываниями
+  anim.addEventListener('complete', function () {
+    setTimeout(function () { anim.goToAndPlay(0, true); }, 3000);
+  });
+});
+
 /* ─── 3b. HERO TITLE FIT (мобильный): максимально крупный, но в экран ─── */
 
 (function fitHeroTitle() {

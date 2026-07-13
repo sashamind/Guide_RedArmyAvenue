@@ -318,7 +318,7 @@ strong { font-weight: 700; }
   position: absolute;
   top: 200px;
   right: 11vw;
-  width: clamp(120px, 9.3vw, 153px);   /* ÷1.5 */
+  width: clamp(180px, 14vw, 230px);   /* ×1.5 */
   margin: 0;
   z-index: 2;
   pointer-events: none;
@@ -335,6 +335,10 @@ strong { font-weight: 700; }
   opacity: 0;
   animation: hero-fade-in 1s ease 3s forwards;
 }
+
+/* контейнер Lottie-анимации птиц (заменяет img после загрузки) */
+.hero__birds-anim { width: 100%; }
+.hero__birds-anim svg { display: block; }
 
 /* Порядок в hero: текст → картинки (пути+поезд) → кнопка.
    Полоса-иллюстрация во всю ширину. */
@@ -2251,7 +2255,7 @@ figcaption {
   /* птицы — в потоке под иллюстрацией с поездом */
   .hero__birds {
     position: static;
-    width: 35%;            /* ÷1.5 */
+    width: 52%;            /* ×1.5 */
     margin: clamp(10px, 3svh, 40px) auto 0;
     right: auto;
     top: auto;
