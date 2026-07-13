@@ -2544,6 +2544,9 @@ figcaption {
   .gub-info__track {
     transform: none !important;
     flex-direction: row;
+    /* карточки не растягиваются по высоте: браузер центрирует контент
+       внутри <button>, и короткие описания съезжают вниз */
+    align-items: flex-start;
     gap: 20px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
