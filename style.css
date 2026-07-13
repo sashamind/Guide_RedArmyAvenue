@@ -81,8 +81,9 @@ strong { font-weight: 700; }
 /* ── CONTAINER ── */
 .container {
   width: 100%;
-  max-width: var(--max-w);
-  margin: 0 auto;
+  /* во всю ширину, поля --pad-x с обеих сторон — как у hero:
+     левые тексты от левого края, правые выключки — от правого */
+  margin: 0;
   padding-left:  var(--pad-x);
   padding-right: var(--pad-x);
 }
