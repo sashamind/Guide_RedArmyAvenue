@@ -724,6 +724,9 @@ figcaption {
 #s1860 .gub-city--faded.is-active .gub-dot { fill: var(--cream); stroke: var(--cream); }
 
 #s1860 .gub-map__info { border-left-color: var(--amber); }
+#s1860 .gub-info__item { border-left-color: var(--amber); }
+#s1860 .gub-info__dot  { border-color: var(--cream); }
+#s1860 .gub-info__dot.is-active { background: var(--amber); border-color: var(--amber); }
 #s1860 .gub-map__city { color: var(--amber); }
 
 /* ═══════════════════════════════════════
@@ -994,14 +997,43 @@ figcaption {
 
 /* вертикальный слайдер описаний: активная точка по центру,
    соседние видны сверху и снизу — меньше и прозрачнее */
-.gub-info {
+.gub-info { position: relative; }
+
+.gub-info__viewport {
   height: 460px;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
           mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
 }
 
+/* точки-буллеты: в вебе — вертикально, слева от линии */
+.gub-info__dots {
+  position: absolute;
+  right: calc(100% + 26px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gub-info__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1.5px solid var(--blue);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s, transform 0.25s;
+}
+
+.gub-info__dot:hover { transform: scale(1.3); }
+
+.gub-info__dot.is-active { background: var(--blue); }
+
 .gub-info__track {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -2411,18 +2443,45 @@ figcaption {
   /* ── Gub map ── */
   .gub-map__inner { grid-template-columns: 1fr; gap: 32px; }
 
-  /* карта по центру экрана; вместо слайдера — только активное описание */
+  /* карта по центру экрана; описания — горизонтальный слайдер:
+     активная карточка по центру, соседние выглядывают по краям */
   .gub-map__svg { margin: 0 auto; }
   .gub-info {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .gub-info__viewport {
     height: auto;
-    min-height: 150px;
     overflow: visible;
     -webkit-mask-image: none;
             mask-image: none;
   }
-  .gub-info__track { transform: none !important; }
-  .gub-info__item { display: none; }
-  .gub-info__item.is-active { display: block; }
+  .gub-info__dots {
+    position: static;
+    transform: none;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .gub-info__track {
+    transform: none !important;
+    flex-direction: row;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 4px 11%;
+  }
+  .gub-info__track::-webkit-scrollbar { display: none; }
+  .gub-info__item {
+    flex: 0 0 78%;
+    scroll-snap-align: center;
+    border-left: 2px solid var(--blue);
+    padding-left: 16px;
+    transform-origin: center;
+  }
 
   /* ── Route: 2 колонки на мобильных ── */
   .route__line {

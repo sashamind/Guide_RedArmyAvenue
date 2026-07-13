@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://i.postimg.cc" />
   <link rel="preconnect" href="https://vxxzyggeogbjxjlrhcus.supabase.co" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260714a" />
+  <link rel="stylesheet" href="style.css?v=20260714b" />
 
   <!-- Lottie (лёгкая SVG-сборка) — анимация птиц в hero -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie_light.min.js" defer></script>
@@ -157,6 +157,7 @@
           </g>
         </svg>
         <div class="gub-map__info gub-info" aria-live="polite">
+          <div class="gub-info__viewport">
           <div class="gub-info__track" id="gubTrack">
             <button type="button" class="gub-info__item is-active" data-city="tula">
               <span class="gub-map__city">Тула</span>
@@ -191,6 +192,13 @@
                 город Плавск.
               </span>
             </button>
+          </div>
+          </div>
+          <div class="gub-info__dots" aria-hidden="true">
+            <button type="button" class="gub-info__dot is-active" data-city="tula" tabindex="-1"></button>
+            <button type="button" class="gub-info__dot" data-city="bogorodick" tabindex="-1"></button>
+            <button type="button" class="gub-info__dot" data-city="epifan" tabindex="-1"></button>
+            <button type="button" class="gub-info__dot" data-city="plavsk" tabindex="-1"></button>
           </div>
         </div>
       </div>
@@ -709,7 +717,7 @@
     </svg>
   </button>
 
-  <script src="script.js?v=20260714a"></script>
+  <script src="script.js?v=20260714b"></script>
   <!-- DEV временно выключен. Вернуть — раскомментировать строку ниже
        и удалить правило-переключатель в конце style.css (метка «DEV OFF»). -->
   <!-- <script src="dev-adjust.js"></script> -->

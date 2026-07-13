@@ -402,24 +402,42 @@ window.addEventListener('DOMContentLoaded', () => {
 
 const gubCities = document.querySelectorAll('.gub-city');
 const gubInfo   = document.querySelector('.gub-info');
+const gubView   = document.querySelector('.gub-info__viewport');
 const gubTrack  = document.getElementById('gubTrack');
 const gubItems  = gubTrack ? Array.prototype.slice.call(gubTrack.querySelectorAll('.gub-info__item')) : [];
+const gubDots   = Array.prototype.slice.call(document.querySelectorAll('.gub-info__dot'));
 const gubMobile = () => window.matchMedia('(max-width: 860px)').matches;
 
-/* активное описание — по центру видимой области слайдера */
+/* веб: активное описание — по центру видимой области слайдера */
 function gubCenter() {
-  if (!gubTrack || !gubInfo) return;
+  if (!gubTrack || !gubView) return;
   if (gubMobile()) { gubTrack.style.transform = ''; return; }
   const active = gubTrack.querySelector('.gub-info__item.is-active');
   if (!active) return;
-  const y = gubInfo.clientHeight / 2 - (active.offsetTop + active.offsetHeight / 2);
+  const y = gubView.clientHeight / 2 - (active.offsetTop + active.offsetHeight / 2);
   gubTrack.style.transform = 'translateY(' + y + 'px)';
 }
 
-function gubSelect(key) {
+/* мобилка: докрутить горизонтальный слайдер до активной карточки */
+function gubScrollToActive(instant) {
+  if (!gubTrack) return;
+  const active = gubTrack.querySelector('.gub-info__item.is-active');
+  if (!active) return;
+  gubTrack.scrollTo({
+    left: active.offsetLeft - (gubTrack.clientWidth - active.offsetWidth) / 2,
+    behavior: instant ? 'auto' : 'smooth',
+  });
+}
+
+function gubSelect(key, fromScroll) {
   gubCities.forEach((c) => c.classList.toggle('is-active', c.dataset.city === key));
   gubItems.forEach((i) => i.classList.toggle('is-active', i.dataset.city === key));
-  gubCenter();
+  gubDots.forEach((d) => d.classList.toggle('is-active', d.dataset.city === key));
+  if (gubMobile()) {
+    if (!fromScroll) gubScrollToActive();
+  } else {
+    gubCenter();
+  }
 }
 
 gubCities.forEach((city) => {
@@ -437,6 +455,31 @@ gubItems.forEach((item) => {
   item.addEventListener('click', () => gubSelect(item.dataset.city));
 });
 
+gubDots.forEach((dot) => {
+  dot.addEventListener('click', () => gubSelect(dot.dataset.city));
+});
+
+/* мобилка: свайп слайдера — активной становится карточка у центра экрана */
+var gubScrollT;
+if (gubTrack) {
+  gubTrack.addEventListener('scroll', function () {
+    if (!gubMobile()) return;
+    clearTimeout(gubScrollT);
+    gubScrollT = setTimeout(function () {
+      const center = gubTrack.scrollLeft + gubTrack.clientWidth / 2;
+      let best = null;
+      let bestD = Infinity;
+      gubItems.forEach(function (i) {
+        const d = Math.abs(i.offsetLeft + i.offsetWidth / 2 - center);
+        if (d < bestD) { bestD = d; best = i; }
+      });
+      if (best && !best.classList.contains('is-active')) {
+        gubSelect(best.dataset.city, true);
+      }
+    }, 120);
+  }, { passive: true });
+}
+
 /* колесо над слайдером листает точки; на границах отдаём скролл странице */
 var gubWheelAt = 0;
 if (gubInfo) {
@@ -452,10 +495,11 @@ if (gubInfo) {
     gubSelect(gubItems[next].dataset.city);
   }, { passive: false });
 
-  window.addEventListener('resize', gubCenter);
-  window.addEventListener('load', gubCenter);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(gubCenter);
-  gubCenter();
+  const gubSync = () => { gubMobile() ? gubScrollToActive(true) : gubCenter(); };
+  window.addEventListener('resize', gubSync);
+  window.addEventListener('load', gubSync);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(gubSync);
+  gubSync();
 }
 
 /* ─── 13. DOVE EASTER EGG ─── */
