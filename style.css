@@ -2255,7 +2255,7 @@ figcaption {
   /* птицы — в потоке под иллюстрацией с поездом */
   .hero__birds {
     position: static;
-    width: 52%;            /* ×1.5 */
+    width: 35%;
     margin: clamp(10px, 3svh, 40px) auto 0;
     right: auto;
     top: auto;
