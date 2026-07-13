@@ -769,7 +769,7 @@ figcaption {
 #s1860 .gub-city--faded.is-active .gub-dot { fill: var(--cream); stroke: var(--cream); }
 
 #s1860 .gub-map__info { border-left-color: var(--amber); }
-#s1860 .gub-info__item { border-left-color: var(--amber); }
+#s1860 .gub-info__viewport { border-top-color: var(--amber); }
 #s1860 .gub-info__dot  { border-color: var(--cream); }
 #s1860 .gub-info__dot.is-active { background: var(--amber); border-color: var(--amber); }
 #s1860 .gub-map__city { color: var(--amber); }
@@ -2505,11 +2505,13 @@ figcaption {
   .nearby__grid { grid-template-columns: 1fr; }
 
   /* ── Gub map ── */
-  .gub-map__inner { grid-template-columns: 1fr; gap: 32px; }
+  /* minmax(0,1fr): иначе колонку распирает min-content слайдера
+     и карта выезжает за экран */
+  .gub-map__inner { grid-template-columns: minmax(0, 1fr); gap: 32px; }
 
-  /* карта по центру экрана; описания — горизонтальный слайдер:
-     активная карточка по центру, соседние выглядывают по краям */
-  .gub-map__svg { margin: 0 auto; }
+  /* карта по центру экрана, целиком во всю ширину колонки;
+     описания — горизонтальный слайдер: активная карточка по центру */
+  .gub-map__svg { width: 100%; margin: 0 auto; }
   .gub-info {
     border-left: 0;
     padding-left: 0;
@@ -2519,6 +2521,9 @@ figcaption {
     overflow: visible;
     -webkit-mask-image: none;
             mask-image: none;
+    /* одна горизонтальная линия над описанием */
+    border-top: 2px solid var(--blue);
+    padding-top: 24px;
   }
   .gub-info__dots {
     position: static;
@@ -2542,8 +2547,6 @@ figcaption {
   .gub-info__item {
     flex: 0 0 78%;
     scroll-snap-align: center;
-    border-left: 2px solid var(--blue);
-    padding-left: 16px;
     transform-origin: center;
   }
 
