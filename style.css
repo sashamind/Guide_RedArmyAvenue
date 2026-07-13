@@ -310,7 +310,7 @@ strong { font-weight: 700; }
   justify-content: flex-start;   /* по верху: пилюля сразу под «КП» */
   overflow: hidden;
   padding-top: 40px;
-  padding-bottom: 40px;
+  padding-bottom: 100px;   /* кнопка «Начать прогулку» в 100px от низа экрана */
 }
 
 /* Птицы: десктоп — абсолютом в верх-правую зону hero */
