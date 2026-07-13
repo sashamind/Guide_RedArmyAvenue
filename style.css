@@ -706,6 +706,12 @@ figcaption {
 /* схема городов внутри синего блока */
 .gub-embed { margin-top: clamp(40px, 6vw, 72px); }
 
+/* абзац-итог под картой: воздух побольше */
+.gub-after .era__body { margin-top: 48px; }
+@media (min-width: 861px) {
+  #s1860 .gub-after .era__body { margin-top: 112px; }
+}
+
 #s1860 .gub-rail  { stroke: var(--cream); }
 #s1860 .gub-node  { fill: var(--cream); }
 #s1860 .gub-label { fill: var(--cream); }
