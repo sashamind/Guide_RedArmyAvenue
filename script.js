@@ -68,12 +68,7 @@ const heroEl   = document.querySelector('.hero');
 // объявление function внутри блока рядом с let даёт
 // «ReferenceError: Can't find variable» при вызове через rAF.
 (function initTrainScene() {
-  if (!trainImg || !heroEl || reducedMotion) {
-    // DEV DEBUG: почему сцена не запустилась
-    window.__sceneErr = 'guard: train=' + !!trainImg + ' hero=' + !!heroEl +
-      ' reduce=' + reducedMotion;
-    return;
-  }
+  if (!trainImg || !heroEl || reducedMotion) return;
 
   // Постоянный rAF-цикл вместо связки «scroll-событие → rAF»: в Safari
   // события скролла с трекпадом приходят нестабильно, и поезд замирал
@@ -96,27 +91,23 @@ const heroEl   = document.querySelector('.hero');
     const w = window.innerWidth;
     const key = p.toFixed(4) + ':' + w;
 
-    try {
-      if (key !== lastKey) {
-        lastKey = key;
-        // translate3d, а не translateX: десктопный Safari без собственного
-        // GPU-слоя не перерисовывает transform внутри scale-родителя
-        if (w <= 860) {
-          // мобильный параллакс: поезд влево, дорога и птицы слегка вправо
-          const roadX = p * 30;
-          trainImg.style.transform = `translate3d(${-p * 100}px, 0, 0)`;
-          if (roadImg)  roadImg.style.transform  = `translate3d(${roadX}px, 0, 0)`;
-          // птицы не в масштабированной сцене → множитель, чтобы совпадать с дорогой
-          if (birdsEl)  birdsEl.style.transform  = `translate3d(${roadX * 2.5}px, 0, 0)`;
-        } else {
-          // десктоп: паровоз едет влево (вперёд) вдвое медленнее, дорога/птицы неподвижны
-          trainImg.style.transform = `translate3d(${-p * w * 0.65}px, 0, 0)`;
-          if (roadImg)  roadImg.style.transform  = 'translate3d(0, 0, 0)';
-          if (birdsEl)  birdsEl.style.transform  = 'translate3d(0, 0, 0)';
-        }
+    if (key !== lastKey) {
+      lastKey = key;
+      // translate3d, а не translateX: десктопный Safari без собственного
+      // GPU-слоя не перерисовывает transform внутри scale-родителя
+      if (w <= 860) {
+        // мобильный параллакс: поезд влево, дорога и птицы слегка вправо
+        const roadX = p * 30;
+        trainImg.style.transform = `translate3d(${-p * 100}px, 0, 0)`;
+        if (roadImg)  roadImg.style.transform  = `translate3d(${roadX}px, 0, 0)`;
+        // птицы не в масштабированной сцене → множитель, чтобы совпадать с дорогой
+        if (birdsEl)  birdsEl.style.transform  = `translate3d(${roadX * 2.5}px, 0, 0)`;
+      } else {
+        // десктоп: паровоз едет влево (вперёд) вдвое медленнее, дорога/птицы неподвижны
+        trainImg.style.transform = `translate3d(${-p * w * 0.65}px, 0, 0)`;
+        if (roadImg)  roadImg.style.transform  = 'translate3d(0, 0, 0)';
+        if (birdsEl)  birdsEl.style.transform  = 'translate3d(0, 0, 0)';
       }
-    } catch (err) {
-      window.__sceneErr = String(err); // DEV DEBUG: показать в плашке
     }
     requestAnimationFrame(applyScene);
   };
@@ -499,35 +490,4 @@ if (hubStops.length && stopsEl) {
       if (v !== n.nodeValue) n.nodeValue = v;
     });
   });
-})();
-
-/* ─── DEV DEBUG (временно): живые значения скролла для диагностики Safari.
-   Удалить весь блок после починки. ─── */
-(function () {
-  const dbg = document.createElement('div');
-  dbg.style.cssText =
-    'position:fixed;top:8px;right:8px;z-index:99999;' +
-    'background:rgba(0,0,0,.82);color:#7CFC00;' +
-    'font:11px/1.6 ui-monospace,Menlo,monospace;' +
-    'padding:8px 11px;border-radius:6px;pointer-events:none;white-space:pre';
-  document.body.appendChild(dbg);
-
-  const img = document.querySelector('.hero__train-img');
-  let tick = 0;
-
-  (function loop() {
-    tick++;
-    const de = document.documentElement, b = document.body;
-    const se = document.scrollingElement;
-    dbg.textContent =
-      'tick        ' + tick +
-      '\nwin.scrollY ' + Math.round(window.scrollY) +
-      '\ndocEl.top   ' + Math.round(de.scrollTop) +
-      '\nbody.top    ' + Math.round(b.scrollTop) +
-      '\nscrollingEl ' + (se === de ? 'html' : se === b ? 'body' : '?') +
-      '\nreduce      ' + (typeof reducedMotion !== 'undefined' ? reducedMotion : '?') +
-      '\nsceneErr    ' + (window.__sceneErr || '—') +
-      '\ntrain       ' + (img ? (img.style.transform || '(нет)') : 'не найден');
-    requestAnimationFrame(loop);
-  })();
 })();
