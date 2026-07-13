@@ -905,8 +905,10 @@ figcaption {
 }
 
 .gub-map__svg {
-  width: 100%;
+  /* −20% размера; в вебе прижата к левому краю колонки */
+  width: 80%;
   height: auto;
+  display: block;
 }
 
 .gub-rail {
@@ -953,6 +955,14 @@ figcaption {
 .gub-city.is-active .gub-dot {
   fill: var(--blue);
   stroke: var(--blue);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: gub-pulse 2s ease-in-out infinite;
+}
+
+@keyframes gub-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.18); }
 }
 
 .gub-city--faded .gub-dot { stroke: var(--dark); opacity: 0.45; }
@@ -962,10 +972,10 @@ figcaption {
 .gub-map__info {
   border-left: 2px solid var(--blue);
   padding-left: 24px;
-  min-height: 180px;
 }
 
 .gub-map__city {
+  display: block;
   font-family: var(--f-display);
   font-size: clamp(24px, 2.6vw, 36px);
   font-weight: 700;
@@ -975,10 +985,51 @@ figcaption {
 }
 
 .gub-map__text {
+  display: block;
   font-family: var(--f-body);
   font-size: 15px;
   line-height: 1.8;
   opacity: 0.82;
+}
+
+/* вертикальный слайдер описаний: активная точка по центру,
+   соседние видны сверху и снизу — меньше и прозрачнее */
+.gub-info {
+  height: 460px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
+          mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
+}
+
+.gub-info__track {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gub-info__item {
+  display: block;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.3;
+  transform: scale(0.88);
+  transform-origin: left center;
+  transition: opacity 0.35s, transform 0.35s;
+}
+
+.gub-info__item:hover { opacity: 0.55; }
+
+.gub-info__item.is-active {
+  opacity: 1;
+  transform: none;
+  cursor: default;
 }
 
 /* ═══════════════════════════════════════
@@ -2359,7 +2410,19 @@ figcaption {
 
   /* ── Gub map ── */
   .gub-map__inner { grid-template-columns: 1fr; gap: 32px; }
-  .gub-map__info { min-height: 150px; }
+
+  /* карта по центру экрана; вместо слайдера — только активное описание */
+  .gub-map__svg { margin: 0 auto; }
+  .gub-info {
+    height: auto;
+    min-height: 150px;
+    overflow: visible;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+  .gub-info__track { transform: none !important; }
+  .gub-info__item { display: none; }
+  .gub-info__item.is-active { display: block; }
 
   /* ── Route: 2 колонки на мобильных ── */
   .route__line {

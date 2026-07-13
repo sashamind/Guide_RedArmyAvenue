@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://i.postimg.cc" />
   <link rel="preconnect" href="https://vxxzyggeogbjxjlrhcus.supabase.co" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260713z" />
+  <link rel="stylesheet" href="style.css?v=20260714a" />
 
   <!-- Lottie (лёгкая SVG-сборка) — анимация птиц в hero -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie_light.min.js" defer></script>
@@ -156,14 +156,42 @@
             <text x="548" y="300" class="gub-label">Епифань</text>
           </g>
         </svg>
-        <div class="gub-map__info" aria-live="polite">
-          <h4 class="gub-map__city" id="gubName">Тула</h4>
-          <p class="gub-map__text" id="gubText">
-            Козырем туляков были богатые залежи каменного угля. Дворянство
-            и купечество пяти уездов писали императору, чтобы Московско-Курская
-            дорога прошла именно здесь. Итог — Тула стала крупным индустриальным
-            центром губернии.
-          </p>
+        <div class="gub-map__info gub-info" aria-live="polite">
+          <div class="gub-info__track" id="gubTrack">
+            <button type="button" class="gub-info__item is-active" data-city="tula">
+              <span class="gub-map__city">Тула</span>
+              <span class="gub-map__text">
+                Козырем туляков были богатые залежи каменного угля. Дворянство
+                и купечество пяти уездов писали императору, чтобы Московско-Курская
+                дорога прошла именно здесь. Итог — Тула стала крупным индустриальным
+                центром губернии.
+              </span>
+            </button>
+            <button type="button" class="gub-info__item" data-city="bogorodick">
+              <span class="gub-map__city">Богородицк</span>
+              <span class="gub-map__text">
+                Железнодорожная ветка прошла рядом — город сохранил масштаб
+                и статус. В конце XIX века Богородицк и Епифань были сопоставимы,
+                но их судьбы разошлись.
+              </span>
+            </button>
+            <button type="button" class="gub-info__item" data-city="epifan">
+              <span class="gub-map__city">Епифань</span>
+              <span class="gub-map__text">
+                Дорога обошла Епифань стороной. Город, сопоставимый
+                с Богородицком в конце XIX века, постепенно угас и со временем
+                превратился в посёлок.
+              </span>
+            </button>
+            <button type="button" class="gub-info__item" data-city="plavsk">
+              <span class="gub-map__city">Плавск</span>
+              <span class="gub-map__text">
+                Здесь была лишь станция «Сергиево» в селе Крапивенского уезда.
+                После прокладки железнодорожных путей село выросло в современный
+                город Плавск.
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -681,7 +709,7 @@
     </svg>
   </button>
 
-  <script src="script.js?v=20260713s"></script>
+  <script src="script.js?v=20260714a"></script>
   <!-- DEV временно выключен. Вернуть — раскомментировать строку ниже
        и удалить правило-переключатель в конце style.css (метка «DEV OFF»). -->
   <!-- <script src="dev-adjust.js"></script> -->

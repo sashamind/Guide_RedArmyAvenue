@@ -400,39 +400,30 @@ window.addEventListener('DOMContentLoaded', () => {
 
 /* ─── 12. GUB MAP — интерактивная схема губернии ─── */
 
-const gubData = {
-  tula: {
-    name: 'Тула',
-    text: 'Козырем туляков были богатые залежи каменного угля. Дворянство и купечество пяти уездов писали императору, чтобы Московско-Курская дорога прошла именно здесь. Итог — Тула стала крупным индустриальным центром губернии.',
-  },
-  bogorodick: {
-    name: 'Богородицк',
-    text: 'Железнодорожная ветка прошла рядом — город сохранил масштаб и статус. В конце XIX века Богородицк и Епифань были сопоставимы, но их судьбы разошлись.',
-  },
-  epifan: {
-    name: 'Епифань',
-    text: 'Дорога обошла Епифань стороной. Город, сопоставимый с Богородицком в конце XIX века, постепенно угас и со временем превратился в посёлок.',
-  },
-  plavsk: {
-    name: 'Плавск',
-    text: 'Здесь была лишь станция «Сергиево» в селе Крапивенского уезда. После прокладки железнодорожных путей село выросло в современный город Плавск.',
-  },
-};
-
-const gubName   = document.getElementById('gubName');
-const gubText   = document.getElementById('gubText');
 const gubCities = document.querySelectorAll('.gub-city');
+const gubInfo   = document.querySelector('.gub-info');
+const gubTrack  = document.getElementById('gubTrack');
+const gubItems  = gubTrack ? Array.prototype.slice.call(gubTrack.querySelectorAll('.gub-info__item')) : [];
+const gubMobile = () => window.matchMedia('(max-width: 860px)').matches;
+
+/* активное описание — по центру видимой области слайдера */
+function gubCenter() {
+  if (!gubTrack || !gubInfo) return;
+  if (gubMobile()) { gubTrack.style.transform = ''; return; }
+  const active = gubTrack.querySelector('.gub-info__item.is-active');
+  if (!active) return;
+  const y = gubInfo.clientHeight / 2 - (active.offsetTop + active.offsetHeight / 2);
+  gubTrack.style.transform = 'translateY(' + y + 'px)';
+}
+
+function gubSelect(key) {
+  gubCities.forEach((c) => c.classList.toggle('is-active', c.dataset.city === key));
+  gubItems.forEach((i) => i.classList.toggle('is-active', i.dataset.city === key));
+  gubCenter();
+}
 
 gubCities.forEach((city) => {
-  const select = () => {
-    const data = gubData[city.dataset.city];
-    if (!data) return;
-    gubCities.forEach((c) => c.classList.remove('is-active'));
-    city.classList.add('is-active');
-    gubName.textContent = data.name;
-    gubText.textContent = data.text;
-  };
-
+  const select = () => gubSelect(city.dataset.city);
   city.addEventListener('click', select);
   city.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -441,6 +432,31 @@ gubCities.forEach((city) => {
     }
   });
 });
+
+gubItems.forEach((item) => {
+  item.addEventListener('click', () => gubSelect(item.dataset.city));
+});
+
+/* колесо над слайдером листает точки; на границах отдаём скролл странице */
+var gubWheelAt = 0;
+if (gubInfo) {
+  gubInfo.addEventListener('wheel', function (e) {
+    if (gubMobile() || !gubItems.length) return;
+    const idx  = gubItems.findIndex((i) => i.classList.contains('is-active'));
+    const next = idx + (e.deltaY > 0 ? 1 : -1);
+    if (next < 0 || next >= gubItems.length) return;
+    e.preventDefault();
+    const now = Date.now();
+    if (now - gubWheelAt < 450) return;
+    gubWheelAt = now;
+    gubSelect(gubItems[next].dataset.city);
+  }, { passive: false });
+
+  window.addEventListener('resize', gubCenter);
+  window.addEventListener('load', gubCenter);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(gubCenter);
+  gubCenter();
+}
 
 /* ─── 13. DOVE EASTER EGG ─── */
 
