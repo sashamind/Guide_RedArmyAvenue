@@ -541,10 +541,12 @@ body.cta-stop .hero__cta {
 .hero__cta-arrow {
   font-size: 20px;
   line-height: 1;
+  transform: rotate(90deg);    /* стрелка смотрит вниз */
   transition: transform 0.3s ease;
 }
 
-.hero__cta:hover .hero__cta-arrow { transform: translateX(5px); }
+/* translateX после rotate — сдвиг вдоль повёрнутой оси, т.е. вниз */
+.hero__cta:hover .hero__cta-arrow { transform: rotate(90deg) translateX(5px); }
 
 /* ═══════════════════════════════════════
    ERA BLOCKS  (timeline sections)
@@ -2225,7 +2227,9 @@ figcaption {
     will-change: transform;
   }
 
-  .hero__title { margin-bottom: 22px; }
+  /* размер от ширины экрана: «МОСКОВСКИЙ» (самая длинная строка, ~9.6px
+     ширины на 1px кегля + отступы) гарантированно помещается */
+  .hero__title { margin-bottom: 22px; font-size: clamp(24px, 8.8vw, 46px); }
   .hero__sub { margin-bottom: 18px; font-size: 11px; }   /* ×1.5 меньше */
   .hero__desc {
     max-width: 100%;
