@@ -2553,6 +2553,8 @@ figcaption {
     scroll-snap-align: center;
     transform-origin: center;
   }
+  /* описание — размером как подписи городов на карте */
+  .gub-map__text { font-size: 12px; line-height: 1.7; }
 
   /* ── Route: 2 колонки на мобильных ── */
   .route__line {
