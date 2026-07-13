@@ -712,6 +712,44 @@ figcaption {
   #s1860 .gub-after .era__body { margin-top: 112px; }
 }
 
+/* скрытая часть абзаца: разворачивается по кнопке «Подробнее» */
+.expand {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.expand__inner { overflow: hidden; }
+
+.expand__inner p { margin: 16px 0 0; }
+
+.expand.is-open { grid-template-rows: 1fr; }
+
+.expand-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 0;
+  background: none;
+  border: 0;
+  font-family: var(--f-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+.expand-toggle__arrow {
+  transition: transform 0.3s;
+}
+
+.expand-toggle.is-open .expand-toggle__arrow { transform: rotate(180deg); }
+
+#s1860 .expand-toggle { color: var(--amber); }
+
 #s1860 .gub-rail  { stroke: var(--cream); }
 #s1860 .gub-node  { fill: var(--cream); }
 #s1860 .gub-label { fill: var(--cream); }

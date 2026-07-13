@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://i.postimg.cc" />
   <link rel="preconnect" href="https://vxxzyggeogbjxjlrhcus.supabase.co" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260714f" />
+  <link rel="stylesheet" href="style.css?v=20260714g" />
 
   <!-- Lottie (лёгкая SVG-сборка) — анимация птиц в hero -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie_light.min.js" defer></script>
@@ -131,12 +131,12 @@
       <div class="gub-map__inner" data-animate="fade-up" data-delay="1">
         <svg class="gub-map__svg" viewBox="100 0 640 540" role="group" aria-label="Схема Московско-Курской железной дороги через Тульскую губернию">
           <!-- main railway: Москва — Тула — Сергиево(Плавск) — Курск -->
-          <path class="gub-rail" d="M320 30 L320 196 L266 384 L286 530" />
+          <path class="gub-rail" d="M320 30 L320 196 L138 384 L158 530" />
           <!-- eastern branch near Богородицк -->
-          <path class="gub-rail gub-rail--thin" d="M320 196 L470 300 L580 356" />
+          <path class="gub-rail gub-rail--thin" d="M320 196 L534 300 L644 356" />
           <text x="336" y="35" class="gub-label gub-label--minor">Москва</text>
-          <text x="300" y="528" class="gub-label gub-label--minor">на Курск</text>
-          <text x="540" y="380" class="gub-label gub-label--minor">на Ряжск</text>
+          <text x="172" y="528" class="gub-label gub-label--minor">на Курск</text>
+          <text x="604" y="380" class="gub-label gub-label--minor">на Ряжск</text>
 
           <!-- cities -->
           <g class="gub-city is-active" data-city="tula" tabindex="0" role="button" aria-label="Тула">
@@ -144,16 +144,16 @@
             <text x="345" y="190" class="gub-label">Тула</text>
           </g>
           <g class="gub-city" data-city="plavsk" tabindex="0" role="button" aria-label="Плавск">
-            <circle cx="266" cy="384" r="12" class="gub-dot" />
-            <text x="288" y="380" class="gub-label">Плавск</text>
+            <circle cx="138" cy="384" r="12" class="gub-dot" />
+            <text x="160" y="380" class="gub-label">Плавск</text>
           </g>
           <g class="gub-city" data-city="bogorodick" tabindex="0" role="button" aria-label="Богородицк">
-            <circle cx="470" cy="300" r="12" class="gub-dot" />
-            <text x="448" y="278" class="gub-label">Богородицк</text>
+            <circle cx="534" cy="300" r="12" class="gub-dot" />
+            <text x="512" y="278" class="gub-label">Богородицк</text>
           </g>
           <g class="gub-city gub-city--faded" data-city="epifan" tabindex="0" role="button" aria-label="Епифань">
-            <circle cx="600" cy="325" r="9" class="gub-dot" />
-            <text x="548" y="300" class="gub-label">Епифань</text>
+            <circle cx="662" cy="325" r="9" class="gub-dot" />
+            <text x="610" y="300" class="gub-label">Епифань</text>
           </g>
         </svg>
         <div class="gub-map__info gub-info" aria-live="polite">
@@ -212,13 +212,23 @@
           и <strong>стало одним из главных факторов экономического роста</strong>. Например,
           сроки доставки зерна с южных регионов страны сократились в 3 раза.
           Для Тулы <strong>это означало устойчивую связь с крупными рынками, приток
-          рабочей силы и ускоренное развитие промышленности</strong>. Слух о том, что
-          железнодорожные пути могут пройти через Калугу (вместо Тулы),
-          сподвиг дворянство и купечество Белёвского, Богородицкого,
-          Одоевского, Чернского, Венёвского уездов и Тулы писать главному
-          управляющему путей сообщения и императору о необходимости дороги
-          именно здесь.
+          рабочей силы и ускоренное развитие промышленности</strong>.
         </p>
+        <div class="expand" id="gubMore">
+          <div class="expand__inner">
+            <p>
+              Слух о том, что железнодорожные пути могут пройти через Калугу
+              (вместо Тулы), сподвиг дворянство и купечество Белёвского,
+              Богородицкого, Одоевского, Чернского, Венёвского уездов и Тулы
+              писать главному управляющему путей сообщения и императору
+              о необходимости дороги именно здесь.
+            </p>
+          </div>
+        </div>
+        <button type="button" class="expand-toggle" id="gubMoreBtn" aria-expanded="false" aria-controls="gubMore">
+          <span class="expand-toggle__label">Узнать больше</span>
+          <span class="expand-toggle__arrow" aria-hidden="true">↓</span>
+        </button>
       </div>
     </div>
   </section>
@@ -735,7 +745,7 @@
     </svg>
   </button>
 
-  <script src="script.js?v=20260714b"></script>
+  <script src="script.js?v=20260714c"></script>
   <!-- DEV временно выключен. Вернуть — раскомментировать строку ниже
        и удалить правило-переключатель в конце style.css (метка «DEV OFF»). -->
   <!-- <script src="dev-adjust.js"></script> -->

@@ -502,6 +502,20 @@ if (gubInfo) {
   gubSync();
 }
 
+/* «Подробнее»: разворачивание скрытой части абзаца под картой */
+const gubMoreBox = document.getElementById('gubMore');
+const gubMoreBtn = document.getElementById('gubMoreBtn');
+
+if (gubMoreBox && gubMoreBtn) {
+  gubMoreBtn.addEventListener('click', () => {
+    const open = gubMoreBox.classList.toggle('is-open');
+    gubMoreBtn.classList.toggle('is-open', open);
+    gubMoreBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    gubMoreBtn.querySelector('.expand-toggle__label').textContent =
+      open ? 'Свернуть' : 'Узнать больше';
+  });
+}
+
 /* ─── 13. DOVE EASTER EGG ─── */
 
 const dove       = document.getElementById('doveEgg');
