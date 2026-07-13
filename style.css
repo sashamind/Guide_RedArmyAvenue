@@ -679,6 +679,29 @@ figcaption {
 
 #s1860 .era__aside-quote { border-left-color: var(--amber); }
 
+/* схема городов внутри синего блока */
+.gub-embed { margin-top: clamp(40px, 6vw, 72px); }
+
+#s1860 .gub-rail  { stroke: var(--cream); }
+#s1860 .gub-node  { fill: var(--cream); }
+#s1860 .gub-label { fill: var(--cream); }
+
+#s1860 .gub-city .gub-dot {
+  fill: var(--blue);
+  stroke: var(--amber);
+}
+
+#s1860 .gub-city.is-active .gub-dot {
+  fill: var(--amber);
+  stroke: var(--amber);
+}
+
+#s1860 .gub-city--faded .gub-dot { stroke: var(--cream); }
+#s1860 .gub-city--faded.is-active .gub-dot { fill: var(--cream); stroke: var(--cream); }
+
+#s1860 .gub-map__info { border-left-color: var(--amber); }
+#s1860 .gub-map__city { color: var(--amber); }
+
 /* ═══════════════════════════════════════
    QUOTE BLOCK
 ═══════════════════════════════════════ */
