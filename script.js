@@ -86,23 +86,27 @@ if (trainImg && heroEl && !reducedMotion) {
     const w = window.innerWidth;
     const key = p.toFixed(4) + ':' + w;
 
-    if (key !== lastKey) {
-      lastKey = key;
-      // translate3d, а не translateX: десктопный Safari без собственного
-      // GPU-слоя не перерисовывает transform внутри scale-родителя
-      if (w <= 860) {
-        // мобильный параллакс: поезд влево, дорога и птицы слегка вправо
-        const roadX = p * 30;
-        trainImg.style.transform = `translate3d(${-p * 100}px, 0, 0)`;
-        if (roadImg)  roadImg.style.transform  = `translate3d(${roadX}px, 0, 0)`;
-        // птицы не в масштабированной сцене → множитель, чтобы совпадать с дорогой
-        if (birdsEl)  birdsEl.style.transform  = `translate3d(${roadX * 2.5}px, 0, 0)`;
-      } else {
-        // десктоп: паровоз едет влево (вперёд) вдвое медленнее, дорога/птицы неподвижны
-        trainImg.style.transform = `translate3d(${-p * w * 0.65}px, 0, 0)`;
-        if (roadImg)  roadImg.style.transform  = 'translate3d(0, 0, 0)';
-        if (birdsEl)  birdsEl.style.transform  = 'translate3d(0, 0, 0)';
+    try {
+      if (key !== lastKey) {
+        lastKey = key;
+        // translate3d, а не translateX: десктопный Safari без собственного
+        // GPU-слоя не перерисовывает transform внутри scale-родителя
+        if (w <= 860) {
+          // мобильный параллакс: поезд влево, дорога и птицы слегка вправо
+          const roadX = p * 30;
+          trainImg.style.transform = `translate3d(${-p * 100}px, 0, 0)`;
+          if (roadImg)  roadImg.style.transform  = `translate3d(${roadX}px, 0, 0)`;
+          // птицы не в масштабированной сцене → множитель, чтобы совпадать с дорогой
+          if (birdsEl)  birdsEl.style.transform  = `translate3d(${roadX * 2.5}px, 0, 0)`;
+        } else {
+          // десктоп: паровоз едет влево (вперёд) вдвое медленнее, дорога/птицы неподвижны
+          trainImg.style.transform = `translate3d(${-p * w * 0.65}px, 0, 0)`;
+          if (roadImg)  roadImg.style.transform  = 'translate3d(0, 0, 0)';
+          if (birdsEl)  birdsEl.style.transform  = 'translate3d(0, 0, 0)';
+        }
       }
+    } catch (err) {
+      window.__sceneErr = String(err); // DEV DEBUG: показать в плашке
     }
     requestAnimationFrame(applyScene);
   }
@@ -120,6 +124,10 @@ if (trainImg && heroEl && !reducedMotion) {
       }
     });
   }
+} else {
+  // DEV DEBUG: почему сцена не запустилась
+  window.__sceneErr = 'guard: train=' + !!trainImg + ' hero=' + !!heroEl +
+    ' reduce=' + reducedMotion;
 }
 
 /* ─── 4. NAV — SCROLL STATE & PROGRESS BAR ─── */
@@ -511,6 +519,8 @@ if (hubStops.length && stopsEl) {
       '\ndocEl.top   ' + Math.round(de.scrollTop) +
       '\nbody.top    ' + Math.round(b.scrollTop) +
       '\nscrollingEl ' + (se === de ? 'html' : se === b ? 'body' : '?') +
+      '\nreduce      ' + (typeof reducedMotion !== 'undefined' ? reducedMotion : '?') +
+      '\nsceneErr    ' + (window.__sceneErr || '—') +
       '\ntrain       ' + (img ? (img.style.transform || '(нет)') : 'не найден');
     requestAnimationFrame(loop);
   })();
