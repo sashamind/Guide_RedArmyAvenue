@@ -64,14 +64,24 @@ const roadImg  = document.querySelector('.hero__band-img');
 const birdsEl  = document.querySelector('.hero__birds');
 const heroEl   = document.querySelector('.hero');
 
-if (trainImg && heroEl && !reducedMotion) {
+// Вся сцена — внутри функции, а не блока if: в Safari (WebKit, Annex B)
+// объявление function внутри блока рядом с let даёт
+// «ReferenceError: Can't find variable» при вызове через rAF.
+(function initTrainScene() {
+  if (!trainImg || !heroEl || reducedMotion) {
+    // DEV DEBUG: почему сцена не запустилась
+    window.__sceneErr = 'guard: train=' + !!trainImg + ' hero=' + !!heroEl +
+      ' reduce=' + reducedMotion;
+    return;
+  }
+
   // Постоянный rAF-цикл вместо связки «scroll-событие → rAF»: в Safari
   // события скролла с трекпадом приходят нестабильно, и поезд замирал
   // после первых пикселей. Цикл читает scrollY каждый кадр и пишет
   // transform только при изменении — в простое это одно сравнение строк.
-  let lastKey = '';
+  var lastKey = '';
 
-  function applyScene() {
+  var applyScene = function () {
     const h = heroEl.offsetHeight || window.innerHeight;
     // scrollY читаем из всех возможных источников: в Safari при
     // overflow-x:hidden на html/body скроллером может быть body,
@@ -109,26 +119,22 @@ if (trainImg && heroEl && !reducedMotion) {
       window.__sceneErr = String(err); // DEV DEBUG: показать в плашке
     }
     requestAnimationFrame(applyScene);
-  }
+  };
 
   requestAnimationFrame(applyScene);
 
   // Safari: после въезда снимаем с обёртки анимацию с fill:forwards —
   // иначе компоузер продолжает «держать» слой и мешает трансформам ниже
-  const trainWrap = document.querySelector('.hero__train');
+  var trainWrap = document.querySelector('.hero__train');
   if (trainWrap) {
-    trainWrap.addEventListener('animationend', (e) => {
+    trainWrap.addEventListener('animationend', function (e) {
       if (e.animationName === 'train-move') {
         trainWrap.style.opacity = '1';
         trainWrap.style.animation = 'none';
       }
     });
   }
-} else {
-  // DEV DEBUG: почему сцена не запустилась
-  window.__sceneErr = 'guard: train=' + !!trainImg + ' hero=' + !!heroEl +
-    ' reduce=' + reducedMotion;
-}
+})();
 
 /* ─── 4. NAV — SCROLL STATE & PROGRESS BAR ─── */
 
