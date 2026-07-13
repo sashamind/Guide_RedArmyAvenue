@@ -142,18 +142,38 @@ window.addEventListener('load', function initBirdsLottie() {
   var anim = window.lottie.loadAnimation({
     container: box,
     renderer: 'svg',
-    loop: false,             // цикл вручную — с паузой между итерациями
-    autoplay: true,
+    loop: false,
+    autoplay: false,          // ведём воспроизведение вручную — покадрово
     path: 'https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/birds_lottie.json'
   });
 
+  // Покадровый режим (stop-motion): длительность та же, но кадр
+  // обновляется STEP_FPS раз в секунду — шагаем по таймлайну крупно.
+  var STEP_FPS = 12;          // визуальная частота кадров
+  var SRC_FPS  = 30;          // фреймрейт таймлайна файла
+
   anim.addEventListener('DOMLoaded', function () {
     if (img) img.style.display = 'none';
-  });
+    anim.setSubframe(false);  // без межкадровой интерполяции
 
-  // зациклено, но с паузой 3с между проигрываниями
-  anim.addEventListener('complete', function () {
-    setTimeout(function () { anim.goToAndPlay(0, true); }, 3000);
+    var total = anim.totalFrames;
+    var frame = 0;
+
+    var startPlayback = function () {
+      var timer = setInterval(function () {
+        frame += SRC_FPS / STEP_FPS;
+        if (frame >= total) {
+          clearInterval(timer);
+          frame = 0;
+          anim.goToAndStop(0, true);
+          setTimeout(startPlayback, 3000);  // пауза между итерациями
+          return;
+        }
+        anim.goToAndStop(frame, true);
+      }, 1000 / STEP_FPS);
+    };
+
+    startPlayback();
   });
 });
 
