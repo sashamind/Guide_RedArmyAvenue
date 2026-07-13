@@ -2225,21 +2225,6 @@ figcaption {
     will-change: transform;
   }
 
-  /* кнопка примагничена к низу экрана (с учётом safe-area Safari) */
-  .hero__cta {
-    position: fixed;
-    left: 0;
-    right: 0;
-    margin: 0 auto;              /* центрирование без transform */
-    width: fit-content;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 44px);
-    z-index: 50;
-    /* фикс-кнопка вне зоны IntersectionObserver — показываем сразу,
-       без fade-up (иначе осталась бы opacity:0 и сдвинутой вниз) */
-    opacity: 1;
-    transform: none;
-  }
-
   .hero__title { margin-bottom: 22px; }
   .hero__sub { margin-bottom: 18px; font-size: 11px; }   /* ×1.5 меньше */
   .hero__desc {
