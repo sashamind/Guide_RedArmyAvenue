@@ -740,7 +740,7 @@ figcaption {
    чтобы полное здание (последний слой) помещалось в колонку */
 #s1867 .era__portico {
   margin: 24px 0 0 0;
-  width: 43%;
+  width: 64%;
 }
 
 /* стопка слоёв облика: build-1 базовый, 2 и 3 накладываются поверх */
@@ -760,21 +760,31 @@ figcaption {
 }
 .portico-layer.is-on { opacity: 1; }
 
+/* подпись состояния под картинкой */
+.portico-caption {
+  margin: 14px 0 0;
+  font-family: var(--f-body);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--dark);
+  opacity: 0.7;
+  max-width: 62%;
+}
+
 /* переключатель этапов под портиком */
 .portico-steps {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  /* компенсируем сдвиг фигуры влево (−40%), чтобы список встал под колонкой */
-  margin: 20px 0 0 27%;
-  width: 40%;
+  margin: 18px 0 0;
+  width: 62%;
 }
 
 .portico-step {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 12px;
-  padding: 10px 0;
+  padding: 9px 0;
   background: none;
   border: 0;
   border-top: 1px solid rgba(28, 16, 7, 0.14);
@@ -784,19 +794,34 @@ figcaption {
   color: var(--dark);
   text-align: left;
   cursor: pointer;
-  opacity: 0.4;
+  opacity: 0.45;
   transition: opacity 0.25s;
 }
 .portico-step:last-child { border-bottom: 1px solid rgba(28, 16, 7, 0.14); }
-.portico-step:hover { opacity: 0.7; }
+.portico-step:hover { opacity: 0.75; }
 .portico-step.is-active { opacity: 1; color: var(--blue); }
 
+/* цифра в кружке */
 .portico-step__num {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
   font-size: 12px;
-  letter-spacing: 0.1em;
-  opacity: 0.6;
+  font-weight: 600;
+  opacity: 0.7;
 }
-.portico-step__lbl { text-transform: uppercase; letter-spacing: 0.06em; }
+.portico-step.is-active .portico-step__num {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--cream-bg);
+  opacity: 1;
+}
+.portico-step__lbl { letter-spacing: 0.02em; }
 
 /* схема городов внутри синего блока */
 .gub-embed { margin-top: clamp(40px, 6vw, 72px); }

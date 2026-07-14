@@ -549,8 +549,9 @@ if (gubMoreBox && gubMoreBtn) {
   var stack  = document.getElementById('porticoStack');
   if (!steps || !stack) return;
 
-  var btns   = Array.prototype.slice.call(steps.querySelectorAll('.portico-step'));
-  var layers = Array.prototype.slice.call(stack.querySelectorAll('.portico-layer'));
+  var btns    = Array.prototype.slice.call(steps.querySelectorAll('.portico-step'));
+  var layers  = Array.prototype.slice.call(stack.querySelectorAll('.portico-layer'));
+  var caption = document.getElementById('porticoCaption');
 
   function setStep(n) {
     layers.forEach(function (l) {
@@ -560,6 +561,7 @@ if (gubMoreBox && gubMoreBtn) {
       var on = +b.dataset.step === n;
       b.classList.toggle('is-active', on);
       b.setAttribute('aria-selected', on ? 'true' : 'false');
+      if (on && caption) caption.textContent = b.dataset.caption;
     });
   }
 
