@@ -778,8 +778,8 @@ figcaption {
 .portico-layer.is-on {
   opacity: 1;
   clip-path: inset(0 0 0 0);
-  /* появление — маской снизу вверх, при полной непрозрачности */
-  transition: clip-path 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0s;
+  /* появление — маской снизу вверх: быстро в начале, плавно тормозит к концу */
+  transition: clip-path 1.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0s;
 }
 
 /* подпись состояния под картинкой — по центру относительно иллюстрации */
