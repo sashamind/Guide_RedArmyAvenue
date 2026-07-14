@@ -725,8 +725,9 @@ figcaption {
     line-height: 1.95;
   }
 
-  /* «Здание вокзала»: тот же размер шрифта и ширина абзаца, что и у лида 1860 */
-  #s1867 .era__body { max-width: 480px; }
+  /* «Здание вокзала»: тот же размер шрифта и ширина абзаца, что и у лида 1860;
+     прижат к правому краю колонки — правый отступ = левому отступу слева */
+  #s1867 .era__body { max-width: 480px; margin-left: auto; }
   #s1867 .era__body p {
     font-size: 17px;
     line-height: 1.95;
@@ -763,9 +764,17 @@ figcaption {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 0.7s ease;
+  /* скрыто: обрезано сверху донизу (проявится снизу вверх) */
+  clip-path: inset(100% 0 0 0);
+  /* исчезновение — через прозрачность; клип мгновенно сбрасывается после фейда */
+  transition: opacity 0.6s ease, clip-path 0s 0.6s;
 }
-.portico-layer.is-on { opacity: 1; }
+.portico-layer.is-on {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  /* появление — маской снизу вверх, при полной непрозрачности */
+  transition: clip-path 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0s;
+}
 
 /* подпись состояния под картинкой — по центру относительно иллюстрации */
 .portico-caption {

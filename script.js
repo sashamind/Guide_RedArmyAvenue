@@ -577,7 +577,7 @@ if (gubMoreBox && gubMoreBtn) {
     if (timer) clearInterval(timer);
     timer = setInterval(function () {
       go(current % btns.length + 1);   // 1→2→3→1 по кругу
-    }, 3000);
+    }, 4000);
   }
 
   btns.forEach(function (b) {
