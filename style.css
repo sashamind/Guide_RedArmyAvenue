@@ -797,8 +797,9 @@ figcaption {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin: 18px 0 0;
-  width: 62%;
+  /* по центру относительно иллюстрации выше */
+  margin: 18px auto 0;
+  width: fit-content;
 }
 /* пунктир, связывающий кружки 1–2–3 */
 .portico-steps::before {
