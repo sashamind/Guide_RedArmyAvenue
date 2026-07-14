@@ -724,6 +724,13 @@ figcaption {
     font-size: 17px;
     line-height: 1.95;
   }
+
+  /* «Здание вокзала»: тот же размер шрифта и ширина абзаца, что и у лида 1860 */
+  #s1867 .era__body { max-width: 480px; }
+  #s1867 .era__body p {
+    font-size: 17px;
+    line-height: 1.95;
+  }
 }
 
 /* «Здание вокзала»: иллюстрация −20%, по центру текстовой колонки;
@@ -775,33 +782,45 @@ figcaption {
 
 /* переключатель этапов под портиком */
 .portico-steps {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 10px;
   margin: 18px 0 0;
   width: 62%;
 }
+/* пунктир, связывающий кружки 1–2–3 */
+.portico-steps::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 22px;
+  bottom: 22px;
+  border-left: 1.5px dashed rgba(28, 16, 7, 0.32);
+  z-index: 0;
+}
 
 .portico-step {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 9px 0;
+  padding: 5px 0;
   background: none;
   border: 0;
-  border-top: 1px solid rgba(28, 16, 7, 0.14);
   font-family: var(--f-display);
   font-size: 17px;
   font-weight: 600;
-  color: var(--dark);
+  /* затемнение неактивных — через цвет, а не opacity,
+     чтобы фон кружка оставался плотным и скрывал пунктир */
+  color: rgba(28, 16, 7, 0.5);
   text-align: left;
   cursor: pointer;
-  opacity: 0.45;
-  transition: opacity 0.25s;
+  transition: color 0.25s;
 }
-.portico-step:last-child { border-bottom: 1px solid rgba(28, 16, 7, 0.14); }
-.portico-step:hover { opacity: 0.75; }
-.portico-step.is-active { opacity: 1; color: var(--blue); }
+.portico-step:hover { color: rgba(28, 16, 7, 0.8); }
+.portico-step.is-active { color: var(--blue); }
 
 /* цифра в кружке */
 .portico-step__num {
@@ -815,7 +834,8 @@ figcaption {
   border-radius: 50%;
   font-size: 12px;
   font-weight: 600;
-  opacity: 0.7;
+  /* плотный фон = фон страницы, чтобы пунктир не просвечивал сквозь кружок */
+  background: var(--amber);
 }
 .portico-step.is-active .portico-step__num {
   background: var(--blue);

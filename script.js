@@ -565,9 +565,29 @@ if (gubMoreBox && gubMoreBtn) {
     });
   }
 
+  var current = 1;
+  var timer = null;
+
+  function go(n) {
+    current = n;
+    setStep(n);
+  }
+
+  function schedule() {
+    if (timer) clearInterval(timer);
+    timer = setInterval(function () {
+      go(current % btns.length + 1);   // 1→2→3→1 по кругу
+    }, 3000);
+  }
+
   btns.forEach(function (b) {
-    b.addEventListener('click', function () { setStep(+b.dataset.step); });
+    b.addEventListener('click', function () {
+      go(+b.dataset.step);
+      schedule();                       // клик перезапускает отсчёт
+    });
   });
+
+  schedule();
 })();
 
 /* ─── 13. DOVE EASTER EGG ─── */
