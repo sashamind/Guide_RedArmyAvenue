@@ -678,8 +678,8 @@ figcaption {
 /* набросок рельсов — слева вверху, напротив заголовка */
 .era__rails {
   position: absolute;
-  top: calc(var(--pad-y) + 100px);
-  left: var(--pad-x);
+  top: calc(var(--pad-y) + 60px);
+  left: calc(var(--pad-x) - 30px);
   width: min(44%, 800px);
   margin: 0;
   pointer-events: none;
@@ -689,6 +689,8 @@ figcaption {
   width: 100%;
   height: auto;
   display: block;
+  /* наклон на img: transform фигуры занят анимацией fade-up */
+  transform: rotate(7deg);
 }
 
 @media (max-width: 860px) {
