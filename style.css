@@ -669,9 +669,30 @@ figcaption {
 /* Инвертированный блок (первый после hero): синий фон,
    заголовки — цвета фона hero (--amber), остальной текст — светлый */
 #s1860 {
+  position: relative;
   background: var(--blue);
   color: var(--cream);
   border-top-color: var(--border-lt);
+}
+
+/* набросок рельсов — слева вверху, напротив заголовка */
+.era__rails {
+  position: absolute;
+  top: calc(var(--pad-y) + 100px);
+  left: var(--pad-x);
+  width: min(44%, 800px);
+  margin: 0;
+  pointer-events: none;
+}
+
+.era__rails img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 860px) {
+  .era__rails { display: none; }
 }
 
 #s1860 .label,
@@ -773,6 +794,8 @@ figcaption {
   border-top-color: var(--amber);
   border-bottom-color: var(--amber);
 }
+/* описания точек — тем же цветом, что их заголовки */
+#s1860 .gub-map__text { color: var(--amber); }
 #s1860 .gub-info__dot  { border-color: var(--cream); }
 #s1860 .gub-info__dot.is-active { background: var(--amber); border-color: var(--amber); }
 #s1860 .gub-map__city { color: var(--amber); }
