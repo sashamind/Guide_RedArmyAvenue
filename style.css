@@ -891,9 +891,12 @@ figcaption {
 #s1860 .gub-city--faded.is-active .gub-dot { fill: var(--cream); stroke: var(--cream); }
 
 #s1860 .gub-map__info {
-  border-left-color: var(--amber);
   border-top-color: var(--amber);
   border-bottom-color: var(--amber);
+}
+#s1860 .gub-map__info::before {
+  background: linear-gradient(to bottom,
+    transparent, var(--amber) 20%, var(--amber) 80%, transparent);
 }
 /* описания точек — тем же цветом, что их заголовки */
 #s1860 .gub-map__text { color: var(--amber); }
@@ -1159,8 +1162,19 @@ figcaption {
 .gub-city--faded.is-active .gub-dot { fill: var(--dark); stroke: var(--dark); opacity: 0.6; }
 
 .gub-map__info {
-  border-left: 2px solid var(--blue);
+  position: relative;
   padding-left: 24px;
+}
+/* вертикальная линия слайдера: плотная в центре, к краям затухает */
+.gub-map__info::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom,
+    transparent, var(--blue) 20%, var(--blue) 80%, transparent);
 }
 
 .gub-map__city {
@@ -2680,6 +2694,8 @@ figcaption {
     padding-top: 20px;
     padding-bottom: 28px;
   }
+  /* вертикальная линия — только в вебе */
+  .gub-map__info::before { display: none; }
   .gub-info__viewport {
     height: auto;
     overflow: visible;
