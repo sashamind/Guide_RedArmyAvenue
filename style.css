@@ -682,7 +682,6 @@ figcaption {
   left: calc(var(--pad-x) - 60px);
   width: min(44%, 800px);
   margin: 0;
-  pointer-events: none;
 }
 
 .era__rails img {
@@ -691,7 +690,10 @@ figcaption {
   display: block;
   /* наклон на img: transform фигуры занят анимацией fade-up */
   transform: rotate(7deg);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+.era__rails:hover img { transform: rotate(-7deg); }
 
 @media (max-width: 860px) {
   .era__rails { display: none; }
