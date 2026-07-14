@@ -688,12 +688,10 @@ figcaption {
   width: 100%;
   height: auto;
   display: block;
-  /* наклон на img: transform фигуры занят анимацией fade-up */
+  /* наклон на img: transform фигуры занят анимацией fade-up;
+     угол крутит JS по скролу (7° → −7°) */
   transform: rotate(7deg);
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
-.era__rails:hover img { transform: rotate(-7deg); }
 
 @media (max-width: 860px) {
   .era__rails { display: none; }

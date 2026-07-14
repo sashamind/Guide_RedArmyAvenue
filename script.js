@@ -517,6 +517,31 @@ if (gubMoreBox && gubMoreBtn) {
   });
 }
 
+/* ─── 12a. RAILS SKETCH — наклон меняется при скроле (7° → −7°) ─── */
+
+(function () {
+  var railsImg = document.querySelector('.era__rails img');
+  if (!railsImg) return;
+  var railsTick = false;
+
+  function railsUpdate() {
+    railsTick = false;
+    var r = railsImg.getBoundingClientRect();
+    var vh = window.innerHeight || 1;
+    /* 0 — картинка у нижнего края экрана, 1 — у верхнего */
+    var t = 1 - (r.top + r.height / 2) / vh;
+    if (t < 0) t = 0;
+    if (t > 1) t = 1;
+    railsImg.style.transform = 'rotate(' + (7 - 14 * t).toFixed(2) + 'deg)';
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!railsTick) { railsTick = true; requestAnimationFrame(railsUpdate); }
+  }, { passive: true });
+  window.addEventListener('resize', railsUpdate);
+  railsUpdate();
+})();
+
 /* ─── 13. DOVE EASTER EGG ─── */
 
 const dove       = document.getElementById('doveEgg');
