@@ -644,6 +644,10 @@ figcaption {
   gap: 15px;
 }
 
+/* акцент в тексте — жирный + фирменный синий */
+.t-accent { color: var(--blue); }
+#s1860 .t-accent { color: var(--amber); }
+
 .era__body p {
   font-family: var(--f-body);
   font-size: 15px;
