@@ -542,6 +542,32 @@ if (gubMoreBox && gubMoreBtn) {
   railsUpdate();
 })();
 
+/* ─── 12b. PORTICO STACK — накопительное наложение облика вокзала ─── */
+
+(function () {
+  var steps  = document.getElementById('porticoSteps');
+  var stack  = document.getElementById('porticoStack');
+  if (!steps || !stack) return;
+
+  var btns   = Array.prototype.slice.call(steps.querySelectorAll('.portico-step'));
+  var layers = Array.prototype.slice.call(stack.querySelectorAll('.portico-layer'));
+
+  function setStep(n) {
+    layers.forEach(function (l) {
+      l.classList.toggle('is-on', +l.dataset.step <= n);
+    });
+    btns.forEach(function (b) {
+      var on = +b.dataset.step === n;
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
+
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () { setStep(+b.dataset.step); });
+  });
+})();
+
 /* ─── 13. DOVE EASTER EGG ─── */
 
 const dove       = document.getElementById('doveEgg');

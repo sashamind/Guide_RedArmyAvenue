@@ -736,6 +736,68 @@ figcaption {
 
 #s1867 .era__content { gap: 48px; }
 
+/* портик — в левой колонке под заголовком; размер такой,
+   чтобы полное здание (последний слой) помещалось в колонку */
+#s1867 .era__portico {
+  margin: 24px 0 0 0;
+  width: 43%;
+}
+
+/* стопка слоёв облика: build-1 базовый, 2 и 3 накладываются поверх */
+.portico-stack { position: relative; }
+
+.portico-layer {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.portico-layer[data-step="2"],
+.portico-layer[data-step="3"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+.portico-layer.is-on { opacity: 1; }
+
+/* переключатель этапов под портиком */
+.portico-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  /* компенсируем сдвиг фигуры влево (−40%), чтобы список встал под колонкой */
+  margin: 20px 0 0 27%;
+  width: 40%;
+}
+
+.portico-step {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 0;
+  background: none;
+  border: 0;
+  border-top: 1px solid rgba(28, 16, 7, 0.14);
+  font-family: var(--f-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--dark);
+  text-align: left;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity 0.25s;
+}
+.portico-step:last-child { border-bottom: 1px solid rgba(28, 16, 7, 0.14); }
+.portico-step:hover { opacity: 0.7; }
+.portico-step.is-active { opacity: 1; color: var(--blue); }
+
+.portico-step__num {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+}
+.portico-step__lbl { text-transform: uppercase; letter-spacing: 0.06em; }
+
 /* схема городов внутри синего блока */
 .gub-embed { margin-top: clamp(40px, 6vw, 72px); }
 
