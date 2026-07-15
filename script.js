@@ -687,56 +687,6 @@ if (gubMoreBox && gubMoreBtn) {
   galUpdate();
 })();
 
-/* ─── 12d. ЦИТАТА-ЗАЯВЛЕНИЕ — печатается при появлении в экране ─── */
-
-(function () {
-  var el = document.getElementById('statementType');
-  if (!el) return;
-  var full = el.textContent.replace(/\s+/g, ' ').trim();
-  el.textContent = full;
-  if (reducedMotion) return;
-
-  /* фиксируем высоту по полному тексту, чтобы контент ниже не прыгал,
-     затем очищаем — печать начнётся, когда доскроллим */
-  requestAnimationFrame(function () {
-    el.style.minHeight = el.offsetHeight + 'px';
-    el.textContent = '';
-
-    var started = false;
-    function type() {
-      if (started) return;
-      started = true;
-      el.classList.add('is-typing');
-      /* нелинейная, «живая» скорость: базовый разброс + паузы на знаках */
-      function delayFor(ch) {
-        if (ch === '.') return 250 + Math.random() * 130;
-        if (ch === ',') return 160 + Math.random() * 100;
-        if (ch === '—') return 170 + Math.random() * 100;
-        if (ch === ' ') return 34 + Math.random() * 50;
-        return 24 + Math.random() * 40;                // обычная буква ~24–64 мс
-      }
-      var i = 0;
-      (function step() {
-        el.textContent = full.slice(0, i);
-        if (i < full.length) {
-          /* пауза считается по только что напечатанному символу
-             (после запятой/тире/точки — дольше) */
-          var last = full.charAt(i - 1);
-          i++;
-          setTimeout(step, delayFor(last));
-        } else {
-          el.classList.remove('is-typing');
-        }
-      })();
-    }
-
-    var io = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) { type(); io.disconnect(); }
-    }, { threshold: 0.6 });
-    io.observe(el);
-  });
-})();
-
 /* ─── 13. DOVE EASTER EGG ─── */
 
 const dove       = document.getElementById('doveEgg');
