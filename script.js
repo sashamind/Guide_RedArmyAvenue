@@ -607,13 +607,18 @@ if (gubMoreBox && gubMoreBtn) {
     var t = order[i]; order[i] = order[j]; order[j] = t;
   }
 
+  function rnd(min, max) { return min + Math.random() * (max - min); }
+
   cards.forEach(function (card, idx) {
     var pos = order[idx];                 // позиция при разъезде (0..n-1)
     card.style.setProperty('--i', pos);
     card.style.setProperty('--n', n);
     card.style.setProperty('--z', pos + 1); // верхняя = наибольший индекс
-    /* лёгкий наклон стопки, детерминированно от позиции */
-    card.style.setProperty('--r', ((pos - (n - 1) / 2) * 2.5).toFixed(2) + 'deg');
+    /* случайный лёгкий наклон в стопке */
+    card.style.setProperty('--rp', rnd(-6, 6).toFixed(2) + 'deg');
+    /* хаотичный разлёт: свой наклон и вертикальный сдвиг */
+    card.style.setProperty('--rs', rnd(-7, 7).toFixed(2) + 'deg');
+    card.style.setProperty('--sy', rnd(14, 96).toFixed(0) + 'px');
   });
 
   /* лайтбокс */
