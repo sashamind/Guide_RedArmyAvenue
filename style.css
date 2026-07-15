@@ -2872,10 +2872,10 @@ figcaption {
     order: 3;
     width: 100%;
     max-width: 360px;
-    margin: 56px 0 0;
+    margin: 76px 0 0;
   }
   #s1860 .era__rails img { transform: none; }
-  #s1860 .era__inner .era__body { order: 4; margin-top: 48px; }
+  #s1860 .era__inner .era__body { order: 4; margin-top: 68px; }
 
   /* ── Мобильный порядок блока «Здание вокзала» ──
      заголовок → иллюстрация → текст «Здание и архитектура» →
@@ -2885,8 +2885,8 @@ figcaption {
   #s1867 .era__content { display: contents; }
   #s1867 .label { order: 1; margin-bottom: 6px; }
   #s1867 .t-era-title { order: 2; margin-top: 0; }
-  #s1867 .era__figure { order: 3; margin-top: 56px; }
-  #s1867 .era__body:not(.portico-note) { order: 4; margin-top: 48px; }
+  #s1867 .era__figure { order: 3; margin-top: 76px; }
+  #s1867 .era__body:not(.portico-note) { order: 4; margin-top: 68px; }
   #s1867 .era__portico { order: 5; margin: 40px auto 0; width: 100%; }
   #s1867 .era__body.portico-note { order: 6; margin-top: 28px; }
   #s1867 .stack-gallery { order: 7; }
