@@ -322,7 +322,7 @@ const glow = document.createElement('div');
 glow.style.cssText = `
   position: fixed;
   pointer-events: none;
-  z-index: 9999;
+  z-index: -1;
   width: 360px;
   height: 360px;
   border-radius: 50%;
