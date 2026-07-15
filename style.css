@@ -2864,8 +2864,8 @@ figcaption {
   #s1860 .era__inner { display: flex; flex-direction: column; }
   #s1860 .era__date,
   #s1860 .era__content { display: contents; }
-  #s1860 .era__inner > .era__date .label { order: 1; }
-  #s1860 .era__inner > .era__date .t-era-title { order: 2; margin-top: 6px; }
+  #s1860 .era__inner > .era__date .label { order: 1; margin-bottom: 6px; }
+  #s1860 .era__inner > .era__date .t-era-title { order: 2; margin-top: 0; }
   #s1860 .era__rails {
     display: block;
     position: static;
@@ -2883,8 +2883,8 @@ figcaption {
   #s1867 .era__inner { display: flex; flex-direction: column; }
   #s1867 .era__date,
   #s1867 .era__content { display: contents; }
-  #s1867 .label { order: 1; }
-  #s1867 .t-era-title { order: 2; margin-top: 6px; }
+  #s1867 .label { order: 1; margin-bottom: 6px; }
+  #s1867 .t-era-title { order: 2; margin-top: 0; }
   #s1867 .era__figure { order: 3; margin-top: 28px; }
   #s1867 .era__body:not(.portico-note) { order: 4; margin-top: 24px; }
   #s1867 .era__portico { order: 5; margin: 40px auto 0; width: 100%; }
