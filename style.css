@@ -2861,7 +2861,7 @@ figcaption {
   /* ── Мобильный порядок блока «Железная дорога» ──
      лейбл → заголовок → иллюстрация рельсов → текст.
      Колонки «разбираем» через display:contents, порядок — order. */
-  #s1860 .era__inner { display: flex; flex-direction: column; }
+  #s1860 .era__inner { display: flex; flex-direction: column; gap: 0; }
   #s1860 .era__date,
   #s1860 .era__content { display: contents; }
   #s1860 .era__inner > .era__date .label { order: 1; margin-bottom: 6px; }
@@ -2880,7 +2880,7 @@ figcaption {
   /* ── Мобильный порядок блока «Здание вокзала» ──
      заголовок → иллюстрация → текст «Здание и архитектура» →
      переключатель облика (по центру) → текст «Новый вокзал» → галерея. */
-  #s1867 .era__inner { display: flex; flex-direction: column; }
+  #s1867 .era__inner { display: flex; flex-direction: column; gap: 0; }
   #s1867 .era__date,
   #s1867 .era__content { display: contents; }
   #s1867 .label { order: 1; margin-bottom: 6px; }
