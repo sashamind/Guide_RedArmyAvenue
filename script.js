@@ -678,7 +678,7 @@ if (gubMoreBox && gubMoreBtn) {
     var r = gallery.getBoundingClientRect();
     var vh = window.innerHeight || 1;
     var c = r.top + r.height / 2;
-    gallery.classList.toggle('is-expanded', c > vh * 0.22 && c < vh * 0.62);
+    gallery.classList.toggle('is-expanded', c > vh * 0.40 && c < vh * 0.62);
   }
   window.addEventListener('scroll', function () {
     if (!galTick) { galTick = true; requestAnimationFrame(galUpdate); }
