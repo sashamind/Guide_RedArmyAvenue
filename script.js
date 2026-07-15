@@ -578,8 +578,11 @@ if (gubMoreBox && gubMoreBtn) {
     setStep(n);
   }
 
-  function schedule() {
-    if (timer) clearInterval(timer);
+  function stop() {
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+  function start() {
+    stop();
     timer = setInterval(function () {
       go(current % btns.length + 1);   // 1→2→3→1 по кругу
     }, 4000);
@@ -588,11 +591,24 @@ if (gubMoreBox && gubMoreBtn) {
   btns.forEach(function (b) {
     b.addEventListener('click', function () {
       go(+b.dataset.step);
-      schedule();                       // клик перезапускает отсчёт
+      start();                          // клик перезапускает отсчёт
     });
   });
 
-  schedule();
+  /* цикл идёт только пока блок в поле зрения; при появлении всегда
+     начинаем с шага 1 («тогда»), смена — через паузу (4с). За экраном —
+     пауза и сброс к 1, чтобы при следующем доскролле снова видеть 1 */
+  go(1);
+  var io = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) {
+      go(1);
+      start();
+    } else {
+      stop();
+      go(1);
+    }
+  }, { threshold: 0.45 });
+  io.observe(stack);
 })();
 
 /* ─── 12c. STACK GALLERY — стопка фото + лайтбокс ─── */
