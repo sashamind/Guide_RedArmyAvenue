@@ -707,14 +707,23 @@ if (gubMoreBox && gubMoreBtn) {
       if (started) return;
       started = true;
       el.classList.add('is-typing');
+      /* нелинейная, «живая» скорость: базовый разброс + паузы на знаках */
+      function delayFor(ch) {
+        if (ch === '.') return 420 + Math.random() * 200;
+        if (ch === ',') return 260 + Math.random() * 160;
+        if (ch === '—') return 280 + Math.random() * 160;
+        if (ch === ' ') return 55 + Math.random() * 80;
+        return 40 + Math.random() * 65;                // обычная буква ~40–105 мс
+      }
       var i = 0;
       (function step() {
         el.textContent = full.slice(0, i);
         if (i < full.length) {
+          /* пауза считается по только что напечатанному символу
+             (после запятой/тире/точки — дольше) */
+          var last = full.charAt(i - 1);
           i++;
-          /* чуть медленнее на паузах-знаках — живее */
-          var ch = full.charAt(i - 1);
-          setTimeout(step, ch === ',' || ch === '—' ? 120 : 30);
+          setTimeout(step, delayFor(last));
         } else {
           el.classList.remove('is-typing');
         }
