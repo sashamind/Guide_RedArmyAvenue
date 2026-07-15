@@ -2891,34 +2891,64 @@ figcaption {
   #s1867 .era__body.portico-note { order: 6; margin-top: 28px; }
   #s1867 .stack-gallery { order: 7; }
 
-  /* ── Галерея на мобильном: куча по центру → тап → две колонки ── */
+  /* чуть больше воздуха между сменяющимся зданием и его подписью */
+  .portico-caption { margin-top: 6px; }
+
+  /* переключатель «тогда/потом/сейчас» — горизонтальный:
+     кружки в ряд, подписи под ними, пунктир проходит через центры кружков */
+  .portico-steps {
+    flex-direction: row;
+    justify-content: center;
+    gap: 0;
+    width: 100%;
+    max-width: 320px;
+    margin: 22px auto 0;
+  }
+  .portico-step {
+    flex: 1 1 0;
+    flex-direction: column;
+    gap: 7px;
+    padding: 0;
+    align-items: center;
+    text-align: center;
+  }
+  .portico-steps::before {
+    left: 16.66%;
+    right: 16.66%;
+    top: 11px;
+    bottom: auto;
+    border-left: 0;
+    border-top: 1.5px dashed rgba(28, 16, 7, 0.32);
+  }
+
+  /* ── Галерея на мобильном: стопка ⇄ сетка по скролу ──
+     контейнер всегда grid (высота = два ряда, без сдвигов при переключении);
+     карточки одним лишь transform собираются в кучу по центру сетки
+     или расходятся по ячейкам — плавно, с одной transition. */
   .stack-gallery {
-    height: 250px;
-    margin: 44px auto 0;
-    cursor: pointer;
-    --n: 4;
-  }
-  /* свёрнутая куча: карточки наложены и отцентрованы по центру экрана */
-  .stack-gallery:not(.is-expanded) .stack-card {
-    left: 50%;
-    top: 50%;
-    width: min(64vw, 300px);
-    transform: translate(-50%, -50%) rotate(var(--rp, 0deg));
-  }
-  /* раскрытая: две колонки, карточки чуть неровно и чуть наклонены */
-  .stack-gallery.is-expanded {
-    height: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px 12px;
+    gap: 16px 12px;
     align-items: start;
-    cursor: default;
+    height: auto;
+    margin: 56px auto;
   }
-  .stack-gallery.is-expanded .stack-card {
+  .stack-gallery .stack-card {
     position: relative;
     left: auto;
     top: auto;
     width: 100%;
+    z-index: var(--z, 1);
+    transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.3s ease;
+    /* свёрнуто: все карточки сходятся к центру сетки (куча внахлёст) */
+    transform:
+      translate(calc((0.5 - var(--col, 0)) * 108%),
+                calc((0.5 - var(--row, 0)) * 116%))
+      rotate(var(--rp, 0deg));
+  }
+  /* раскрыто: карточки на своих местах — чуть неровно и слегка наклонены */
+  .stack-gallery.is-expanded .stack-card {
     transform: translateY(var(--my, 0px)) rotate(var(--rp, 0deg));
   }
 

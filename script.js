@@ -627,7 +627,9 @@ if (gubMoreBox && gubMoreBtn) {
     card.style.setProperty('--sy', rnd(6, 128).toFixed(0) + 'px');
     /* при наведении — доворот на пару градусов в сторону от текущего угла */
     card.style.setProperty('--rh', (rs + (rs >= 0 ? -4 : 4)).toFixed(2) + 'deg');
-    /* мобильный: лёгкий вертикальный сдвиг в раскрытой сетке («неровно») */
+    /* мобильный: положение в сетке 2×2 + лёгкий вертикальный сдвиг («неровно») */
+    card.style.setProperty('--col', pos % 2);
+    card.style.setProperty('--row', Math.floor(pos / 2));
     card.style.setProperty('--my', rnd(0, 20).toFixed(0) + 'px');
   });
 
@@ -649,14 +651,8 @@ if (gubMoreBox && gubMoreBtn) {
       setTimeout(function () { lightbox.hidden = true; lbImg.src = ''; }, 300);
     }
 
-    var mobileMq = window.matchMedia('(max-width: 860px)');
     cards.forEach(function (card) {
       card.addEventListener('click', function () {
-        /* мобильный: первый тап по куче — раскрыть в две колонки, а не лайтбокс */
-        if (mobileMq.matches && !gallery.classList.contains('is-expanded')) {
-          gallery.classList.add('is-expanded');
-          return;
-        }
         var img = card.querySelector('img');
         open(card.dataset.full, img ? img.alt : '');
       });
@@ -669,6 +665,24 @@ if (gubMoreBox && gubMoreBtn) {
       if (e.key === 'Escape' && !lightbox.hidden) close();
     });
   }
+
+  /* мобильный: стопка плавно разъезжается в сетку, когда её центр
+     подходит к центру экрана, и собирается обратно при прокрутке дальше */
+  var galMq = window.matchMedia('(max-width: 860px)');
+  var galTick = false;
+  function galUpdate() {
+    galTick = false;
+    if (!galMq.matches) { gallery.classList.remove('is-expanded'); return; }
+    var r = gallery.getBoundingClientRect();
+    var vh = window.innerHeight || 1;
+    var c = r.top + r.height / 2;
+    gallery.classList.toggle('is-expanded', c > vh * 0.22 && c < vh * 0.80);
+  }
+  window.addEventListener('scroll', function () {
+    if (!galTick) { galTick = true; requestAnimationFrame(galUpdate); }
+  }, { passive: true });
+  window.addEventListener('resize', galUpdate);
+  galUpdate();
 })();
 
 /* ─── 13. DOVE EASTER EGG ─── */
