@@ -526,6 +526,11 @@ if (gubMoreBox && gubMoreBtn) {
 
   function railsUpdate() {
     railsTick = false;
+    /* на мобильном рельсы стоят в потоке между заголовком и текстом — без наклона */
+    if (window.matchMedia('(max-width: 860px)').matches) {
+      railsImg.style.transform = '';
+      return;
+    }
     var r = railsImg.getBoundingClientRect();
     var vh = window.innerHeight || 1;
     /* 0 — картинка у нижнего края экрана, 1 — у верхнего */
@@ -622,6 +627,8 @@ if (gubMoreBox && gubMoreBtn) {
     card.style.setProperty('--sy', rnd(6, 128).toFixed(0) + 'px');
     /* при наведении — доворот на пару градусов в сторону от текущего угла */
     card.style.setProperty('--rh', (rs + (rs >= 0 ? -4 : 4)).toFixed(2) + 'deg');
+    /* мобильный: лёгкий вертикальный сдвиг в раскрытой сетке («неровно») */
+    card.style.setProperty('--my', rnd(0, 20).toFixed(0) + 'px');
   });
 
   /* лайтбокс */
@@ -642,8 +649,14 @@ if (gubMoreBox && gubMoreBtn) {
       setTimeout(function () { lightbox.hidden = true; lbImg.src = ''; }, 300);
     }
 
+    var mobileMq = window.matchMedia('(max-width: 860px)');
     cards.forEach(function (card) {
       card.addEventListener('click', function () {
+        /* мобильный: первый тап по куче — раскрыть в две колонки, а не лайтбокс */
+        if (mobileMq.matches && !gallery.classList.contains('is-expanded')) {
+          gallery.classList.add('is-expanded');
+          return;
+        }
         var img = card.querySelector('img');
         open(card.dataset.full, img ? img.alt : '');
       });

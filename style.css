@@ -2858,6 +2858,70 @@ figcaption {
   /* заголовки разделов — по левому краю (в вебе выключка чередуется) */
   #s1860 .era__date { text-align: left; }
 
+  /* ── Мобильный порядок блока «Железная дорога» ──
+     лейбл → заголовок → иллюстрация рельсов → текст.
+     Колонки «разбираем» через display:contents, порядок — order. */
+  #s1860 .era__inner { display: flex; flex-direction: column; }
+  #s1860 .era__date,
+  #s1860 .era__content { display: contents; }
+  #s1860 .era__inner > .era__date .label { order: 1; }
+  #s1860 .era__inner > .era__date .t-era-title { order: 2; margin-top: 6px; }
+  #s1860 .era__rails {
+    display: block;
+    position: static;
+    order: 3;
+    width: 100%;
+    max-width: 360px;
+    margin: 26px 0 4px;
+  }
+  #s1860 .era__rails img { transform: none; }
+  #s1860 .era__inner .era__body { order: 4; margin-top: 18px; }
+
+  /* ── Мобильный порядок блока «Здание вокзала» ──
+     заголовок → иллюстрация → текст «Здание и архитектура» →
+     переключатель облика (по центру) → текст «Новый вокзал» → галерея. */
+  #s1867 .era__inner { display: flex; flex-direction: column; }
+  #s1867 .era__date,
+  #s1867 .era__content { display: contents; }
+  #s1867 .label { order: 1; }
+  #s1867 .t-era-title { order: 2; margin-top: 6px; }
+  #s1867 .era__figure { order: 3; margin-top: 28px; }
+  #s1867 .era__body:not(.portico-note) { order: 4; margin-top: 24px; }
+  #s1867 .era__portico { order: 5; margin: 40px auto 0; width: 100%; }
+  #s1867 .era__body.portico-note { order: 6; margin-top: 28px; }
+  #s1867 .stack-gallery { order: 7; }
+
+  /* ── Галерея на мобильном: куча по центру → тап → две колонки ── */
+  .stack-gallery {
+    height: 250px;
+    margin: 44px auto 0;
+    cursor: pointer;
+    --n: 4;
+  }
+  /* свёрнутая куча: карточки наложены и отцентрованы по центру экрана */
+  .stack-gallery:not(.is-expanded) .stack-card {
+    left: 50%;
+    top: 50%;
+    width: min(64vw, 300px);
+    transform: translate(-50%, -50%) rotate(var(--rp, 0deg));
+  }
+  /* раскрытая: две колонки, карточки чуть неровно и чуть наклонены */
+  .stack-gallery.is-expanded {
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 12px;
+    align-items: start;
+    cursor: default;
+  }
+  .stack-gallery.is-expanded .stack-card {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    transform: translateY(var(--my, 0px)) rotate(var(--rp, 0deg));
+  }
+
   /* ── Gub map ── */
   /* minmax(0,1fr): иначе колонку распирает min-content слайдера
      и карта выезжает за экран */
