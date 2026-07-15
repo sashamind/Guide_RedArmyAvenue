@@ -687,6 +687,47 @@ if (gubMoreBox && gubMoreBtn) {
   galUpdate();
 })();
 
+/* ─── 12d. ЦИТАТА-ЗАЯВЛЕНИЕ — печатается при появлении в экране ─── */
+
+(function () {
+  var el = document.getElementById('statementType');
+  if (!el) return;
+  var full = el.textContent.replace(/\s+/g, ' ').trim();
+  el.textContent = full;
+  if (reducedMotion) return;
+
+  /* фиксируем высоту по полному тексту, чтобы контент ниже не прыгал,
+     затем очищаем — печать начнётся, когда доскроллим */
+  requestAnimationFrame(function () {
+    el.style.minHeight = el.offsetHeight + 'px';
+    el.textContent = '';
+
+    var started = false;
+    function type() {
+      if (started) return;
+      started = true;
+      el.classList.add('is-typing');
+      var i = 0;
+      (function step() {
+        el.textContent = full.slice(0, i);
+        if (i < full.length) {
+          i++;
+          /* чуть медленнее на паузах-знаках — живее */
+          var ch = full.charAt(i - 1);
+          setTimeout(step, ch === ',' || ch === '—' ? 120 : 30);
+        } else {
+          el.classList.remove('is-typing');
+        }
+      })();
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { type(); io.disconnect(); }
+    }, { threshold: 0.6 });
+    io.observe(el);
+  });
+})();
+
 /* ─── 13. DOVE EASTER EGG ─── */
 
 const dove       = document.getElementById('doveEgg');

@@ -1079,6 +1079,19 @@ figcaption {
   opacity: 1;
 }
 
+/* мигающий курсор во время печати цитаты */
+.quote-block--statement .quote p.is-typing::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 3px;
+  background: currentColor;
+  vertical-align: -0.14em;
+  animation: caretBlink 0.8s steps(1) infinite;
+}
+@keyframes caretBlink { 50% { opacity: 0; } }
+
 .quote cite {
   display: block;
   font-family: var(--f-display);
