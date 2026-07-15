@@ -709,11 +709,11 @@ if (gubMoreBox && gubMoreBtn) {
       el.classList.add('is-typing');
       /* нелинейная, «живая» скорость: базовый разброс + паузы на знаках */
       function delayFor(ch) {
-        if (ch === '.') return 420 + Math.random() * 200;
-        if (ch === ',') return 260 + Math.random() * 160;
-        if (ch === '—') return 280 + Math.random() * 160;
-        if (ch === ' ') return 55 + Math.random() * 80;
-        return 40 + Math.random() * 65;                // обычная буква ~40–105 мс
+        if (ch === '.') return 250 + Math.random() * 130;
+        if (ch === ',') return 160 + Math.random() * 100;
+        if (ch === '—') return 170 + Math.random() * 100;
+        if (ch === ' ') return 34 + Math.random() * 50;
+        return 24 + Math.random() * 40;                // обычная буква ~24–64 мс
       }
       var i = 0;
       (function step() {
