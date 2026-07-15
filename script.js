@@ -326,7 +326,7 @@ glow.style.cssText = `
   width: 360px;
   height: 360px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(77,109,211,0.09) 0%, rgba(77,109,211,0.04) 40%, transparent 72%);
+  background: radial-gradient(circle, rgba(255,224,198,0.55) 0%, rgba(255,224,198,0.22) 40%, transparent 72%);
   transform: translate(-50%,-50%);
   transition: left 0.6s ease, top 0.6s ease;
   will-change: left, top;
