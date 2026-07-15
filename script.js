@@ -627,9 +627,11 @@ if (gubMoreBox && gubMoreBtn) {
     card.style.setProperty('--sy', rnd(6, 128).toFixed(0) + 'px');
     /* при наведении — доворот на пару градусов в сторону от текущего угла */
     card.style.setProperty('--rh', (rs + (rs >= 0 ? -4 : 4)).toFixed(2) + 'deg');
-    /* мобильный: положение в сетке 2×2 + лёгкий вертикальный сдвиг («неровно») */
-    card.style.setProperty('--col', pos % 2);
-    card.style.setProperty('--row', Math.floor(pos / 2));
+    /* мобильный: ячейка в сетке 2×2 берётся по DOM-порядку (как раскладывает
+       grid auto-flow), иначе сбор в кучу считается от чужой ячейки и разъезжается;
+       перемешивание оставляем стопке (z-index) и наклону */
+    card.style.setProperty('--col', idx % 2);
+    card.style.setProperty('--row', Math.floor(idx / 2));
     card.style.setProperty('--my', rnd(0, 20).toFixed(0) + 'px');
   });
 
