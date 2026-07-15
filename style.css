@@ -655,6 +655,8 @@ figcaption {
   height: 390px;
   --cw: 378px;   /* ширина карточки (+80%) */
   --n: 4;        /* число карточек */
+  --spread: 1.5; /* коэффициент разлёта (1 = ровно по ширине, >1 — за края) */
+  overflow: visible;
 }
 
 .stack-card {
@@ -691,7 +693,9 @@ figcaption {
 
 /* разъезд по наведению: раскладываем по ширине + вертикальный джиттер и наклон */
 .stack-gallery:hover .stack-card {
-  left: calc(var(--i) * (100% - var(--cw)) / (var(--n) - 1));
+  left: calc(50% - var(--cw) / 2
+        + (var(--i) - (var(--n) - 1) / 2)
+        * (100% - var(--cw)) / (var(--n) - 1) * var(--spread));
   top: var(--sy, 50px);
   transform: rotate(var(--rs, 0deg));
 }
