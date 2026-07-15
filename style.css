@@ -648,6 +648,97 @@ figcaption {
 .t-accent { color: var(--blue); }
 #s1860 .t-accent { color: var(--amber); }
 
+/* ── Галерея-стопка ── */
+.stack-gallery {
+  position: relative;
+  margin-top: 56px;
+  height: 210px;
+  --cw: 210px;   /* ширина карточки */
+  --n: 4;        /* число карточек */
+}
+
+.stack-card {
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - var(--cw) / 2);
+  width: var(--cw);
+  aspect-ratio: 3 / 2;
+  margin: 0;
+  padding: 0;
+  border: 3px solid var(--amber);
+  border-radius: 3px;
+  background: var(--amber);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(28, 16, 7, 0.22);
+  transform: rotate(var(--r, 0deg));
+  transform-origin: center bottom;
+  transition: left 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s ease;
+  z-index: var(--z, 1);
+}
+
+.stack-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%) contrast(1.06);
+  transition: filter 0.3s ease;
+}
+
+/* разъезд по наведению: раскладываем по всей ширине */
+.stack-gallery:hover .stack-card {
+  left: calc(var(--i) * (100% - var(--cw)) / (var(--n) - 1));
+  transform: rotate(0deg);
+}
+.stack-gallery:hover .stack-card:hover {
+  z-index: 20;
+  box-shadow: 0 16px 36px rgba(28, 16, 7, 0.32);
+}
+.stack-gallery:hover .stack-card:hover img { filter: none; }
+
+/* ── Лайтбокс ── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5vmin;
+  background: rgba(18, 10, 3, 0.9);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.lightbox.is-open { opacity: 1; }
+.lightbox[hidden] { display: none; }
+
+.lightbox__img {
+  max-width: 92vw;
+  max-height: 90vh;
+  border-radius: 4px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(216, 223, 247, 0.14);
+  color: var(--cream);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.lightbox__close:hover { background: rgba(216, 223, 247, 0.28); }
+
 .era__body p {
   font-family: var(--f-body);
   font-size: 15px;

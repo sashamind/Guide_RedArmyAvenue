@@ -590,6 +590,66 @@ if (gubMoreBox && gubMoreBtn) {
   schedule();
 })();
 
+/* ─── 12c. STACK GALLERY — стопка фото + лайтбокс ─── */
+
+(function () {
+  var gallery = document.getElementById('stackGallery');
+  var lightbox = document.getElementById('lightbox');
+  if (!gallery) return;
+
+  var cards = Array.prototype.slice.call(gallery.querySelectorAll('.stack-card'));
+  var n = cards.length;
+
+  /* случайный порядок при каждой загрузке */
+  var order = cards.map(function (_, i) { return i; });
+  for (var i = order.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = order[i]; order[i] = order[j]; order[j] = t;
+  }
+
+  cards.forEach(function (card, idx) {
+    var pos = order[idx];                 // позиция при разъезде (0..n-1)
+    card.style.setProperty('--i', pos);
+    card.style.setProperty('--n', n);
+    card.style.setProperty('--z', pos + 1); // верхняя = наибольший индекс
+    /* лёгкий наклон стопки, детерминированно от позиции */
+    card.style.setProperty('--r', ((pos - (n - 1) / 2) * 2.5).toFixed(2) + 'deg');
+  });
+
+  /* лайтбокс */
+  if (lightbox) {
+    var lbImg = document.getElementById('lightboxImg');
+    var lbClose = document.getElementById('lightboxClose');
+
+    function open(src, alt) {
+      lbImg.src = src;
+      lbImg.alt = alt || '';
+      lightbox.hidden = false;
+      lightbox.setAttribute('aria-hidden', 'false');
+      requestAnimationFrame(function () { lightbox.classList.add('is-open'); });
+    }
+    function close() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      setTimeout(function () { lightbox.hidden = true; lbImg.src = ''; }, 300);
+    }
+
+    cards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        var img = card.querySelector('img');
+        open(card.dataset.full, img ? img.alt : '');
+      });
+    });
+    lbClose.addEventListener('click', close);
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) close();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !lightbox.hidden) close();
+    });
+  }
+})();
+
 /* ─── 13. DOVE EASTER EGG ─── */
 
 const dove       = document.getElementById('doveEgg');
