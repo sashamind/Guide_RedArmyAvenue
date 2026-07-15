@@ -1062,7 +1062,7 @@ figcaption {
 }
 
 /* утверждение: фон цвета текста синего блока, крупнее обычной цитаты */
-.quote-block--statement { background: var(--cream); }
+.quote-block--statement { background: var(--cream-bg); }
 
 .quote-block--statement .quote { max-width: 880px; }
 
@@ -1137,6 +1137,64 @@ figcaption {
   font-size: 13px;
   line-height: 1.65;
   opacity: 0.55;
+}
+
+/* ═══════════════════════════════════════
+   FIGURES — вокзал в цифрах
+═══════════════════════════════════════ */
+
+.figures-block {
+  padding: var(--pad-y) 0;
+  border-top: 1px solid rgba(28, 16, 7, 0.07);
+}
+
+.figures-block__title {
+  font-family: var(--f-display);
+  font-size: clamp(30px, 4.4vw, 60px);
+  font-weight: 700;
+  color: var(--blue);
+  text-transform: uppercase;
+  line-height: 0.98;
+  margin: 10px 0 56px;
+}
+
+.figures {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+}
+
+.figure {
+  border-top: 2px solid var(--blue);
+  padding-top: 20px;
+}
+
+.figure__num {
+  font-family: var(--f-display);
+  font-size: clamp(48px, 5vw, 76px);
+  font-weight: 700;
+  color: var(--blue);
+  line-height: 1;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.figure__unit {
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.75;
+}
+
+.figure__text {
+  font-family: var(--f-body);
+  font-size: 15px;
+  line-height: 1.72;
+  opacity: 0.8;
 }
 
 /* ═══════════════════════════════════════
@@ -2920,6 +2978,7 @@ figcaption {
 
   /* ── Stats ── */
   .stats-stripe__grid { grid-template-columns: 1fr; }
+  .figures { grid-template-columns: 1fr; gap: 32px; }
 
   /* ── Credits ── */
   .credits__grid { grid-template-columns: 1fr; }
