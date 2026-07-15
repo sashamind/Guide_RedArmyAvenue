@@ -2852,8 +2852,8 @@ figcaption {
   .nearby__hdr { grid-template-columns: 1fr; }
   .nearby__grid { grid-template-columns: 1fr; }
 
-  /* синий блок: двойной отступ от верхней границы до первого текста */
-  #s1860 { padding-top: calc(var(--pad-y) * 2); }
+  /* верхний отступ синего блока — как у #s1867 и блока «в цифрах» (одинаково) */
+  #s1860 { padding-top: var(--pad-y); }
 
   /* заголовки разделов — по левому краю (в вебе выключка чередуется) */
   #s1860 .era__date { text-align: left; }
