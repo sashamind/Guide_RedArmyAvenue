@@ -652,8 +652,8 @@ figcaption {
 .stack-gallery {
   position: relative;
   margin-top: 56px;
-  height: 330px;
-  --cw: 315px;   /* ширина карточки (+50%) */
+  height: 390px;
+  --cw: 378px;   /* ширина карточки (+80%) */
   --n: 4;        /* число карточек */
 }
 
