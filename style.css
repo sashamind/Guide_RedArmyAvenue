@@ -697,7 +697,7 @@ figcaption {
 }
 .stack-gallery:hover .stack-card:hover {
   z-index: 20;
-  transform: rotate(var(--rs, 0deg)) scale(1.04);
+  transform: rotate(var(--rh, 0deg)) scale(1.05);
   box-shadow: 0 10px 24px rgba(28, 16, 7, 0.22);
 }
 .stack-gallery:hover .stack-card:hover img { filter: none; }

@@ -617,8 +617,11 @@ if (gubMoreBox && gubMoreBtn) {
     /* случайный лёгкий наклон в стопке */
     card.style.setProperty('--rp', rnd(-6, 6).toFixed(2) + 'deg');
     /* хаотичный разлёт: свой наклон и вертикальный сдвиг */
-    card.style.setProperty('--rs', rnd(-7, 7).toFixed(2) + 'deg');
+    var rs = rnd(-7, 7);
+    card.style.setProperty('--rs', rs.toFixed(2) + 'deg');
     card.style.setProperty('--sy', rnd(14, 96).toFixed(0) + 'px');
+    /* при наведении — доворот на пару градусов в сторону от текущего угла */
+    card.style.setProperty('--rh', (rs + (rs >= 0 ? -4 : 4)).toFixed(2) + 'deg');
   });
 
   /* лайтбокс */
