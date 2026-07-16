@@ -2365,10 +2365,11 @@ figcaption {
 
 .tl-item__content {
   display: grid;
-  /* текст — узкая колонка (≈вдвое уже прежнего), фото — крупнее */
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+  /* текст — узкая колонка, фото — чуть меньше текста; весь блок ограничен по ширине */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
   gap: clamp(24px, 4vw, 56px);
   align-items: start;
+  max-width: 1000px;
 }
 
 .tl-item__year {
