@@ -1692,7 +1692,8 @@ figcaption {
 .route.bg-blue .route__dot {
   /* непрозрачная заливка цветом фона — линия прячется под точкой, а не проходит сквозь */
   background: var(--blue);
-  border-color: var(--white);
+  border-color: rgba(255, 255, 255, 0.55);
+  opacity: 1;   /* базовые 0.5 делали точку полупрозрачной — линия просвечивала */
 }
 .route.bg-blue .route__stop--active .route__dot {
   background: var(--amber);
