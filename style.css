@@ -2937,6 +2937,9 @@ figcaption {
   #s1860 .era__rails {
     display: block;
     position: relative;   /* контекст для Lottie-оверлея */
+    top: auto;            /* сбрасываем смещения от абсолютного макета (десктоп),
+                             иначе relative сдвигает набросок и он накладывается */
+    left: auto;
     order: 3;
     width: 100%;
     max-width: 360px;
