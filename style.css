@@ -2766,6 +2766,15 @@ figcaption {
   .hub-stop.is-active .hub-stop__cta-label::after { clip-path: inset(0 0 0 0); transition-delay: 0.45s; }
   .hub-stop.is-active .hub-stop__arrow { transform: translateX(5px); transition-delay: 0.45s; }
 
+  /* активная карточка (в центре экрана) — полный размер, остальные −20% */
+  .hub-stop__card {
+    transform: scale(0.8);
+    transform-origin: center center;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hub-stop.is-active .hub-stop__card { transform: scale(1); }
+
   /* ── Nav: top bar ── */
   .nav {
     top: 0; left: 0; right: 0; bottom: auto;
