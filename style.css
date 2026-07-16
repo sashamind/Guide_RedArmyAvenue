@@ -2132,11 +2132,11 @@ figcaption {
 
   .hub-stop:hover .hub-stop__desc,
   .hub-stop:focus-within .hub-stop__desc,
-  .hub-stop.is-active .hub-stop__desc { opacity: 0.72; transition-delay: 0.5s; }
+  .hub-stop.is-active .hub-stop__desc { opacity: 0.72; }
 
   .hub-stop:hover .hub-stop__tag,
   .hub-stop:focus-within .hub-stop__tag,
-  .hub-stop.is-active .hub-stop__tag { opacity: 0.5; transition-delay: 0.5s; }
+  .hub-stop.is-active .hub-stop__tag { opacity: 0.5; }
 
   .hub-stop:hover .hub-stop__node,
   .hub-stop:focus-within .hub-stop__node,
