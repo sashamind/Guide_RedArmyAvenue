@@ -3412,7 +3412,7 @@ figcaption {
 
   /* иллюстрация реки — крупнее в 1.5×, обрезается по краям */
   .nearby__river { padding: 0; overflow: hidden; }
-  .nearby__river img { width: 195%; max-width: none; margin: 0 0 0 -47.5%; }
+  .nearby__river img { width: 185%; max-width: none; margin: 0 0 0 -42.5%; }
 
   /* ── Credits ── */
   .credits__grid { grid-template-columns: 1fr; }
