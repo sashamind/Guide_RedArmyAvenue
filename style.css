@@ -92,6 +92,7 @@ strong { font-weight: 700; }
 .bg-cream { background: var(--cream-bg); }
 .bg-dark  { background: var(--dark);    color: var(--cream); }
 .bg-amber { background: var(--amber); }
+.bg-blue  { background: var(--blue);    color: var(--white); }
 
 /* строчная буква внутри uppercase-текста (напр. «е» в «1900-е») */
 .lc { text-transform: lowercase; }
@@ -1676,6 +1677,30 @@ figcaption {
   background: var(--blue);
   padding: 4px 10px;
   border-radius: 100px;
+}
+
+/* ── тот же блок, но на синем фоне ── */
+.route.bg-blue { border-top-color: rgba(255, 255, 255, 0.14); }
+.route.bg-blue .label { color: var(--amber); }
+.route.bg-blue .route__title { color: var(--white); }
+.route.bg-blue .route__desc { color: var(--white); opacity: 0.8; }
+.route.bg-blue .route__back { color: var(--amber); }
+.route.bg-blue .route__line::before { border-top-color: rgba(255, 255, 255, 0.35); }
+.route.bg-blue .route__dot {
+  background: transparent;
+  border-color: var(--white);
+}
+.route.bg-blue .route__stop--active .route__dot {
+  background: var(--amber);
+  border-color: var(--amber);
+  box-shadow: 0 0 0 6px rgba(250, 194, 192, 0.25);
+}
+.route.bg-blue .route__num { color: var(--white); }
+.route.bg-blue .route__stop--active .route__num { color: var(--amber); opacity: 1; }
+.route.bg-blue .route__name { color: var(--white); }
+.route.bg-blue .route__status {
+  color: var(--blue);
+  background: var(--amber);
 }
 
 /* ═══════════════════════════════════════
