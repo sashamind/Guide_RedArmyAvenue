@@ -2454,12 +2454,16 @@ figcaption {
   flex-direction: column;
 }
 .tl-item__coda {
-  margin-top: 30px;
+  grid-column: 1 / -1;
+  justify-self: center;
+  max-width: 620px;
+  margin-top: 90px;
   padding-top: 24px;
   border-top: 1px solid var(--border-lt);
   font-family: var(--f-body);
   font-size: 15px;
   line-height: 1.75;
+  text-align: center;
   color: rgba(216, 223, 247, 0.62);
 }
 
@@ -2470,8 +2474,16 @@ figcaption {
   .tl-item__main   { grid-column: 1; order: 2; }
   .tl-item__figure { grid-column: 1; order: 1; }
   /* последний блок: текст → фото → вывод */
-  .tl-item__side { grid-column: 1; order: 3; }
-  .tl-item__coda { margin-top: 22px; padding-top: 20px; }
+  .tl-item__side { grid-column: 1; order: 2; }
+  .tl-item__coda {
+    grid-column: 1;
+    order: 3;
+    justify-self: stretch;
+    max-width: none;
+    margin-top: 22px;
+    padding-top: 20px;
+    text-align: left;
+  }
 }
 
 /* ═══════════════════════════════════════
