@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://i.postimg.cc" />
   <link rel="preconnect" href="https://vxxzyggeogbjxjlrhcus.supabase.co" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260717i" />
+  <link rel="stylesheet" href="style.css?v=20260717j" />
 
   <!-- Lottie (лёгкая SVG-сборка) — анимация птиц в hero -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie_light.min.js" defer></script>
@@ -71,10 +71,10 @@
     <div class="nav__inner">
       <a class="nav__logo" href="index.html" aria-label="К началу маршрута">КП</a>
       <ul class="nav__links">
-        <li><a href="#s1860">1860-е</a></li>
-        <li><a href="#s1867">Вокзал</a></li>
-        <li><a href="#timeline">Хроника</a></li>
-        <li><a href="#nearby">Рядом</a></li>
+        <li><a href="#s1860">Ж/Д</a></li>
+        <li><a href="#s1867">Здание</a></li>
+        <li><a href="#figures">Цифры</a></li>
+        <li><a href="#timeline">Время</a></li>
       </ul>
       <button class="nav__burger" id="navBurger" aria-label="Меню" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -353,7 +353,7 @@
   </div>
 
   <!-- MULTIFUNCTIONAL COMPLEX: вокзал в цифрах -->
-  <div class="figures-block bg-cream">
+  <div class="figures-block bg-cream" id="figures">
     <div class="container">
       <span class="label" data-animate="fade-up">Многофункциональный комплекс</span>
       <h3 class="figures-block__title" data-animate="fade-up" data-delay="1">
@@ -517,25 +517,26 @@
                   и&nbsp;кордонами, и&nbsp;даже центральный зал с&nbsp;монументальными
                   росписями фактически недоступен для&nbsp;свободного осмотра.
                 </p>
-                <p>
-                  <strong class="tl-hl">Тем не&nbsp;менее Московский вокзал остаётся
-                  одной из&nbsp;ключевых точек на&nbsp;карте Тулы.</strong> Он&nbsp;наглядно
-                  показывает, как место может
-                  меняться под&nbsp;давлением времени, не&nbsp;утратив при&nbsp;этом своего
-                  исторического ядра. Каменное здание XIX&nbsp;века сохранилось —
-                  пусть и&nbsp;под слоями поздних функций и&nbsp;смыслов, которые
-                  сегодня почти неотделимы от&nbsp;него.
-                </p>
               </div>
             </div>
-            <figure class="tl-item__figure">
-              <picture>
-                <source srcset="https://i.postimg.cc/V6qHb8zD/vokzal-aerial.webp" type="image/webp" />
-                <img src="https://i.postimg.cc/85RnrSTm/vokzal-aerial.jpg"
-                     alt="Вид сверху на Московский вокзал и привокзальную площадь"
-                     width="1280" height="827" loading="lazy" />
-              </picture>
-            </figure>
+            <div class="tl-item__side">
+              <figure class="tl-item__figure">
+                <picture>
+                  <source srcset="https://i.postimg.cc/V6qHb8zD/vokzal-aerial.webp" type="image/webp" />
+                  <img src="https://i.postimg.cc/85RnrSTm/vokzal-aerial.jpg"
+                       alt="Вид сверху на Московский вокзал и привокзальную площадь"
+                       width="1280" height="827" loading="lazy" />
+                </picture>
+              </figure>
+              <p class="tl-item__coda">
+                <strong class="tl-hl">Тем не&nbsp;менее Московский вокзал остаётся
+                одной из&nbsp;ключевых точек на&nbsp;карте Тулы.</strong> Он&nbsp;наглядно
+                показывает, как место может меняться под&nbsp;давлением времени,
+                не&nbsp;утратив при&nbsp;этом своего исторического ядра. Каменное здание
+                XIX&nbsp;века сохранилось — пусть и&nbsp;под слоями поздних функций
+                и&nbsp;смыслов, которые сегодня почти неотделимы от&nbsp;него.
+              </p>
+            </div>
           </div>
         </div>
 

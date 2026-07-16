@@ -2439,12 +2439,31 @@ figcaption {
   filter: grayscale(35%) contrast(1.04) brightness(0.96);
 }
 
+/* правая колонка: фото + вынесенный вниз вывод-абзац */
+.tl-item__side {
+  grid-column: 3;
+  display: flex;
+  flex-direction: column;
+}
+.tl-item__coda {
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-lt);
+  font-family: var(--f-body);
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(216, 223, 247, 0.62);
+}
+
 @media (max-width: 720px) {
   .tl-item { grid-template-columns: 34px 1fr; }
   /* фото — над текстом на мобильном, одна колонка */
   .tl-item__content { grid-template-columns: 1fr; gap: 22px; }
   .tl-item__main   { grid-column: 1; order: 2; }
   .tl-item__figure { grid-column: 1; order: 1; }
+  /* последний блок: текст → фото → вывод */
+  .tl-item__side { grid-column: 1; order: 3; }
+  .tl-item__coda { margin-top: 22px; padding-top: 20px; }
 }
 
 /* ═══════════════════════════════════════
