@@ -2526,7 +2526,7 @@ figcaption {
   font-family: var(--f-display);
   font-size: clamp(38px, 5.5vw, 68px);
   font-weight: 700;
-  color: var(--dark);
+  color: var(--blue);
   text-transform: uppercase;
   line-height: 0.91;
 }
