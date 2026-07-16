@@ -2411,8 +2411,13 @@ figcaption {
   font-family: var(--f-body);
   font-size: 15px;
   line-height: 1.75;
-  color: var(--cream);
-  opacity: 0.62;
+  /* --cream с прозрачностью (не opacity), чтобы выделения могли быть ярче */
+  color: rgba(216, 223, 247, 0.62);
+}
+/* акцент в тексте таймлайна — жирнее и цветом (янтарный, как метки-годы) */
+.tl-hl {
+  font-weight: 600;
+  color: var(--amber);
 }
 
 .tl-item__figure {
