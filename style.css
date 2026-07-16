@@ -3422,7 +3422,7 @@ figcaption {
   .nearby__river::-webkit-scrollbar { display: none; }   /* WebKit: скрыть полосу */
   .nearby__river img {
     width: auto;
-    height: clamp(240px, 66vw, 380px);   /* по высоте комфортно, ширина уходит за экран */
+    height: clamp(288px, 79vw, 456px);   /* по высоте комфортно, ширина уходит за экран */
     max-width: none;
     margin: 0;
   }
