@@ -544,11 +544,6 @@ if (gubMoreBox && gubMoreBtn) {
 
   function railsUpdate() {
     railsTick = false;
-    /* на мобильном рельсы стоят в потоке между заголовком и текстом — без наклона */
-    if (window.matchMedia('(max-width: 860px)').matches) {
-      apply('');
-      return;
-    }
     var r = railsImg.getBoundingClientRect();
     var vh = window.innerHeight || 1;
     /* 0 — картинка у нижнего края экрана, 1 — у верхнего */

@@ -2945,9 +2945,6 @@ figcaption {
     max-width: 360px;
     margin: 76px 0 0;
   }
-  #s1860 .era__rails img { transform: none; }
-  /* Lottie-оверлей на мобильном тоже без наклона — совпадает с плоским наброском */
-  #s1860 .era__rails-anim { transform: none; }
   #s1860 .era__inner .era__body { order: 4; margin-top: 68px; }
 
   /* ── Мобильный порядок блока «Здание вокзала» ──
