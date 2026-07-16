@@ -2028,6 +2028,8 @@ figcaption {
     aspect-ratio: 1 / 1;
     border: 1.5px solid var(--blue);
     border-radius: 4px;
+    /* лёгкое искажение линий рамки — «дисплейсмент» */
+    filter: url(#mapWobble);
   }
 }
 
