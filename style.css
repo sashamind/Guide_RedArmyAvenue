@@ -2751,7 +2751,10 @@ figcaption {
 
   /* ── Hub hero: полный экран, контент сверху (без пустого верха) ── */
   .hub-hero {
+    /* dvh, а не svh: иначе при скрытии адресной строки на скроле
+       нижняя стрелка «подпрыгивает» вверх (высота не догоняет вьюпорт) */
     min-height: 100svh;
+    min-height: 100dvh;
     justify-content: flex-start;
     padding: 32px 0 clamp(48px, 9vw, 72px);
   }
