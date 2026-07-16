@@ -2005,6 +2005,12 @@ figcaption {
   color: inherit;
 }
 
+/* десктоп: плашки частей — половинной ширины (третья колонка пустая справа) */
+@media (min-width: 861px) {
+  .hub-stop,
+  .hub-stop__link { grid-template-columns: 48px minmax(0, 1fr) minmax(0, 1fr); }
+}
+
 /* доступная остановка: цифра нейтральная в покое, синяя — при наведении */
 .hub-stop--ready .hub-stop__node {
   background: var(--cream);
