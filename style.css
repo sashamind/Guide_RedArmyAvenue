@@ -91,6 +91,7 @@ strong { font-weight: 700; }
 /* ── BACKGROUNDS ── */
 .bg-cream { background: var(--cream-bg); }
 .bg-dark  { background: var(--dark);    color: var(--cream); }
+.bg-amber { background: var(--amber); }
 
 /* строчная буква внутри uppercase-текста (напр. «е» в «1900-е») */
 .lc { text-transform: lowercase; }
