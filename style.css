@@ -1613,10 +1613,14 @@ figcaption {
 .route__line::before {
   content: '';
   position: absolute;
-  top: 7px;
+  top: 6px;
   left: calc(100% / 16);
   right: calc(100% / 16);
-  border-top: 2px dashed rgba(28, 16, 7, 0.3);
+  height: 2px;
+  /* штрих 6px, промежуток 16px — управляем гэпом явно (border dashed не даёт) */
+  background: repeating-linear-gradient(to right,
+    rgba(28, 16, 7, 0.3) 0 6px,
+    transparent 6px 22px);
 }
 
 .route__stop {
@@ -1686,7 +1690,9 @@ figcaption {
 .route.bg-blue .route__desc { color: var(--white); opacity: 0.8; }
 .route.bg-blue .route__back { color: var(--amber); }
 .route.bg-blue .route__line::before {
-  border-top-color: rgba(255, 255, 255, 0.35);
+  background: repeating-linear-gradient(to right,
+    rgba(255, 255, 255, 0.4) 0 6px,
+    transparent 6px 22px);
   filter: url(#routeWobble);   /* лёгкая кривизна, как у таймлайна */
 }
 .route.bg-blue .route__dot {
