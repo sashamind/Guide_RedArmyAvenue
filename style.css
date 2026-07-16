@@ -2457,7 +2457,7 @@ figcaption {
   grid-column: 1 / -1;
   justify-self: center;
   max-width: 620px;
-  margin-top: 90px;
+  margin-top: 290px;
   padding-top: 24px;
   border-top: 1px solid var(--border-lt);
   font-family: var(--f-body);
