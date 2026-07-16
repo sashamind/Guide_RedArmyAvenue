@@ -2330,16 +2330,27 @@ figcaption {
 .timeline {
   position: relative;
 }
-/* сплошная линия по всей высоте, за точками */
+/* сплошная линия по всей высоте, за точками; слегка искажена (кривенькая) */
 .timeline::before {
   content: '';
   position: absolute;
   left: 6px;
   top: 12px;
-  bottom: 12px;
+  bottom: 0;
   width: 2px;
   background: var(--amber);
   opacity: 0.28;
+  filter: url(#tlWobble);
+}
+/* линия не уходит ниже последней точки — прячем её хвост фоном секции */
+.tl-item:last-child .tl-item__marker::after {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 22px;
+  bottom: 0;
+  width: 26px;
+  background: var(--dark);
 }
 
 .tl-item {
