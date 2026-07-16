@@ -2007,8 +2007,13 @@ figcaption {
 
 /* десктоп: плашки частей — половинной ширины (третья колонка пустая справа) */
 @media (min-width: 861px) {
-  .hub-stop,
-  .hub-stop__link { grid-template-columns: 48px minmax(0, 1fr) minmax(0, 1fr); }
+  .hub-stop { grid-template-columns: 48px minmax(0, 1fr) minmax(0, 1fr); }
+  /* ссылка/карточка занимают только левую половину — правая пустая колонка
+     не кликается и не реагирует на наведение */
+  .hub-stop__link {
+    grid-column: 1 / 3;
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
 }
 
 /* доступная остановка: цифра нейтральная в покое, синяя — при наведении */
@@ -2023,14 +2028,14 @@ figcaption {
   transition: color 0.3s ease;
 }
 
-.hub-stop--ready .hub-stop__link:hover .hub-stop__node {
+.hub-stop--ready:has(.hub-stop__card:hover) .hub-stop__node {
   background: var(--blue);
   border-color: var(--blue);
   box-shadow: 0 0 0 6px rgba(77, 109, 211, 0.18);
   transform: scale(1);   /* при наведении вырастает до полного размера */
 }
 
-.hub-stop--ready .hub-stop__link:hover .hub-stop__num { color: var(--white); }
+.hub-stop--ready:has(.hub-stop__card:hover) .hub-stop__num { color: var(--white); }
 
 .hub-stop__card {
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -2074,13 +2079,13 @@ figcaption {
 .hub-stop.is-active .hub-stop__num { color: var(--white); opacity: 1; }
 
 /* ready: лифт карточки + стрелка при наведении (десктоп) */
-.hub-stop--ready .hub-stop__link:hover .hub-stop__card {
+.hub-stop--ready:has(.hub-stop__card:hover) .hub-stop__card {
   transform: translateY(-4px);
   border-color: var(--blue);
   box-shadow: 0 16px 40px rgba(28, 16, 7, 0.12);
 }
 
-.hub-stop--ready .hub-stop__link:hover .hub-stop__media img { transform: scale(1.05); }
+.hub-stop--ready:has(.hub-stop__card:hover) .hub-stop__media img { transform: scale(1.05); }
 
 /* ── ДЕСКТОП (>860px): карточка свёрнута (только «Часть N» + заголовок),
       раскрывается при наведении — появляются фото, описание и CTA.
@@ -2112,33 +2117,33 @@ figcaption {
 
   /* раскрытие — чистый CSS :hover (не зависит от JS) + .is-active (резерв)
      + :focus-within — чтобы карточка раскрывалась и при табе с клавиатуры */
-  .hub-stop:hover .hub-stop__card,
+  .hub-stop:has(.hub-stop__card:hover) .hub-stop__card,
   .hub-stop:focus-within .hub-stop__card,
   .hub-stop.is-active .hub-stop__card {
     border-color: var(--blue);
     box-shadow: 0 12px 32px rgba(28, 16, 7, 0.12);
   }
-  .hub-stop:hover .hub-stop__media,
+  .hub-stop:has(.hub-stop__card:hover) .hub-stop__media,
   .hub-stop:focus-within .hub-stop__media,
   .hub-stop.is-active .hub-stop__media { width: clamp(120px, 26vw, 280px); opacity: 1; }
 
-  .hub-stop:hover .hub-stop__media img,
+  .hub-stop:has(.hub-stop__card:hover) .hub-stop__media img,
   .hub-stop:focus-within .hub-stop__media img,
   .hub-stop.is-active .hub-stop__media img { filter: grayscale(20%) contrast(1.04); opacity: 1; }
 
-  .hub-stop:hover .hub-stop__reveal,
+  .hub-stop:has(.hub-stop__card:hover) .hub-stop__reveal,
   .hub-stop:focus-within .hub-stop__reveal,
   .hub-stop.is-active .hub-stop__reveal { max-height: 260px; }
 
-  .hub-stop:hover .hub-stop__desc,
+  .hub-stop:has(.hub-stop__card:hover) .hub-stop__desc,
   .hub-stop:focus-within .hub-stop__desc,
   .hub-stop.is-active .hub-stop__desc { opacity: 0.72; }
 
-  .hub-stop:hover .hub-stop__tag,
+  .hub-stop:has(.hub-stop__card:hover) .hub-stop__tag,
   .hub-stop:focus-within .hub-stop__tag,
   .hub-stop.is-active .hub-stop__tag { opacity: 0.5; }
 
-  .hub-stop:hover .hub-stop__node,
+  .hub-stop:has(.hub-stop__card:hover) .hub-stop__node,
   .hub-stop:focus-within .hub-stop__node,
   .hub-stop.is-active .hub-stop__node {
     background: var(--blue);
@@ -2146,11 +2151,11 @@ figcaption {
     transform: scale(1);
     box-shadow: 0 0 0 6px rgba(77, 109, 211, 0.18);
   }
-  .hub-stop:hover .hub-stop__num,
+  .hub-stop:has(.hub-stop__card:hover) .hub-stop__num,
   .hub-stop:focus-within .hub-stop__num,
   .hub-stop.is-active .hub-stop__num { color: var(--white); opacity: 1; }
 
-  .hub-stop:hover .hub-stop__name,
+  .hub-stop:has(.hub-stop__card:hover) .hub-stop__name,
   .hub-stop:focus-within .hub-stop__name,
   .hub-stop.is-active .hub-stop__name { opacity: 1; }
 }
