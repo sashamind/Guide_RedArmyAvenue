@@ -3410,6 +3410,10 @@ figcaption {
   .figures { grid-template-columns: 1fr; gap: 32px; }
   .figures-block__head { text-align: left; margin-left: 0; }
 
+  /* иллюстрация реки — крупнее в 1.5×, обрезается по краям */
+  .nearby__river { padding: 0; overflow: hidden; }
+  .nearby__river img { width: 150%; max-width: none; margin: 0 0 0 -25%; }
+
   /* ── Credits ── */
   .credits__grid { grid-template-columns: 1fr; }
 
