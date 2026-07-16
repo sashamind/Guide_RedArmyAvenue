@@ -1616,7 +1616,7 @@ figcaption {
   top: 7px;
   left: calc(100% / 16);
   right: calc(100% / 16);
-  border-top: 3px dashed rgba(28, 16, 7, 0.3);
+  border-top: 2px dashed rgba(28, 16, 7, 0.3);
 }
 
 .route__stop {
