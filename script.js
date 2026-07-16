@@ -188,6 +188,12 @@ window.addEventListener('load', function () {
   initStopMotionLottie(document.querySelector('.hero__train-mover'), SB + 'train_lottie.json?v=2', {
     className: 'hero__train-anim', hideImg: false, pauseMs: 4000
   });
+
+  // рельсы (#s1860): Lottie-оверлей поверх наброска путей, пауза 3с;
+  // наклон синхронизируется со скролом в §12a
+  initStopMotionLottie(document.querySelector('.era__rails'), SB + 'rails_lottie.json', {
+    className: 'era__rails-anim', hideImg: false, pauseMs: 3000
+  });
 });
 
 /* ─── 3b. HERO TITLE FIT (мобильный): максимально крупный, но в экран ─── */
@@ -523,12 +529,24 @@ if (gubMoreBox && gubMoreBtn) {
   var railsImg = document.querySelector('.era__rails img');
   if (!railsImg) return;
   var railsTick = false;
+  var railsAnim = null;
+  /* Lottie-оверлей создаётся по window.load — берём его лениво */
+  function anim() {
+    if (!railsAnim) railsAnim = document.querySelector('.era__rails-anim');
+    return railsAnim;
+  }
+
+  function apply(tf) {
+    railsImg.style.transform = tf;
+    var a = anim();
+    if (a) a.style.transform = tf;   // оверлей наклоняется синхронно с наброском
+  }
 
   function railsUpdate() {
     railsTick = false;
     /* на мобильном рельсы стоят в потоке между заголовком и текстом — без наклона */
     if (window.matchMedia('(max-width: 860px)').matches) {
-      railsImg.style.transform = '';
+      apply('');
       return;
     }
     var r = railsImg.getBoundingClientRect();
@@ -537,13 +555,15 @@ if (gubMoreBox && gubMoreBtn) {
     var t = 1 - (r.top + r.height / 2) / vh;
     if (t < 0) t = 0;
     if (t > 1) t = 1;
-    railsImg.style.transform = 'rotate(' + (7 - 14 * t).toFixed(2) + 'deg)';
+    apply('rotate(' + (7 - 14 * t).toFixed(2) + 'deg)');
   }
 
   window.addEventListener('scroll', function () {
     if (!railsTick) { railsTick = true; requestAnimationFrame(railsUpdate); }
   }, { passive: true });
   window.addEventListener('resize', railsUpdate);
+  /* повторный расчёт после load — к этому моменту Lottie-оверлей уже создан */
+  window.addEventListener('load', railsUpdate);
   railsUpdate();
 })();
 

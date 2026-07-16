@@ -795,6 +795,21 @@ figcaption {
   transform: rotate(7deg);
 }
 
+/* Lottie-оверлей поверх наброска путей: тех же пропорций (1108×168),
+   наклоняется синхронно с img (JS в §12a) */
+.era__rails-anim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform-origin: 50% 50%;
+  transform: rotate(7deg);
+}
+.era__rails-anim svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 @media (max-width: 860px) {
   .era__rails { display: none; }
 }
@@ -2868,7 +2883,7 @@ figcaption {
   #s1860 .era__inner > .era__date .t-era-title { order: 2; margin-top: 0; }
   #s1860 .era__rails {
     display: block;
-    position: static;
+    position: relative;   /* контекст для Lottie-оверлея */
     order: 3;
     width: 100%;
     max-width: 360px;
