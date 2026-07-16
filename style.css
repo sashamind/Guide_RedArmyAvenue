@@ -1910,8 +1910,8 @@ figcaption {
 
 .hub-stop__q {
   font-family: var(--f-display);
-  font-weight: 700;
-  font-size: clamp(48px, 8vw, 92px);
+  font-weight: 300;
+  font-size: clamp(52px, 8.5vw, 100px);
   line-height: 1;
   color: var(--blue);
 }
