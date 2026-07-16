@@ -3137,6 +3137,10 @@ figcaption {
     margin: auto auto 0;     /* прижать к низу растянутого .container */
     padding: 12px;
     align-self: center;
+    /* стрелка-подсказка всегда видна и без сдвига: иначе fade-up
+       срабатывал только на скроле и стрелка «подпрыгивала» вверх на 44px */
+    opacity: 1;
+    transform: none;
   }
   .hub-hero .hero__scroll-line,
   .hub-hero .hero__scroll-text { display: none; }
