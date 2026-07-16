@@ -3144,7 +3144,7 @@ figcaption {
   .portraits__grid { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
 
   /* ── Nearby ── */
-  .nearby__hdr { grid-template-columns: 1fr; }
+  .nearby__hdr { grid-template-columns: 1fr; text-align: left; }
   .nearby__grid { grid-template-columns: 1fr; }
 
   /* верхний отступ синего блока — как у #s1867 и блока «в цифрах» (одинаково) */
@@ -3380,6 +3380,7 @@ figcaption {
   /* ── Stats ── */
   .stats-stripe__grid { grid-template-columns: 1fr; }
   .figures { grid-template-columns: 1fr; gap: 32px; }
+  .figures-block__head { text-align: left; margin-left: 0; }
 
   /* ── Credits ── */
   .credits__grid { grid-template-columns: 1fr; }
