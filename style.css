@@ -2516,10 +2516,11 @@ figcaption {
 
 .nearby__hdr {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: var(--gap);
   align-items: end;
   margin-bottom: clamp(44px, 6vw, 72px);
+  text-align: right;
 }
 
 .nearby__title {
