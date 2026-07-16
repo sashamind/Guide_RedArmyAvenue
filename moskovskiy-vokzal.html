@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://i.postimg.cc" />
   <link rel="preconnect" href="https://vxxzyggeogbjxjlrhcus.supabase.co" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260717z9" />
+  <link rel="stylesheet" href="style.css?v=20260717z10" />
 
   <!-- Lottie (лёгкая SVG-сборка) — анимация птиц в hero -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie_light.min.js" defer></script>
@@ -584,6 +584,15 @@
            alt="Река Воронка и окрестности — панорамная иллюстрация"
            width="3543" height="1790" loading="lazy" />
     </figure>
+    <!-- подсказка «можно листать» — только на мобильном, гаснет после скролла -->
+    <div class="river-hint" id="riverHint" aria-hidden="true">
+      <svg viewBox="0 0 74 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 15 C 22 4, 50 4, 66 15" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" />
+        <path d="M66 15 l -10 -3 M66 15 l -6 8" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
   </section>
 
   <!-- ═══════════════════════════════════════ ROUTE: серия из 8 частей -->
@@ -716,7 +725,7 @@
     </svg>
   </button>
 
-  <script src="script.js?v=20260717a"></script>
+  <script src="script.js?v=20260717b"></script>
   <!-- DEV временно выключен. Вернуть — раскомментировать строку ниже
        и удалить правило-переключатель в конце style.css (метка «DEV OFF»). -->
   <!-- <script src="dev-adjust.js"></script> -->

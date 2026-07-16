@@ -862,12 +862,24 @@ if (hubStops.length && stopsEl) {
   if (!box) return;
   const img = box.querySelector('img');
   if (!img) return;
+  const hint = document.getElementById('riverHint');
 
+  let programmatic = false;
   function center() {
     // только когда контент шире контейнера (мобильный режим со скроллом)
     const extra = box.scrollWidth - box.clientWidth;
-    if (extra > 1) box.scrollLeft = extra / 2;
+    if (extra > 1) {
+      programmatic = true;
+      box.scrollLeft = extra / 2;
+      setTimeout(() => { programmatic = false; }, 120);
+    }
   }
+
+  // гасим подсказку только при настоящем скролле пользователя
+  box.addEventListener('scroll', () => {
+    if (programmatic || !hint) return;
+    hint.classList.add('is-hidden');
+  }, { passive: true });
 
   if (img.complete) center();
   else img.addEventListener('load', center);

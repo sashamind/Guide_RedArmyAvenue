@@ -2585,6 +2585,7 @@ figcaption {
   height: auto;
   margin: 0 auto;
 }
+.river-hint { display: none; }   /* только на мобильном (см. медиазапрос) */
 
 .nearby__grid {
   display: grid;
@@ -3425,6 +3426,30 @@ figcaption {
     height: clamp(346px, 95vw, 547px);   /* по высоте комфортно, ширина уходит за экран */
     max-width: none;
     margin: 0;
+  }
+
+  /* подсказка-стрелка «можно листать» */
+  .river-hint {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    color: var(--blue);
+    opacity: 0.85;
+    transition: opacity 0.5s ease;
+    animation: riverHintPulse 1.5s ease-in-out infinite;
+  }
+  .river-hint svg { width: 60px; height: auto; display: block; }
+  .river-hint.is-hidden {
+    opacity: 0;
+    animation: none;
+    pointer-events: none;
+  }
+  @keyframes riverHintPulse {
+    0%, 100% { opacity: 0.28; transform: translateX(0); }
+    50%      { opacity: 0.9;  transform: translateX(7px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .river-hint { animation: none; }
   }
 
   /* ── Credits ── */
