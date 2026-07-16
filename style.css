@@ -1620,7 +1620,7 @@ figcaption {
   /* штрих 6px, промежуток 16px — управляем гэпом явно (border dashed не даёт) */
   background: repeating-linear-gradient(to right,
     rgba(28, 16, 7, 0.3) 0 6px,
-    transparent 6px 22px);
+    transparent 6px 15px);
 }
 
 .route__stop {
@@ -1692,7 +1692,7 @@ figcaption {
 .route.bg-blue .route__line::before {
   background: repeating-linear-gradient(to right,
     rgba(255, 255, 255, 0.4) 0 6px,
-    transparent 6px 22px);
+    transparent 6px 15px);
   filter: url(#routeWobble);   /* лёгкая кривизна, как у таймлайна */
 }
 .route.bg-blue .route__dot {
