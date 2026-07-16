@@ -691,20 +691,24 @@ figcaption {
   transition: filter 0.3s ease;
 }
 
-/* разъезд по наведению: раскладываем по ширине + вертикальный джиттер и наклон */
-.stack-gallery:hover .stack-card {
-  left: calc(50% - var(--cw) / 2
-        + (var(--i) - (var(--n) - 1) / 2)
-        * (100% - var(--cw)) / (var(--n) - 1) * var(--spread));
-  top: var(--sy, 50px);
-  transform: rotate(var(--rs, 0deg));
+/* разъезд по наведению: раскладываем по ширине + вертикальный джиттер и наклон.
+   Только для устройств с реальным наведением — на тач-экранах тап давал бы
+   «залипший» :hover и карточки разъезжались бы поверх мобильной сетки */
+@media (hover: hover) {
+  .stack-gallery:hover .stack-card {
+    left: calc(50% - var(--cw) / 2
+          + (var(--i) - (var(--n) - 1) / 2)
+          * (100% - var(--cw)) / (var(--n) - 1) * var(--spread));
+    top: var(--sy, 50px);
+    transform: rotate(var(--rs, 0deg));
+  }
+  .stack-gallery:hover .stack-card:hover {
+    z-index: 20;
+    transform: rotate(var(--rh, 0deg)) scale(1.05);
+    box-shadow: 0 10px 24px rgba(28, 16, 7, 0.22);
+  }
+  .stack-gallery:hover .stack-card:hover img { filter: none; }
 }
-.stack-gallery:hover .stack-card:hover {
-  z-index: 20;
-  transform: rotate(var(--rh, 0deg)) scale(1.05);
-  box-shadow: 0 10px 24px rgba(28, 16, 7, 0.22);
-}
-.stack-gallery:hover .stack-card:hover img { filter: none; }
 
 /* ── Лайтбокс ── */
 .lightbox {
