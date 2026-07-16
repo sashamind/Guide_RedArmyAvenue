@@ -1900,6 +1900,22 @@ figcaption {
   filter: none !important;
 }
 
+/* «Скоро»: вместо иллюстрации — синий вопросительный знак на том же фоне */
+.hub-stop__media--q {
+  background: var(--amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hub-stop__q {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(48px, 8vw, 92px);
+  line-height: 1;
+  color: var(--blue);
+}
+
 .hub-stop__body {
   display: flex;
   flex-direction: column;
