@@ -2365,7 +2365,8 @@ figcaption {
 
 .tl-item__content {
   display: grid;
-  grid-template-columns: 1fr minmax(0, 300px);
+  /* текст — узкая колонка (≈вдвое уже прежнего), фото — крупнее */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
   gap: clamp(24px, 4vw, 56px);
   align-items: start;
 }
