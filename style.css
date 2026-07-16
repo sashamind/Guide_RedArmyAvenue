@@ -1793,6 +1793,9 @@ figcaption {
   position: relative;
 }
 
+/* слот под карту-навигацию: скрыт на мобильном, справа на десктопе */
+.hub-map-slot { display: none; }
+
 .hub-stops {
   list-style: none;
 }
@@ -2005,14 +2008,22 @@ figcaption {
   color: inherit;
 }
 
-/* десктоп: плашки частей — половинной ширины (третья колонка пустая справа) */
+/* десктоп: список остановок — левая половина, справа слот под карту-навигацию.
+   Половинная ширина плашек достигается сеткой обёртки (без пустой колонки) */
 @media (min-width: 861px) {
-  .hub-stop { grid-template-columns: 48px minmax(0, 1fr) minmax(0, 1fr); }
-  /* ссылка/карточка занимают только левую половину — правая пустая колонка
-     не кликается и не реагирует на наведение */
-  .hub-stop__link {
-    grid-column: 1 / 3;
-    grid-template-columns: 48px minmax(0, 1fr);
+  .hub-stops-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    column-gap: clamp(32px, 5vw, 88px);
+  }
+  .hub-map-slot {
+    display: block;
+    position: sticky;
+    top: 96px;
+    aspect-ratio: 1 / 1;
+    border: 1.5px solid var(--blue);
+    border-radius: 4px;
   }
 }
 
