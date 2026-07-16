@@ -2365,12 +2365,12 @@ figcaption {
 
 .tl-item__content {
   display: grid;
-  /* текст — узкая колонка, фото — чуть меньше текста; весь блок ограничен по ширине */
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
-  gap: clamp(24px, 4vw, 56px);
+  /* текст слева (узкий), пустой растяжной столбец, фото прижато к правому краю */
+  grid-template-columns: minmax(0, 490px) 1fr minmax(0, 460px);
   align-items: start;
-  max-width: 1000px;
 }
+.tl-item__main   { grid-column: 1; }
+.tl-item__figure { grid-column: 3; }
 
 .tl-item__year {
   display: block;
@@ -2425,10 +2425,10 @@ figcaption {
 
 @media (max-width: 720px) {
   .tl-item { grid-template-columns: 34px 1fr; }
-  /* фото — над текстом на мобильном */
+  /* фото — над текстом на мобильном, одна колонка */
   .tl-item__content { grid-template-columns: 1fr; gap: 22px; }
-  .tl-item__main { order: 2; }
-  .tl-item__figure { order: 1; }
+  .tl-item__main   { grid-column: 1; order: 2; }
+  .tl-item__figure { grid-column: 1; order: 1; }
 }
 
 /* ═══════════════════════════════════════
