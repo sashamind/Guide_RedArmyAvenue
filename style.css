@@ -1685,9 +1685,13 @@ figcaption {
 .route.bg-blue .route__title { color: var(--white); }
 .route.bg-blue .route__desc { color: var(--white); opacity: 0.8; }
 .route.bg-blue .route__back { color: var(--amber); }
-.route.bg-blue .route__line::before { border-top-color: rgba(255, 255, 255, 0.35); }
+.route.bg-blue .route__line::before {
+  border-top-color: rgba(255, 255, 255, 0.35);
+  filter: url(#routeWobble);   /* лёгкая кривизна, как у таймлайна */
+}
 .route.bg-blue .route__dot {
-  background: transparent;
+  /* непрозрачная заливка цветом фона — линия прячется под точкой, а не проходит сквозь */
+  background: var(--blue);
   border-color: var(--white);
 }
 .route.bg-blue .route__stop--active .route__dot {
