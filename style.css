@@ -2097,13 +2097,17 @@ figcaption {
     transition: width 0.5s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.4s ease;
   }
   .hub-stop__media img { opacity: 0.9; }
-  /* содержимое всегда свёрстано в финальном виде (число строк не меняется);
-     карточка не «разворачивается» — текст просто проявляется/исчезает по ховеру */
+  .hub-stop__reveal {
+    max-height: 0;
+    transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  /* описание появляется только ПОСЛЕ того, как карточка развернулась:
+     держим его прозрачным, показываем с задержкой = времени раскрытия.
+     CTA «Смотреть главу» не трогаем — он проявляется сразу при развороте */
   .hub-stop__desc,
-  .hub-stop__cta,
   .hub-stop__tag {
     opacity: 0;
-    transition: opacity 0.35s ease;
+    transition: opacity 0.3s ease;
   }
 
   /* раскрытие — чистый CSS :hover (не зависит от JS) + .is-active (резерв)
@@ -2122,17 +2126,17 @@ figcaption {
   .hub-stop:focus-within .hub-stop__media img,
   .hub-stop.is-active .hub-stop__media img { filter: grayscale(20%) contrast(1.04); opacity: 1; }
 
+  .hub-stop:hover .hub-stop__reveal,
+  .hub-stop:focus-within .hub-stop__reveal,
+  .hub-stop.is-active .hub-stop__reveal { max-height: 260px; }
+
   .hub-stop:hover .hub-stop__desc,
   .hub-stop:focus-within .hub-stop__desc,
-  .hub-stop.is-active .hub-stop__desc { opacity: 0.72; }
-
-  .hub-stop:hover .hub-stop__cta,
-  .hub-stop:focus-within .hub-stop__cta,
-  .hub-stop.is-active .hub-stop__cta { opacity: 1; }
+  .hub-stop.is-active .hub-stop__desc { opacity: 0.72; transition-delay: 0.5s; }
 
   .hub-stop:hover .hub-stop__tag,
   .hub-stop:focus-within .hub-stop__tag,
-  .hub-stop.is-active .hub-stop__tag { opacity: 0.5; }
+  .hub-stop.is-active .hub-stop__tag { opacity: 0.5; transition-delay: 0.5s; }
 
   .hub-stop:hover .hub-stop__node,
   .hub-stop:focus-within .hub-stop__node,
