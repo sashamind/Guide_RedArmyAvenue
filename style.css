@@ -2406,10 +2406,12 @@ figcaption {
   margin: 0;
   overflow: hidden;
   border-radius: 2px;
+  aspect-ratio: 3 / 2;      /* резервирует место — колонка не схлопывается до загрузки фото */
 }
 .tl-item__figure img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
   filter: grayscale(100%) contrast(1.08) brightness(0.85);
   transition: transform 0.55s ease, filter 0.55s ease;
