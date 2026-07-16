@@ -2538,6 +2538,16 @@ figcaption {
   opacity: 0.75;
 }
 
+.nearby__river {
+  margin: clamp(40px, 5vw, 80px) 0 0;
+  padding: 0 clamp(16px, 3vw, 48px);
+}
+.nearby__river img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .nearby__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
