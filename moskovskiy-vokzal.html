@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://i.postimg.cc" />
   <link rel="preconnect" href="https://vxxzyggeogbjxjlrhcus.supabase.co" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260717b" />
+  <link rel="stylesheet" href="style.css?v=20260717c" />
 
   <!-- Lottie (лёгкая SVG-сборка) — анимация птиц в hero -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie_light.min.js" defer></script>
@@ -396,91 +396,136 @@
           Линия<br>времени
         </h2>
       </header>
-      <div class="portraits__grid" data-animate="stagger">
+      <div class="timeline" data-animate="stagger">
 
-        <article class="person-card">
-          <div class="person-card__img">
-            <picture>
-              <source srcset="https://i.postimg.cc/FR5BRRX0/sad-1900.webp" type="image/webp" />
-              <img src="https://i.postimg.cc/zBZcBBYH/sad-1900.jpg"
-                   alt="Извозчик у тульского вокзала, 1900-е годы"
-                   width="914" height="639" loading="lazy" />
-            </picture>
+        <!-- 1900-е: окраина → платный сад -->
+        <div class="tl-item">
+          <div class="tl-item__marker"><span class="tl-item__dot"></span></div>
+          <div class="tl-item__content">
+            <div class="tl-item__main">
+              <span class="tl-item__year">1900-е годы</span>
+              <h3 class="tl-item__title">Сад</h3>
+              <div class="tl-item__text">
+                <p>
+                  Долгое время территория у&nbsp;вокзала оставалась окраиной Тулы.
+                  Окружение вокзала не&nbsp;выглядело парадным: складские корпуса
+                  заводов, поля и&nbsp;вид на&nbsp;сахарный завод формировали скорее
+                  промышленный, чем гостеприимный въезд в&nbsp;город.
+                </p>
+                <p>
+                  В&nbsp;1900 году перед вокзалом разбили платный сад — вход стоил
+                  10&nbsp;копеек. Со&nbsp;временем он&nbsp;стал местом городского отдыха:
+                  здесь появились сцена для&nbsp;летнего театра и&nbsp;площадка
+                  для&nbsp;фейерверков.
+                </p>
+              </div>
+            </div>
+            <figure class="tl-item__figure">
+              <picture>
+                <source srcset="https://i.postimg.cc/FR5BRRX0/sad-1900.webp" type="image/webp" />
+                <img src="https://i.postimg.cc/zBZcBBYH/sad-1900.jpg"
+                     alt="Извозчик у тульского вокзала, 1900-е годы"
+                     width="914" height="639" loading="lazy" />
+              </picture>
+            </figure>
           </div>
-          <div class="person-card__body">
-            <span class="person-card__role">1900-е годы</span>
-            <div class="person-card__name">Платный сад</div>
-            <div class="person-card__years">вход — 10 копеек</div>
-            <p class="person-card__bio">
-              Перед вокзалом разбили платный сад. Со временем он стал местом
-              городского отдыха: здесь появились сцена для летнего театра
-              и площадка для фейерверков.
-            </p>
-          </div>
-        </article>
+        </div>
 
-        <article class="person-card">
-          <div class="person-card__img">
-            <picture>
-              <source srcset="https://i.postimg.cc/vTG2rNmk/vokzal-xix.webp" type="image/webp" />
-              <img src="https://i.postimg.cc/1tGYNQ9s/vokzal-xix.jpg"
-                   alt="Каменное здание вокзала, открытка начала XX века"
-                   width="1478" height="910" loading="lazy" />
-            </picture>
+        <!-- 1913: новый корпус -->
+        <div class="tl-item">
+          <div class="tl-item__marker"><span class="tl-item__dot"></span></div>
+          <div class="tl-item__content">
+            <div class="tl-item__main">
+              <span class="tl-item__year">1913 год</span>
+              <h3 class="tl-item__title">Новый корпус</h3>
+              <div class="tl-item__text">
+                <p>
+                  С&nbsp;начала XX&nbsp;века Тула значительно выросла, и&nbsp;вокзал стал
+                  развиваться вместе с&nbsp;городом. В&nbsp;1913 году к&nbsp;основному зданию
+                  пристроили новый корпус — зал междугороднего сообщения.
+                  Он&nbsp;был расположен перпендикулярно первоначальному строению
+                  и&nbsp;сформировал более сложную композицию вокзального ансамбля.
+                </p>
+              </div>
+            </div>
+            <figure class="tl-item__figure">
+              <picture>
+                <source srcset="https://i.postimg.cc/vTG2rNmk/vokzal-xix.webp" type="image/webp" />
+                <img src="https://i.postimg.cc/1tGYNQ9s/vokzal-xix.jpg"
+                     alt="Каменное здание вокзала, открытка начала XX века"
+                     width="1478" height="910" loading="lazy" />
+              </picture>
+            </figure>
           </div>
-          <div class="person-card__body">
-            <span class="person-card__role">1913 год</span>
-            <div class="person-card__name">Новый корпус</div>
-            <div class="person-card__years">зал междугороднего сообщения</div>
-            <p class="person-card__bio">
-              К основному зданию пристроили новый корпус, расположенный
-              перпендикулярно первоначальному строению — сформировалась
-              более сложная композиция вокзального ансамбля.
-            </p>
-          </div>
-        </article>
+        </div>
 
-        <article class="person-card">
-          <div class="person-card__img">
-            <picture>
-              <source srcset="https://i.postimg.cc/cJ8z032g/portik-1950s.webp" type="image/webp" />
-              <img src="https://i.postimg.cc/25BtrWM1/portik-1950s.jpg"
-                   alt="Московский вокзал с шестиколонным портиком, советская открытка"
-                   width="800" height="572" loading="lazy" />
-            </picture>
+        <!-- 1950-е: реконструкция -->
+        <div class="tl-item">
+          <div class="tl-item__marker"><span class="tl-item__dot"></span></div>
+          <div class="tl-item__content">
+            <div class="tl-item__main">
+              <span class="tl-item__year">1950-е годы</span>
+              <h3 class="tl-item__title">Реконструкция</h3>
+              <div class="tl-item__text">
+                <p>
+                  В&nbsp;1950-х годах, уже под&nbsp;названием Московский вокзал, здание
+                  пережило масштабную реконструкцию. Проект архитекторов
+                  Б.&nbsp;Д.&nbsp;Сергеева, К.&nbsp;И.&nbsp;Гурьева и&nbsp;Р.&nbsp;Г.&nbsp;Челнокова включал
+                  обновление интерьеров. Главный зал оформили монументальной
+                  живописью на&nbsp;сюжеты труда и&nbsp;отдыха советских людей —
+                  характерный художественный язык послевоенного времени.
+                  Тогда же появился шестиколонный портик, формирующий
+                  парадный вход.
+                </p>
+              </div>
+            </div>
+            <figure class="tl-item__figure">
+              <picture>
+                <source srcset="https://i.postimg.cc/cJ8z032g/portik-1950s.webp" type="image/webp" />
+                <img src="https://i.postimg.cc/25BtrWM1/portik-1950s.jpg"
+                     alt="Московский вокзал с шестиколонным портиком, советская открытка"
+                     width="800" height="572" loading="lazy" />
+              </picture>
+            </figure>
           </div>
-          <div class="person-card__body">
-            <span class="person-card__role">1950-е годы</span>
-            <div class="person-card__name">Реконструкция</div>
-            <div class="person-card__years">арх. Сергеев, Гурьев, Челноков</div>
-            <p class="person-card__bio">
-              Обновлены интерьеры, появился шестиколонный портик. Главный зал
-              оформили монументальной живописью на сюжеты труда и отдыха
-              советских людей.
-            </p>
-          </div>
-        </article>
+        </div>
 
-        <article class="person-card">
-          <div class="person-card__img">
-            <picture>
-              <source srcset="https://i.postimg.cc/V6qHb8zD/vokzal-aerial.webp" type="image/webp" />
-              <img src="https://i.postimg.cc/85RnrSTm/vokzal-aerial.jpg"
-                   alt="Вид сверху на Московский вокзал и привокзальную площадь"
-                   width="1280" height="827" loading="lazy" />
-            </picture>
+        <!-- современность -->
+        <div class="tl-item">
+          <div class="tl-item__marker"><span class="tl-item__dot"></span></div>
+          <div class="tl-item__content">
+            <div class="tl-item__main">
+              <span class="tl-item__year">Современность</span>
+              <h3 class="tl-item__title">Узловая точка города</h3>
+              <div class="tl-item__text">
+                <p>
+                  Сегодня пространство вокруг Московского вокзала перегружено.
+                  Парковки, транспортное кольцо, такси и&nbsp;плотный автомобильный
+                  поток формируют напряжённую среду, в&nbsp;которой пешеход
+                  чувствует себя вторично. Здание вокзала дополнено ограждениями
+                  и&nbsp;кордонами, и&nbsp;даже центральный зал с&nbsp;монументальными
+                  росписями фактически недоступен для&nbsp;свободного осмотра.
+                </p>
+                <p>
+                  Тем не&nbsp;менее Московский вокзал остаётся одной из&nbsp;ключевых
+                  точек на&nbsp;карте Тулы. Он&nbsp;наглядно показывает, как место может
+                  меняться под&nbsp;давлением времени, не&nbsp;утратив при&nbsp;этом своего
+                  исторического ядра. Каменное здание XIX&nbsp;века сохранилось —
+                  пусть и&nbsp;под слоями поздних функций и&nbsp;смыслов, которые
+                  сегодня почти неотделимы от&nbsp;него.
+                </p>
+              </div>
+            </div>
+            <figure class="tl-item__figure">
+              <picture>
+                <source srcset="https://i.postimg.cc/V6qHb8zD/vokzal-aerial.webp" type="image/webp" />
+                <img src="https://i.postimg.cc/85RnrSTm/vokzal-aerial.jpg"
+                     alt="Вид сверху на Московский вокзал и привокзальную площадь"
+                     width="1280" height="827" loading="lazy" />
+              </picture>
+            </figure>
           </div>
-          <div class="person-card__body">
-            <span class="person-card__role">Современность</span>
-            <div class="person-card__name">Узловая точка города</div>
-            <div class="person-card__years">ключевое место на карте Тулы</div>
-            <p class="person-card__bio">
-              Пространство вокруг перегружено парковками и транспортным кольцом.
-              Но каменное здание XIX века сохранилось — пусть и под слоями
-              поздних функций, которые сегодня почти неотделимы от него.
-            </p>
-          </div>
-        </article>
+        </div>
 
       </div>
     </div>
