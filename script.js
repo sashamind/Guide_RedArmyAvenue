@@ -855,3 +855,21 @@ if (hubStops.length && stopsEl) {
     });
   });
 })();
+
+/* ═══ Панорама реки: стартовое положение скролла по центру (моб.) ═══ */
+(() => {
+  const box = document.querySelector('.nearby__river');
+  if (!box) return;
+  const img = box.querySelector('img');
+  if (!img) return;
+
+  function center() {
+    // только когда контент шире контейнера (мобильный режим со скроллом)
+    const extra = box.scrollWidth - box.clientWidth;
+    if (extra > 1) box.scrollLeft = extra / 2;
+  }
+
+  if (img.complete) center();
+  else img.addEventListener('load', center);
+  window.addEventListener('resize', center);
+})();
