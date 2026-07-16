@@ -2090,11 +2090,11 @@ figcaption {
     width: 100%;          /* ширина постоянна — при наведении меняется только высота */
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
-  /* картинка сразу в «раскрытом» размере и не меняет ширину —
-     тогда ширина текстовой колонки постоянна и описание не переверстывается */
+  /* свёрнуто: маленькая картинка видна */
   .hub-stop__media {
-    width: clamp(120px, 26vw, 280px);
+    width: clamp(76px, 12vw, 104px);
     opacity: 1;
+    transition: width 0.5s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.4s ease;
   }
   .hub-stop__media img { opacity: 0.9; }
   /* содержимое всегда свёрстано в финальном виде (число строк не меняется);
