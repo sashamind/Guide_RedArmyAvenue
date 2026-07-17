@@ -1033,7 +1033,7 @@ if (hubStops.length && stopsEl) {
       const base = duckChase
         ? (attract.fast ? amp * 0.014 + 0.7 : amp * 0.006 + 0.28)
         : (amp * 0.0016 + 0.03);
-      const spd = base * st.speed;
+      const spd = base * st.speed / 1.5;   // общий темп в 1.5× медленнее
       st.x += Math.sign(dx) * Math.min(Math.abs(dx), spd);
       st.y += Math.sign(dy) * Math.min(Math.abs(dy), spd);
       if (Math.abs(dx) > 0.5) st.dir = dx > 0 ? 1 : -1;  // разворот к направлению движения/точке
