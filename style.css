@@ -175,10 +175,18 @@ strong { font-weight: 700; }
   color: var(--dark);
   letter-spacing: 0.08em;
   margin-bottom: 36px;
-  transition: color 0.45s ease;
+  transition: color 0.45s ease, opacity 0.35s ease;
 }
 
 .nav.scrolled .nav__logo { color: var(--cream); }
+
+/* в веб-версии логотип исчезает, как только начали скроллить (в мобилке — остаётся) */
+@media (min-width: 861px) {
+  .nav.logo-hidden .nav__logo {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
 
 .nav__links {
   display: flex;

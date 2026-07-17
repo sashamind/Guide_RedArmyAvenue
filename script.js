@@ -238,6 +238,7 @@ if (nav) {
     const pct        = maxScroll > 0 ? scrollY / maxScroll : 0;
 
     nav.classList.toggle('scrolled', scrollY > 60);
+    nav.classList.toggle('logo-hidden', scrollY > 8);   // логотип прячется в начале скрола (веб)
 
     // проскроллили дальше — гасим мигание кнопки «Начать прогулку»
     if (scrollY > 40) document.body.classList.add('cta-stop');
