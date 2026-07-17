@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://i.postimg.cc" />
   <link rel="preconnect" href="https://vxxzyggeogbjxjlrhcus.supabase.co" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260717z34" />
+  <link rel="stylesheet" href="style.css?v=20260717z35" />
 
   <!-- Lottie (лёгкая SVG-сборка) — анимация птиц в hero -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie_light.min.js" defer></script>
@@ -601,6 +601,12 @@
         <img class="nearby__river-duck"
              src="https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/duck_1.png"
              alt="Утка на воде — иллюстрация" width="43" height="33" loading="lazy" />
+        <!-- точка-триггер бабла (позицию выставляем в dev-режиме, потом фиксирую в CSS) -->
+        <button class="river-pt" id="riverBubblePt" type="button" aria-label="Показать подсказку"></button>
+        <!-- сам бабл: тёмный, «кривой»; появляется по тапу на точку -->
+        <div class="river-bubble" id="riverBubble" role="status" hidden>
+          <p>Текст подсказки появится здесь.</p>
+        </div>
       </div>
     </figure>
     <!-- подсказка «можно листать» — только на мобильном, гаснет после скролла -->
@@ -614,6 +620,8 @@
     </div>
     <!-- панель параметров зоны утки (видна только в dev-режиме #duckzone) -->
     <div class="duckzone-readout" id="duckZoneReadout"></div>
+    <!-- панель координат точки-бабла (dev-режим) -->
+    <div class="duckpt-readout" id="duckPtReadout"></div>
   </section>
 
   <!-- ═══════════════════════════════════════ ROUTE: серия из 8 частей -->
@@ -746,7 +754,7 @@
     </svg>
   </button>
 
-  <script src="script.js?v=20260718c"></script>
+  <script src="script.js?v=20260718d"></script>
   <!-- DEV временно выключен. Вернуть — раскомментировать строку ниже
        и удалить правило-переключатель в конце style.css (метка «DEV OFF»). -->
   <!-- <script src="dev-adjust.js"></script> -->

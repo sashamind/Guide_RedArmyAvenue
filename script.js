@@ -1197,3 +1197,75 @@ if (hubStops.length && stopsEl) {
   activate();                       // если страница загрузилась уже с #duckzone
   window.addEventListener('load', activate);
 })();
+
+/* ═══ Точка-бабл на реке: тап → тёмный «кривой» бабл; в dev — точку можно двигать ═══ */
+(() => {
+  const stage  = document.querySelector('.nearby__river-stage');
+  const pt      = document.getElementById('riverBubblePt');
+  const bubble  = document.getElementById('riverBubble');
+  if (!stage || !pt || !bubble) return;
+  const readout = document.getElementById('duckPtReadout');
+  const isDev = () => document.documentElement.classList.contains('duckzone-dev');
+
+  // тап по точке не должен шевелить уток
+  pt.addEventListener('pointerdown', (e) => e.stopPropagation());
+
+  function positionBubble() {
+    const pr = pt.getBoundingClientRect();
+    const sr = stage.getBoundingClientRect();
+    bubble.style.left = ((pr.left + pr.width / 2 - sr.left) / sr.width  * 100) + '%';
+    bubble.style.top  = ((pr.top  - sr.top) / sr.height * 100) + '%';
+  }
+  let open = false;
+  function openBubble()  { positionBubble(); bubble.hidden = false;
+                           requestAnimationFrame(() => bubble.classList.add('is-open')); open = true; }
+  function closeBubble() { bubble.classList.remove('is-open');
+                           setTimeout(() => { bubble.hidden = true; }, 260); open = false; }
+
+  pt.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (isDev()) return;                     // в dev-режиме точка — для позиционирования
+    open ? closeBubble() : openBubble();
+  });
+  document.addEventListener('click', (e) => {
+    if (open && e.target !== pt && !bubble.contains(e.target)) closeBubble();
+  });
+
+  /* ── dev (#duckzone): перетаскивание точки + координаты в панели ── */
+  function show() {
+    if (!isDev() || !readout) return;
+    const pr = pt.getBoundingClientRect();
+    const sr = stage.getBoundingClientRect();
+    const leftPct = (pr.left + pr.width / 2 - sr.left) / sr.width  * 100;
+    const topPct  = (pr.top  + pr.height / 2 - sr.top) / sr.height * 100;
+    readout.textContent = 'точка-бабл\ntop:  ' + topPct.toFixed(1) +
+                          '%\nleft: ' + leftPct.toFixed(1) + '%';
+  }
+  let drag = false, sx = 0, sy = 0, sLeft = 0, sTop = 0;
+  pt.addEventListener('pointerdown', (e) => {
+    if (!isDev()) return;
+    drag = true;
+    const sr = stage.getBoundingClientRect();
+    const pr = pt.getBoundingClientRect();
+    sx = e.clientX; sy = e.clientY;
+    sLeft = pr.left + pr.width / 2 - sr.left;
+    sTop  = pr.top  + pr.height / 2 - sr.top;
+    e.preventDefault();
+    window.addEventListener('pointermove', mv);
+    window.addEventListener('pointerup', up);
+  });
+  function mv(e) {
+    if (!drag) return;
+    const sr = stage.getBoundingClientRect();
+    pt.style.left = ((sLeft + (e.clientX - sx)) / sr.width  * 100) + '%';
+    pt.style.top  = ((sTop  + (e.clientY - sy)) / sr.height * 100) + '%';
+    show();
+  }
+  function up() { drag = false;
+    window.removeEventListener('pointermove', mv);
+    window.removeEventListener('pointerup', up);
+  }
+  window.addEventListener('hashchange', show);
+  window.addEventListener('load', show);
+  show();
+})();

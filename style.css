@@ -2678,6 +2678,72 @@ figcaption {
   opacity: 0;
 }
 
+/* точка-триггер бабла на иллюстрации (позиция — в % от иллюстрации) */
+.river-pt {
+  position: absolute;
+  top: 60%;
+  left: 40%;
+  width: 1.1%;
+  aspect-ratio: 1;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  border: none;
+  border-radius: 50%;
+  background: var(--dark);
+  box-shadow: 0 0 0 4px rgba(28, 16, 7, 0.18);
+  cursor: pointer;
+  z-index: 4;
+}
+.duckzone-dev .river-pt {                 /* в dev-режиме — виднее и можно таскать */
+  outline: 2px dashed #E5484D;
+  outline-offset: 3px;
+}
+
+/* тёмный «кривой» бабл, появляется по тапу на точку */
+.river-bubble {
+  position: absolute;
+  z-index: 6;
+  max-width: min(260px, 46%);
+  padding: 14px 16px;
+  background: var(--dark);
+  color: var(--cream);
+  font-family: var(--f-body);
+  font-size: 14px;
+  line-height: 1.5;
+  /* «от руки» — неровные скругления */
+  border-radius: 20px 22px 19px 23px / 22px 19px 23px 20px;
+  /* якорь — над точкой (left/top точки задаёт JS), приподнят на 10px */
+  margin-top: -10px;
+  transform: translate(-50%, -100%) scale(0.96);
+  transform-origin: bottom center;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+.river-bubble[hidden] { display: none; }
+.river-bubble.is-open {
+  opacity: 1;
+  transform: translate(-50%, -100%) scale(1);
+}
+.river-bubble p { margin: 0; }
+
+/* панель координат точки-бабла (dev) */
+.duckpt-readout { display: none; }
+.duckzone-dev .duckpt-readout {
+  display: block;
+  position: fixed;
+  top: 128px;
+  left: 12px;
+  z-index: 9999;
+  background: rgba(17, 17, 17, 0.92);
+  color: #fff;
+  font: 600 14px/1.6 ui-monospace, Menlo, Consolas, monospace;
+  padding: 12px 16px;
+  border-radius: 10px;
+  white-space: pre;
+  pointer-events: none;
+}
+
 /* утка на воде — размер в % от иллюстрации; позицию внутри зоны ставит JS */
 .nearby__river-duck {
   position: absolute;
