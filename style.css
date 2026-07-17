@@ -2605,9 +2605,9 @@ figcaption {
 /* утка на воде — тоже в % от иллюстрации */
 .nearby__river-duck {
   position: absolute;
-  top: 51%;
-  left: 68%;
-  width: 3.8%;
+  top: 57%;
+  left: 67%;
+  width: 1.7%;
   height: auto;
   z-index: 2;
   pointer-events: none;
