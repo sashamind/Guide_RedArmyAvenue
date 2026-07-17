@@ -2655,7 +2655,7 @@ figcaption {
 /* «кусочек хлеба» — точка тапа/клика, к которой сплываются утки; сжимается до 0 */
 .nearby__river-dot {
   position: absolute;
-  width: 0.5%;
+  width: 0.25%;
   aspect-ratio: 1;
   /* чуть кривая, «от руки» */
   border-radius: 47% 53% 50% 50% / 52% 48% 52% 48%;
