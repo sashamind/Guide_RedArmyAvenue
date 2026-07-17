@@ -931,6 +931,12 @@ if (hubStops.length && stopsEl) {
     ducks.push(c);
   }
 
+  // состояние покачивания для каждой утки
+  const wob = ducks.map((el) => ({
+    el, x: 0, dir: Math.random() < 0.5 ? -1 : 1,
+    target: 0, wait: Math.random() * 60
+  }));
+
   function place() {
     const s = stage.getBoundingClientRect();
     const z = zone.getBoundingClientRect();
@@ -951,12 +957,34 @@ if (hubStops.length && stopsEl) {
           Math.hypot(p.x - cx, p.y - cy) > d.width * 1.4);
         if (ok || t === 11) { placed.push({ x: cx, y: cy }); break; }
       }
-      // позиция в % от иллюстрации → сохраняется во всех адаптивах
+      // базовая позиция в % от иллюстрации → сохраняется во всех адаптивах
       duck.style.left = (lx / s.width  * 100) + '%';
       duck.style.top  = (ty / s.height * 100) + '%';
-      // случайный разворот по горизонтали — для разнообразия
-      duck.style.transform = Math.random() < 0.5 ? 'scaleX(-1)' : 'none';
     });
+  }
+
+  // лёгкое покачивание внутри зоны: смещение задаётся transform поверх базы;
+  // едет вправо — иллюстрация как есть, влево — отражается (scaleX -1)
+  function tick() {
+    const z = zone.getBoundingClientRect();
+    const amp = z.width * 0.10;                        // размах ~10% ширины зоны
+    wob.forEach((st) => {
+      if (st.wait > 0) {
+        st.wait -= 1;
+      } else {
+        const dx = st.target - st.x;
+        if (Math.abs(dx) < 0.5) {
+          st.target = (Math.random() * 2 - 1) * amp;   // новое случайное расстояние
+          st.wait = 40 + Math.random() * 120;          // пауза перед следующим заплывом
+        } else {
+          const step = Math.sign(dx) * Math.min(Math.abs(dx), amp * 0.006 + 0.12);
+          st.x += step;
+          st.dir = step > 0 ? 1 : -1;
+        }
+      }
+      st.el.style.transform = 'translateX(' + st.x.toFixed(2) + 'px) scaleX(' + st.dir + ')';
+    });
+    requestAnimationFrame(tick);
   }
 
   const illo = stage.querySelector('img');            // основная иллюстрация — первая
@@ -964,6 +992,7 @@ if (hubStops.length && stopsEl) {
   if (!first.complete) first.addEventListener('load', place);
   window.addEventListener('load', place);
   place();
+  if (!reducedMotion) requestAnimationFrame(tick);    // покачивание (кроме reduce-motion)
 })();
 
 /* ═══ DEV: настройка зоны утки (открыть страницу с #duckzone) ═══
