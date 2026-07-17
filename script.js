@@ -446,8 +446,19 @@ function gubSelect(key, fromScroll) {
   }
 }
 
+// мобилка: при тапе на точку карты — плавно проскроллить страницу чуть вниз,
+// чтобы описание под картой попало в кадр хотя бы частично
+function gubRevealInfo() {
+  if (!gubMobile() || !gubInfo) return;
+  const target = gubInfo.getBoundingClientRect().top + window.scrollY
+                 - window.innerHeight * 0.72;
+  if (target > window.scrollY + 4) {         // только вниз
+    window.scrollTo({ top: target, behavior: 'smooth' });
+  }
+}
+
 gubCities.forEach((city) => {
-  const select = () => gubSelect(city.dataset.city);
+  const select = () => { gubSelect(city.dataset.city); gubRevealInfo(); };
   city.addEventListener('click', select);
   city.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
