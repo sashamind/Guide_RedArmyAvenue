@@ -451,7 +451,7 @@ function gubSelect(key, fromScroll) {
 function gubRevealInfo() {
   if (!gubMobile() || !gubInfo) return;
   const target = gubInfo.getBoundingClientRect().top + window.scrollY
-                 - window.innerHeight * 0.72;
+                 - window.innerHeight * 0.58;
   if (target > window.scrollY + 4) {         // только вниз
     window.scrollTo({ top: target, behavior: 'smooth' });
   }
