@@ -944,8 +944,27 @@ if (hubStops.length && stopsEl) {
     el, x: 0, y: 0, targetX: 0, targetY: 0,
     dir: Math.random() < 0.5 ? -1 : 1, wait: Math.random() * 60,
     sx: 0, sy: 0,                                    // индивидуальный разброс при сборе к точке
-    speed: 0.5 + Math.random() * 1.3                // у каждой утки заметно своя скорость
+    speed: 0.5 + Math.random() * 1.3,               // у каждой утки заметно своя скорость
+    lastWake: 0, wakeEvery: 700 + Math.random() * 900   // периодичность шлейфа
   }));
+
+  // тонкий след позади утки — «шлейф» от движения
+  function spawnWake(st, s) {
+    const el = st.el;
+    const w  = el.offsetWidth;
+    const cx = el.offsetLeft + st.x + w / 2;
+    const cy = el.offsetTop  + st.y + el.offsetHeight / 2;
+    const behind = -st.dir * w * 0.85;               // позади по ходу движения
+    const wake = document.createElement('div');
+    wake.className = 'nearby__river-wake';
+    wake.style.width = (w * 1.1 / s.width * 100) + '%';
+    wake.style.left  = ((cx + behind) / s.width  * 100) + '%';
+    wake.style.top   = ((cy + el.offsetHeight * 0.3) / s.height * 100) + '%';
+    stage.appendChild(wake);
+    void wake.offsetWidth;
+    requestAnimationFrame(() => wake.classList.add('is-gone'));
+    setTimeout(() => wake.remove(), 1300);
+  }
 
   // точка притяжения (тап/наведение), в координатах вьюпорта
   let attract = null, attractUntil = 0, lockUntil = 0;
@@ -1043,9 +1062,18 @@ if (hubStops.length && stopsEl) {
         ? (attract.fast ? amp * 0.014 + 0.7 : amp * 0.006 + 0.28)
         : (amp * 0.0016 + 0.03);
       const spd = base * st.speed / 1.5 * mobileSlow;   // общий темп в 1.5× медленнее (моб. — ещё)
-      st.x += Math.sign(dx) * Math.min(Math.abs(dx), spd);
-      st.y += Math.sign(dy) * Math.min(Math.abs(dy), spd);
+      const stepX = Math.sign(dx) * Math.min(Math.abs(dx), spd);
+      const stepY = Math.sign(dy) * Math.min(Math.abs(dy), spd);
+      st.x += stepX;
+      st.y += stepY;
       if (Math.abs(dx) > 0.5) st.dir = dx > 0 ? 1 : -1;  // разворот к направлению движения/точке
+
+      // пока утка реально плывёт — периодически оставляем позади тонкий след
+      if (Math.abs(stepX) + Math.abs(stepY) > 0.06 && now - st.lastWake > st.wakeEvery) {
+        st.lastWake = now;
+        st.wakeEvery = 700 + Math.random() * 900;
+        spawnWake(st, s);
+      }
       el.style.transform = 'translate(' + st.x.toFixed(2) + 'px,' + st.y.toFixed(2) + 'px) scaleX(' + st.dir + ')';
     });
 

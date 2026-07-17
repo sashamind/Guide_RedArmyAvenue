@@ -2678,6 +2678,24 @@ figcaption {
   opacity: 0;
 }
 
+/* шлейф от движения утки — тонкая линия позади, тает */
+.nearby__river-wake {
+  position: absolute;
+  height: 1.5px;
+  border-radius: 2px;
+  background: var(--blue);
+  opacity: 0.4;
+  transform: translate(-50%, -50%) scaleX(1);
+  transform-origin: center;
+  z-index: 1;                     /* под утками */
+  pointer-events: none;
+  transition: opacity 1.1s ease, transform 1.1s ease;
+}
+.nearby__river-wake.is-gone {
+  opacity: 0;
+  transform: translate(-50%, -50%) scaleX(0.2);
+}
+
 /* точка-триггер бабла на иллюстрации (позиция — в % от иллюстрации) */
 .river-pt {
   position: absolute;
