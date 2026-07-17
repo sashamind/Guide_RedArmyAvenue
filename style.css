@@ -2681,8 +2681,8 @@ figcaption {
 /* точка-триггер бабла на иллюстрации (позиция — в % от иллюстрации) */
 .river-pt {
   position: absolute;
-  top: 60%;
-  left: 40%;
+  top: 45.2%;
+  left: 80.7%;
   width: 1.1%;
   aspect-ratio: 1;
   padding: 0;
