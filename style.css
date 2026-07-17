@@ -170,11 +170,14 @@ strong { font-weight: 700; }
 
 .nav__logo {
   font-family: var(--f-display);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--dark);
-  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
   margin-bottom: 36px;
+  /* в узком вертикальном сайдбаре (веб) — вертикальная надпись, чтобы не обрезалась */
+  writing-mode: vertical-rl;
   transition: color 0.45s ease, opacity 0.35s ease;
 }
 
@@ -3116,6 +3119,9 @@ figcaption {
   .nav__logo {
     margin-bottom: 0;
     font-size: 18px;
+    /* в мобильном топ-баре — обычная горизонтальная надпись */
+    writing-mode: horizontal-tb;
+    letter-spacing: 0.08em;
   }
 
   .nav__burger { display: flex; }
