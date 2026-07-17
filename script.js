@@ -865,7 +865,10 @@ if (hubStops.length && stopsEl) {
   const hint = document.getElementById('riverHint');
 
   let programmatic = false;
+  let userScrolled = false;
   function center() {
+    // не пересчитываем, если пользователь уже листал панораму сам
+    if (userScrolled) return;
     // только когда контент шире контейнера (мобильный режим со скроллом)
     const extra = box.scrollWidth - box.clientWidth;
     if (extra > 1) {
@@ -875,13 +878,23 @@ if (hubStops.length && stopsEl) {
     }
   }
 
-  // гасим подсказку только при настоящем скролле пользователя
   box.addEventListener('scroll', () => {
-    if (programmatic || !hint) return;
-    hint.classList.add('is-hidden');
+    if (programmatic) return;
+    // настоящий скролл пользователя — фиксируем позицию и гасим подсказку
+    userScrolled = true;
+    if (hint) hint.classList.add('is-hidden');
   }, { passive: true });
 
   if (img.complete) center();
   else img.addEventListener('load', center);
-  window.addEventListener('resize', center);
+
+  // ВАЖНО: в мобильном Safari прокрутка страницы показывает/прячет адресную
+  // строку → срабатывает resize только по высоте. Пересчитываем центр лишь при
+  // реальной смене ширины, иначе горизонтальный скролл панорамы сбрасывался.
+  let lastW = window.innerWidth;
+  window.addEventListener('resize', () => {
+    if (window.innerWidth === lastW) return;
+    lastW = window.innerWidth;
+    center();
+  });
 })();
