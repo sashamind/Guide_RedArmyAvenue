@@ -2607,10 +2607,10 @@ figcaption {
    настройка — только в dev-режиме (открыть страницу с #duckzone). */
 .nearby__river-zone {
   position: absolute;
-  top: 52%;
-  left: 58%;
-  width: 22%;
-  height: 12%;
+  top: 53.8%;
+  left: 58.2%;
+  width: 27.9%;
+  height: 13.4%;
   z-index: 3;
   pointer-events: none;
 }
