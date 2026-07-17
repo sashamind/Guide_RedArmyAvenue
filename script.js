@@ -942,3 +942,74 @@ if (hubStops.length && stopsEl) {
   window.addEventListener('load', place);
   place();
 })();
+
+/* ═══ DEV: настройка зоны утки (открыть страницу с #duckzone) ═══
+   Рамку можно двигать и тянуть за угол; панель слева показывает
+   top/left/width/height в % — скринишь их, и эти значения фиксируются в CSS. */
+(() => {
+  if (!/duckzone/i.test(location.hash)) return;
+  const stage   = document.querySelector('.nearby__river-stage');
+  const zone    = document.getElementById('riverDuckZone');
+  const handle  = zone && zone.querySelector('.nearby__river-zone__handle');
+  const readout = document.getElementById('duckZoneReadout');
+  if (!stage || !zone) return;
+
+  document.documentElement.classList.add('duckzone-dev');
+
+  function pct() {
+    const s = stage.getBoundingClientRect();
+    const z = zone.getBoundingClientRect();
+    return {
+      top:    (z.top  - s.top ) / s.height * 100,
+      left:   (z.left - s.left) / s.width  * 100,
+      width:   z.width  / s.width  * 100,
+      height:  z.height / s.height * 100
+    };
+  }
+  function show() {
+    const p = pct();
+    if (readout) readout.textContent =
+      'top:    ' + p.top.toFixed(1)    + '%\n' +
+      'left:   ' + p.left.toFixed(1)   + '%\n' +
+      'width:  ' + p.width.toFixed(1)  + '%\n' +
+      'height: ' + p.height.toFixed(1) + '%';
+  }
+  show();
+  window.addEventListener('resize', show);
+
+  let mode = null, sx = 0, sy = 0, sLeft = 0, sTop = 0, sW = 0, sH = 0;
+  function down(e, m) {
+    mode = m;
+    const s = stage.getBoundingClientRect();
+    const z = zone.getBoundingClientRect();
+    sx = e.clientX; sy = e.clientY;
+    sLeft = z.left - s.left; sTop = z.top - s.top; sW = z.width; sH = z.height;
+    e.preventDefault();
+    e.stopPropagation();
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  }
+  function move(e) {
+    if (!mode) return;
+    const s = stage.getBoundingClientRect();
+    const dx = e.clientX - sx, dy = e.clientY - sy;
+    if (mode === 'move') {
+      zone.style.left = ((sLeft + dx) / s.width  * 100) + '%';
+      zone.style.top  = ((sTop  + dy) / s.height * 100) + '%';
+    } else {
+      zone.style.width  = (Math.max(8, sW + dx) / s.width  * 100) + '%';
+      zone.style.height = (Math.max(8, sH + dy) / s.height * 100) + '%';
+    }
+    show();
+  }
+  function up() {
+    mode = null;
+    window.removeEventListener('pointermove', move);
+    window.removeEventListener('pointerup', up);
+  }
+  if (handle) handle.addEventListener('pointerdown', (e) => down(e, 'resize'));
+  zone.addEventListener('pointerdown', (e) => {
+    if (e.target === handle) return;
+    down(e, 'move');
+  });
+})();

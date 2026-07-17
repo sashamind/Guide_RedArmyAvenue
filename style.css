@@ -2603,7 +2603,8 @@ figcaption {
 .nearby__river-birds-anim { width: 100%; }
 .nearby__river-birds svg { display: block; width: 100%; height: auto; }
 /* ЗОНА появления утки — координаты/размер в % от иллюстрации.
-   ⟵ ЭТИ ЧЕТЫРЕ ЗНАЧЕНИЯ настраиваешь. Рамка временная (для настройки). */
+   ⟵ ЭТИ ЧЕТЫРЕ ЗНАЧЕНИЯ и есть итог. В проде рамка невидима;
+   настройка — только в dev-режиме (открыть страницу с #duckzone). */
 .nearby__river-zone {
   position: absolute;
   top: 52%;
@@ -2612,9 +2613,43 @@ figcaption {
   height: 12%;
   z-index: 3;
   pointer-events: none;
-  /* временная рамка — уберу, когда зафиксируешь область */
+}
+/* dev-режим (html.duckzone-dev): рамку видно, её можно двигать и тянуть */
+.duckzone-dev .nearby__river-zone {
+  pointer-events: auto;
+  cursor: move;
   border: 2px solid #E5484D;
   background: rgba(229, 72, 77, 0.12);
+}
+.nearby__river-zone__handle { display: none; }
+.duckzone-dev .nearby__river-zone__handle {
+  display: block;
+  position: absolute;
+  right: -8px;
+  bottom: -8px;
+  width: 16px;
+  height: 16px;
+  background: #E5484D;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: nwse-resize;
+  pointer-events: auto;
+}
+/* панель с параметрами — скринишь её */
+.duckzone-readout { display: none; }
+.duckzone-dev .duckzone-readout {
+  display: block;
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 9999;
+  background: rgba(17, 17, 17, 0.92);
+  color: #fff;
+  font: 600 14px/1.6 ui-monospace, Menlo, Consolas, monospace;
+  padding: 12px 16px;
+  border-radius: 10px;
+  white-space: pre;
+  pointer-events: none;
 }
 
 /* утка на воде — размер в % от иллюстрации; позицию внутри зоны ставит JS */
