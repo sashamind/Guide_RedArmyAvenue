@@ -1017,9 +1017,13 @@ if (hubStops.length && stopsEl) {
           st.wait = 60 + Math.random() * 160;
         }
       }
-      // шаг к цели: к точке — быстрее, покачивание — медленно; у каждой утки своя скорость
+      // шаг к цели: клик — быстро, наведение — медленно, покачивание — совсем медленно;
+      // у каждой утки своя скорость
       const dx = st.targetX - st.x, dy = st.targetY - st.y;
-      const spd = (chasing ? (amp * 0.006 + 0.28) : (amp * 0.0016 + 0.03)) * st.speed;
+      const base = chasing
+        ? (attract.fast ? amp * 0.014 + 0.7 : amp * 0.006 + 0.28)
+        : (amp * 0.0016 + 0.03);
+      const spd = base * st.speed;
       st.x += Math.sign(dx) * Math.min(Math.abs(dx), spd);
       st.y += Math.sign(dy) * Math.min(Math.abs(dy), spd);
       if (Math.abs(dx) > 0.5) st.dir = dx > 0 ? 1 : -1;  // разворот к направлению движения/точке
@@ -1036,13 +1040,25 @@ if (hubStops.length && stopsEl) {
     requestAnimationFrame(tick);
   }
 
-  // тап/наведение в зоне → утки плывут к точке
-  function setAttract(e) {
+  // «кусочек хлеба»: синяя точка в месте клика/тапа, сжимается до 0 за ~2с
+  function spawnDot(clientX, clientY) {
+    const s = stage.getBoundingClientRect();
+    const dot = document.createElement('div');
+    dot.className = 'nearby__river-dot';
+    dot.style.left = ((clientX - s.left) / s.width  * 100) + '%';
+    dot.style.top  = ((clientY - s.top ) / s.height * 100) + '%';
+    stage.appendChild(dot);
+    requestAnimationFrame(() => requestAnimationFrame(() => dot.classList.add('is-gone')));
+    setTimeout(() => dot.remove(), 2200);
+  }
+
+  // тап/клик/наведение в зоне → утки плывут к точке
+  function setAttract(e, fast, withDot) {
     const z = zone.getBoundingClientRect();
     if (e.clientX < z.left || e.clientX > z.right ||
         e.clientY < z.top  || e.clientY > z.bottom) return;
     const fresh = !attract;
-    attract = { x: e.clientX, y: e.clientY };
+    attract = { x: e.clientX, y: e.clientY, fast: fast };
     attractUntil = now2() + 2600;                     // держим цель ~2.6с после последнего события
     if (fresh) wob.forEach((st, i) => {               // тесная кучка вокруг точки — будто у кусочка хлеба
       const ang = (i / wob.length) * Math.PI * 2 + Math.random() * 1.2;
@@ -1050,10 +1066,14 @@ if (hubStops.length && stopsEl) {
       st.sx = Math.cos(ang) * r;
       st.sy = Math.sin(ang) * r;
     });
+    if (withDot) spawnDot(e.clientX, e.clientY);
   }
   function now2() { return performance.now(); }
-  stage.addEventListener('pointerdown', setAttract);
-  stage.addEventListener('pointermove', setAttract);
+  // клик/тап — точка + быстрый заплыв; наведение мышью — медленно следуют за курсором
+  stage.addEventListener('pointerdown', (e) => setAttract(e, true, true));
+  stage.addEventListener('pointermove', (e) => {
+    if (e.pointerType === 'mouse') setAttract(e, false, false);
+  });
 
   const illo = stage.querySelector('img');            // основная иллюстрация — первая
   if (illo && !illo.complete) illo.addEventListener('load', place);

@@ -2652,6 +2652,24 @@ figcaption {
   pointer-events: none;
 }
 
+/* «кусочек хлеба» — точка тапа/клика, к которой сплываются утки; сжимается до 0 */
+.nearby__river-dot {
+  position: absolute;
+  width: 1%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--blue);
+  transform: translate(-50%, -50%) scale(1);
+  transform-origin: center;
+  z-index: 1;
+  pointer-events: none;
+  transition: transform 2s ease, opacity 2s ease;
+}
+.nearby__river-dot.is-gone {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
 /* утка на воде — размер в % от иллюстрации; позицию внутри зоны ставит JS */
 .nearby__river-duck {
   position: absolute;
