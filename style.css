@@ -2596,7 +2596,7 @@ figcaption {
   position: absolute;
   top: 72%;      /* ~на 50px ниже (в % — чтобы пропорция сохранялась в адаптивах) */
   left: 8.5%;
-  width: 13.5%;  /* в 1.5× крупнее */
+  width: 16.2%;  /* в 1.5× + ещё ~20% крупнее */
   z-index: 2;
   pointer-events: none;
 }
