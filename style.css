@@ -2586,7 +2586,7 @@ figcaption {
   width: 90%;
   margin: 0 auto;
 }
-.nearby__river img {
+.nearby__river img:not(.nearby__river-duck) {
   display: block;
   width: 100%;
   height: auto;
@@ -3450,7 +3450,7 @@ figcaption {
   }
   .nearby__river::-webkit-scrollbar { display: none; }   /* WebKit: скрыть полосу */
   .nearby__river-stage { display: inline-block; width: auto; margin: 0; }
-  .nearby__river img {
+  .nearby__river img:not(.nearby__river-duck) {
     width: auto;
     height: clamp(415px, 114vw, 656px);   /* по высоте комфортно, ширина уходит за экран */
     max-width: none;
