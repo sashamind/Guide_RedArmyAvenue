@@ -915,30 +915,53 @@ if (hubStops.length && stopsEl) {
   });
 })();
 
-/* ═══ Утка: случайная позиция внутри заданной зоны (зона — в % от иллюстрации) ═══ */
+/* ═══ Утки: N штук в случайных местах внутри зоны (зона — в % от иллюстрации) ═══ */
 (() => {
+  const DUCKS = 3;
   const stage = document.querySelector('.nearby__river-stage');
   const zone  = document.getElementById('riverDuckZone');
-  const duck  = document.querySelector('.nearby__river-duck');
-  if (!stage || !zone || !duck) return;
+  const first = document.querySelector('.nearby__river-duck');
+  if (!stage || !zone || !first) return;
+
+  // доводим количество уток до нужного клонированием шаблона
+  const ducks = [first];
+  for (let i = 1; i < DUCKS; i++) {
+    const c = first.cloneNode(true);
+    first.parentNode.appendChild(c);
+    ducks.push(c);
+  }
 
   function place() {
     const s = stage.getBoundingClientRect();
     const z = zone.getBoundingClientRect();
-    const d = duck.getBoundingClientRect();
-    if (!s.width || !z.width || !d.width) return;      // ещё не отрисовано
-    const freeX = Math.max(0, z.width  - d.width);
-    const freeY = Math.max(0, z.height - d.height);
-    const leftPx = (z.left - s.left) + Math.random() * freeX;
-    const topPx  = (z.top  - s.top ) + Math.random() * freeY;
-    // позиция в % от иллюстрации → сохраняется во всех адаптивах
-    duck.style.left = (leftPx / s.width  * 100) + '%';
-    duck.style.top  = (topPx  / s.height * 100) + '%';
+    if (!s.width || !z.width) return;                 // ещё не отрисовано
+    const placed = [];                                // px-центры уже размещённых
+    ducks.forEach((duck) => {
+      const d = duck.getBoundingClientRect();
+      if (!d.width) return;
+      const freeX = Math.max(0, z.width  - d.width);
+      const freeY = Math.max(0, z.height - d.height);
+      // случайное место; несколько попыток, чтобы утки сильно не наезжали друг на друга
+      let lx = 0, ty = 0;
+      for (let t = 0; t < 12; t++) {
+        lx = (z.left - s.left) + Math.random() * freeX;
+        ty = (z.top  - s.top ) + Math.random() * freeY;
+        const cx = lx + d.width / 2, cy = ty + d.height / 2;
+        const ok = placed.every((p) =>
+          Math.hypot(p.x - cx, p.y - cy) > d.width * 1.4);
+        if (ok || t === 11) { placed.push({ x: cx, y: cy }); break; }
+      }
+      // позиция в % от иллюстрации → сохраняется во всех адаптивах
+      duck.style.left = (lx / s.width  * 100) + '%';
+      duck.style.top  = (ty / s.height * 100) + '%';
+      // случайный разворот по горизонтали — для разнообразия
+      duck.style.transform = Math.random() < 0.5 ? 'scaleX(-1)' : 'none';
+    });
   }
 
   const illo = stage.querySelector('img');            // основная иллюстрация — первая
   if (illo && !illo.complete) illo.addEventListener('load', place);
-  if (!duck.complete) duck.addEventListener('load', place);
+  if (!first.complete) first.addEventListener('load', place);
   window.addEventListener('load', place);
   place();
 })();
