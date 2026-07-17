@@ -1061,7 +1061,7 @@ if (hubStops.length && stopsEl) {
   function spawnDot(clientX, clientY) {
     const s = stage.getBoundingClientRect();
     const n = 1 + Math.floor(Math.random() * 3);           // от 1 до 3
-    const jit = s.width * 0.012;                            // небольшой разброс рядом с точкой
+    const jit = s.width * 0.005;                            // совсем небольшой разброс — точки рядышком
     for (let i = 0; i < n; i++) {
       const jx = (Math.random() * 2 - 1) * jit;
       const jy = (Math.random() * 2 - 1) * jit;
