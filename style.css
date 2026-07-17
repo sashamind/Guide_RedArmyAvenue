@@ -2600,6 +2600,7 @@ figcaption {
   z-index: 2;
   pointer-events: none;
 }
+.nearby__river-birds-anim { width: 100%; }
 .nearby__river-birds svg { display: block; width: 100%; height: auto; }
 
 .river-hint { display: none; }   /* только на мобильном (см. медиазапрос) */
