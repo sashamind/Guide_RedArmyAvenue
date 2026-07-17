@@ -2579,12 +2579,29 @@ figcaption {
   margin: clamp(40px, 5vw, 80px) 0 0;
   padding: 0 clamp(16px, 3vw, 48px);
 }
-.nearby__river img {
+/* сцена = размер иллюстрации: птицы позиционируются в % от неё */
+.nearby__river-stage {
+  position: relative;
   display: block;
   width: 90%;
-  height: auto;
   margin: 0 auto;
 }
+.nearby__river img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* птицы приклеены к иллюстрации, координаты в % — пропорция сохраняется в любом адаптиве */
+.nearby__river-birds {
+  position: absolute;
+  top: 63%;
+  left: 8.5%;
+  width: 9%;
+  z-index: 2;
+  pointer-events: none;
+}
+.nearby__river-birds svg { display: block; width: 100%; height: auto; }
+
 .river-hint { display: none; }   /* только на мобильном (см. медиазапрос) */
 
 .nearby__grid {
@@ -3421,6 +3438,7 @@ figcaption {
     overscroll-behavior-x: contain;
   }
   .nearby__river::-webkit-scrollbar { display: none; }   /* WebKit: скрыть полосу */
+  .nearby__river-stage { display: inline-block; width: auto; margin: 0; }
   .nearby__river img {
     width: auto;
     height: clamp(415px, 114vw, 656px);   /* по высоте комфортно, ширина уходит за экран */

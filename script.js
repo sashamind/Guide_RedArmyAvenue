@@ -194,6 +194,11 @@ window.addEventListener('load', function () {
   initStopMotionLottie(document.querySelector('.era__rails'), SB + 'rails_lottie.json', {
     className: 'era__rails-anim', hideImg: false, pauseMs: 3000
   });
+
+  // птицы над иллюстрацией реки («Что ещё посмотреть»), маленькие, пауза 3с
+  initStopMotionLottie(document.getElementById('riverBirds'), SB + 'birds_lottie.json', {
+    className: 'nearby__river-birds-anim', hideImg: false, pauseMs: 3000
+  });
 });
 
 /* ─── 3b. HERO TITLE FIT (мобильный): максимально крупный, но в экран ─── */

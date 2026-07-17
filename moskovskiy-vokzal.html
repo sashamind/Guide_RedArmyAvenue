@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://i.postimg.cc" />
   <link rel="preconnect" href="https://vxxzyggeogbjxjlrhcus.supabase.co" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260717z14" />
+  <link rel="stylesheet" href="style.css?v=20260717z15" />
 
   <!-- Lottie (лёгкая SVG-сборка) — анимация птиц в hero -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie_light.min.js" defer></script>
@@ -585,9 +585,13 @@
       </header>
     </div>
     <figure class="nearby__river" data-animate="fade-up">
-      <img src="https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/river-and-surroundings.png"
-           alt="Река Воронка и окрестности — панорамная иллюстрация"
-           width="3543" height="1790" loading="lazy" />
+      <div class="nearby__river-stage">
+        <img src="https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/river-and-surroundings.png"
+             alt="Река Воронка и окрестности — панорамная иллюстрация"
+             width="3543" height="1790" loading="lazy" />
+        <!-- Lottie-птицы, приклеены к иллюстрации (координаты в % → одинаковая пропорция во всех адаптивах) -->
+        <div class="nearby__river-birds" id="riverBirds" aria-hidden="true"></div>
+      </div>
     </figure>
     <!-- подсказка «можно листать» — только на мобильном, гаснет после скролла -->
     <div class="river-hint" id="riverHint" aria-hidden="true">
@@ -730,7 +734,7 @@
     </svg>
   </button>
 
-  <script src="script.js?v=20260717e"></script>
+  <script src="script.js?v=20260717f"></script>
   <!-- DEV временно выключен. Вернуть — раскомментировать строку ниже
        и удалить правило-переключатель в конце style.css (метка «DEV OFF»). -->
   <!-- <script src="dev-adjust.js"></script> -->
