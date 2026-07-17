@@ -3438,15 +3438,15 @@ figcaption {
     transition: opacity 0.5s ease;
     animation: riverHintPulse 1.5s ease-in-out infinite;
   }
-  .river-hint svg { width: 58px; height: auto; display: block; filter: url(#arrowWobble); }
+  .river-hint svg { width: 74px; height: auto; display: block; filter: url(#arrowWobble); }
   .river-hint.is-hidden {
     opacity: 0;
     animation: none;
     pointer-events: none;
   }
   @keyframes riverHintPulse {
-    0%, 100% { opacity: 0.28; transform: translateX(0); }
-    50%      { opacity: 0.9;  transform: translateX(7px); }
+    0%, 100% { opacity: 0.28; }
+    50%      { opacity: 0.9; }
   }
   @media (prefers-reduced-motion: reduce) {
     .river-hint { animation: none; }
