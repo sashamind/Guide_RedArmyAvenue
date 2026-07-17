@@ -715,8 +715,9 @@ if (gubMoreBox && gubMoreBtn) {
     });
   }
 
-  /* мобильный: стопка плавно разъезжается в сетку, когда её центр
-     подходит к центру экрана, и собирается обратно при прокрутке дальше */
+  /* мобильный: стопка разъезжается в сетку, когда её центр доходит до центра экрана,
+     и ОСТАЁТСЯ разобранной при дальнейшей прокрутке вниз; собирается обратно в стопку
+     только при прокрутке назад (вверх) выше порога */
   var galMq = window.matchMedia('(max-width: 860px)');
   var galTick = false;
   function galUpdate() {
@@ -725,7 +726,8 @@ if (gubMoreBox && gubMoreBtn) {
     var r = gallery.getBoundingClientRect();
     var vh = window.innerHeight || 1;
     var c = r.top + r.height / 2;
-    gallery.classList.toggle('is-expanded', c > vh * 0.40 && c < vh * 0.62);
+    // разобрана, пока центр стопки в верхних ~58% экрана (т.е. при скролле вниз не сворачивается)
+    gallery.classList.toggle('is-expanded', c < vh * 0.58);
   }
   window.addEventListener('scroll', function () {
     if (!galTick) { galTick = true; requestAnimationFrame(galUpdate); }
