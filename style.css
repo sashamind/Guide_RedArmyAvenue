@@ -3423,7 +3423,7 @@ figcaption {
   .nearby__river::-webkit-scrollbar { display: none; }   /* WebKit: скрыть полосу */
   .nearby__river img {
     width: auto;
-    height: clamp(346px, 95vw, 547px);   /* по высоте комфортно, ширина уходит за экран */
+    height: clamp(415px, 114vw, 656px);   /* по высоте комфортно, ширина уходит за экран */
     max-width: none;
     margin: 0;
   }
