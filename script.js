@@ -935,7 +935,8 @@ if (hubStops.length && stopsEl) {
   const wob = ducks.map((el) => ({
     el, x: 0, y: 0, targetX: 0, targetY: 0,
     dir: Math.random() < 0.5 ? -1 : 1, wait: Math.random() * 60,
-    sx: 0, sy: 0                                     // индивидуальный разброс при сборе к точке
+    sx: 0, sy: 0,                                    // индивидуальный разброс при сборе к точке
+    speed: 0.8 + Math.random() * 0.45               // у каждой утки чуть своя скорость
   }));
 
   // точка притяжения (тап/наведение), в координатах вьюпорта
@@ -1016,14 +1017,22 @@ if (hubStops.length && stopsEl) {
           st.wait = 60 + Math.random() * 160;
         }
       }
-      // шаг к цели: к точке — быстрее, покачивание — медленно
+      // шаг к цели: к точке — быстрее, покачивание — медленно; у каждой утки своя скорость
       const dx = st.targetX - st.x, dy = st.targetY - st.y;
-      const spd = chasing ? (amp * 0.012 + 0.6) : (amp * 0.0025 + 0.04);
+      const spd = (chasing ? (amp * 0.006 + 0.28) : (amp * 0.0016 + 0.03)) * st.speed;
       st.x += Math.sign(dx) * Math.min(Math.abs(dx), spd);
       st.y += Math.sign(dy) * Math.min(Math.abs(dy), spd);
       if (Math.abs(dx) > 0.5) st.dir = dx > 0 ? 1 : -1;  // разворот к направлению движения/точке
       el.style.transform = 'translate(' + st.x.toFixed(2) + 'px,' + st.y.toFixed(2) + 'px) scaleX(' + st.dir + ')';
     });
+
+    // слои по глубине в реальном времени: кто ниже по экрану (больше Y с учётом смещения) —
+    // тот перекрывает остальных
+    wob.slice()
+       .sort((a, b) =>
+         (a.el.offsetTop + a.y) - (b.el.offsetTop + b.y))
+       .forEach((st, i) => { st.el.style.zIndex = 2 + i; });
+
     requestAnimationFrame(tick);
   }
 
