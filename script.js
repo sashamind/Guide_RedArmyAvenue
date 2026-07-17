@@ -947,14 +947,21 @@ if (hubStops.length && stopsEl) {
    Рамку можно двигать и тянуть за угол; панель слева показывает
    top/left/width/height в % — скринишь их, и эти значения фиксируются в CSS. */
 (() => {
-  if (!/duckzone/i.test(location.hash)) return;
   const stage   = document.querySelector('.nearby__river-stage');
   const zone    = document.getElementById('riverDuckZone');
   const handle  = zone && zone.querySelector('.nearby__river-zone__handle');
   const readout = document.getElementById('duckZoneReadout');
   if (!stage || !zone) return;
 
-  document.documentElement.classList.add('duckzone-dev');
+  let active = false;
+  function activate() {
+    if (active || !/duckzone/i.test(location.hash)) return;
+    active = true;
+    document.documentElement.classList.add('duckzone-dev');
+    show();
+  }
+  // работает и при полной загрузке с #duckzone, и когда хэш дописали к открытой странице
+  window.addEventListener('hashchange', activate);
 
   function pct() {
     const s = stage.getBoundingClientRect();
@@ -1012,4 +1019,7 @@ if (hubStops.length && stopsEl) {
     if (e.target === handle) return;
     down(e, 'move');
   });
+
+  activate();                       // если страница загрузилась уже с #duckzone
+  window.addEventListener('load', activate);
 })();
