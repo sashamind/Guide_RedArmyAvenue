@@ -942,6 +942,7 @@ if (hubStops.length && stopsEl) {
     const z = zone.getBoundingClientRect();
     if (!s.width || !z.width) return;                 // ещё не отрисовано
     const placed = [];                                // px-центры уже размещённых
+    const tops = [];                                  // {duck, ty} — для слоёв по глубине
     ducks.forEach((duck) => {
       const d = duck.getBoundingClientRect();
       if (!d.width) return;
@@ -960,7 +961,11 @@ if (hubStops.length && stopsEl) {
       // базовая позиция в % от иллюстрации → сохраняется во всех адаптивах
       duck.style.left = (lx / s.width  * 100) + '%';
       duck.style.top  = (ty / s.height * 100) + '%';
+      tops.push({ duck: duck, ty: ty });
     });
+    // слои по глубине: кто ниже по экрану (больше ty) — тот выше в стеке (перекрывает)
+    tops.sort((a, b) => a.ty - b.ty)
+        .forEach((o, i) => { o.duck.style.zIndex = 2 + i; });
   }
 
   // лёгкое покачивание внутри зоны: смещение задаётся transform поверх базы;
@@ -975,9 +980,9 @@ if (hubStops.length && stopsEl) {
         const dx = st.target - st.x;
         if (Math.abs(dx) < 0.5) {
           st.target = (Math.random() * 2 - 1) * amp;   // новое случайное расстояние
-          st.wait = 40 + Math.random() * 120;          // пауза перед следующим заплывом
+          st.wait = 60 + Math.random() * 160;          // пауза перед следующим заплывом
         } else {
-          const step = Math.sign(dx) * Math.min(Math.abs(dx), amp * 0.006 + 0.12);
+          const step = Math.sign(dx) * Math.min(Math.abs(dx), amp * 0.0025 + 0.04);
           st.x += step;
           st.dir = step > 0 ? 1 : -1;
         }
