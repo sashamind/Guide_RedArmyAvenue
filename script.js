@@ -1058,16 +1058,23 @@ if (hubStops.length && stopsEl) {
     requestAnimationFrame(tick);
   }
 
-  // «кусочек хлеба»: синяя точка в месте клика/тапа — пару секунд на месте, потом сжимается до 0
+  // «кусочки хлеба»: 1–3 синих точки рядом с местом тапа, каждая висит чуть разное время
   function spawnDot(clientX, clientY) {
     const s = stage.getBoundingClientRect();
-    const dot = document.createElement('div');
-    dot.className = 'nearby__river-dot';
-    dot.style.left = ((clientX - s.left) / s.width  * 100) + '%';
-    dot.style.top  = ((clientY - s.top ) / s.height * 100) + '%';
-    stage.appendChild(dot);
-    setTimeout(() => dot.classList.add('is-gone'), 2000);  // держим ~2с, затем сжатие
-    setTimeout(() => dot.remove(), 2900);
+    const n = 1 + Math.floor(Math.random() * 3);           // от 1 до 3
+    const jit = s.width * 0.012;                            // небольшой разброс рядом с точкой
+    for (let i = 0; i < n; i++) {
+      const jx = (Math.random() * 2 - 1) * jit;
+      const jy = (Math.random() * 2 - 1) * jit;
+      const dot = document.createElement('div');
+      dot.className = 'nearby__river-dot';
+      dot.style.left = ((clientX - s.left + jx) / s.width  * 100) + '%';
+      dot.style.top  = ((clientY - s.top  + jy) / s.height * 100) + '%';
+      stage.appendChild(dot);
+      const hold = 1600 + Math.random() * 1300;            // держится ~1.6–2.9с
+      setTimeout(() => dot.classList.add('is-gone'), hold);
+      setTimeout(() => dot.remove(), hold + 900);
+    }
   }
 
   // тап/клик/наведение в зоне → утки плывут к точке
