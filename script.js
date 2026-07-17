@@ -933,7 +933,7 @@ if (hubStops.length && stopsEl) {
   // два вида уток — случайно duck_1 / duck_2
   const DUCK_SRC = [
     'https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/duck_1.png',
-    'https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/duck_2.png'
+    'https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/duck_2.png?v=2'
   ];
   ducks.forEach((d) => { d.src = DUCK_SRC[Math.random() < 0.5 ? 0 : 1]; });
 
