@@ -1044,10 +1044,11 @@ if (hubStops.length && stopsEl) {
     const fresh = !attract;
     attract = { x: e.clientX, y: e.clientY };
     attractUntil = now2() + 2600;                     // держим цель ~2.6с после последнего события
-    if (fresh) wob.forEach((st) => {                  // разброс фиксируем на сессию притяжения
-      const sc = st.el.offsetWidth * 1.6;
-      st.sx = (Math.random() * 2 - 1) * sc;
-      st.sy = (Math.random() * 2 - 1) * sc;
+    if (fresh) wob.forEach((st, i) => {               // тесная кучка вокруг точки — будто у кусочка хлеба
+      const ang = (i / wob.length) * Math.PI * 2 + Math.random() * 1.2;
+      const r = st.el.offsetWidth * (0.28 + Math.random() * 0.22);
+      st.sx = Math.cos(ang) * r;
+      st.sy = Math.sin(ang) * r;
     });
   }
   function now2() { return performance.now(); }
