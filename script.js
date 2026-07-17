@@ -917,7 +917,7 @@ if (hubStops.length && stopsEl) {
 
 /* ═══ Утки: N штук в случайных местах внутри зоны (зона — в % от иллюстрации) ═══ */
 (() => {
-  const DUCKS = 3;
+  const DUCKS = 4;
   const stage = document.querySelector('.nearby__river-stage');
   const zone  = document.getElementById('riverDuckZone');
   const first = document.querySelector('.nearby__river-duck');
@@ -941,6 +941,14 @@ if (hubStops.length && stopsEl) {
 
   // точка притяжения (тап/наведение), в координатах вьюпорта
   let attract = null, attractUntil = 0, lockUntil = 0;
+
+  // одна утка «сама по себе» — не реагирует на интерактив; раз в 7с роль переходит к другой
+  let loner = Math.floor(Math.random() * DUCKS);
+  setInterval(() => {
+    let n;
+    do { n = Math.floor(Math.random() * DUCKS); } while (n === loner && DUCKS > 1);
+    loner = n;
+  }, 7000);
 
   // ограничить смещение так, чтобы утка осталась внутри зоны
   function clampOff(el, ox, oy, s, z) {
@@ -995,9 +1003,11 @@ if (hubStops.length && stopsEl) {
     const chasing = attract && now < attractUntil;
     if (!chasing) attract = null;
 
-    wob.forEach((st) => {
+    wob.forEach((st, idx) => {
       const el = st.el;
-      if (chasing) {
+      const solo = idx === loner;               // «одиночка» игнорирует притяжение
+      const duckChase = chasing && !solo;
+      if (duckChase) {
         // цель = точка притяжения + индивидуальный разброс (собираются рядом, не в кучу)
         const px = attract.x - s.left, py = attract.y - s.top;
         const baseCx = el.offsetLeft + el.offsetWidth  / 2;
@@ -1020,7 +1030,7 @@ if (hubStops.length && stopsEl) {
       // шаг к цели: клик — быстро, наведение — медленно, покачивание — совсем медленно;
       // у каждой утки своя скорость
       const dx = st.targetX - st.x, dy = st.targetY - st.y;
-      const base = chasing
+      const base = duckChase
         ? (attract.fast ? amp * 0.014 + 0.7 : amp * 0.006 + 0.28)
         : (amp * 0.0016 + 0.03);
       const spd = base * st.speed;
