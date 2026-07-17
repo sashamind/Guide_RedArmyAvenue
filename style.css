@@ -1635,6 +1635,7 @@ figcaption {
 .route__dot {
   width: 16px;
   height: 16px;
+  flex: none;              /* не сжиматься в флекс-строке (иначе в Safari — овал) */
   border-radius: 50%;
   background: var(--cream);
   border: 2.5px solid var(--dark);
