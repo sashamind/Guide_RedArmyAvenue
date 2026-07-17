@@ -931,11 +931,27 @@ if (hubStops.length && stopsEl) {
     ducks.push(c);
   }
 
-  // состояние покачивания для каждой утки
+  // состояние движения для каждой утки (смещения x/y в px поверх базовой позиции)
   const wob = ducks.map((el) => ({
-    el, x: 0, dir: Math.random() < 0.5 ? -1 : 1,
-    target: 0, wait: Math.random() * 60
+    el, x: 0, y: 0, targetX: 0, targetY: 0,
+    dir: Math.random() < 0.5 ? -1 : 1, wait: Math.random() * 60,
+    sx: 0, sy: 0                                     // индивидуальный разброс при сборе к точке
   }));
+
+  // точка притяжения (тап/наведение), в координатах вьюпорта
+  let attract = null, attractUntil = 0;
+
+  // ограничить смещение так, чтобы утка осталась внутри зоны
+  function clampOff(el, ox, oy, s, z) {
+    const baseCx = el.offsetLeft + el.offsetWidth  / 2;
+    const baseCy = el.offsetTop  + el.offsetHeight / 2;
+    const zL = z.left - s.left, zT = z.top - s.top;
+    const minX = zL + el.offsetWidth  / 2 - baseCx;
+    const maxX = zL + z.width  - el.offsetWidth  / 2 - baseCx;
+    const minY = zT + el.offsetHeight / 2 - baseCy;
+    const maxY = zT + z.height - el.offsetHeight / 2 - baseCy;
+    return [Math.max(minX, Math.min(maxX, ox)), Math.max(minY, Math.min(maxY, oy))];
+  }
 
   function place() {
     const s = stage.getBoundingClientRect();
@@ -968,36 +984,73 @@ if (hubStops.length && stopsEl) {
         .forEach((o, i) => { o.duck.style.zIndex = 2 + i; });
   }
 
-  // лёгкое покачивание внутри зоны: смещение задаётся transform поверх базы;
+  // движение: обычно — лёгкое покачивание; при тапе/наведении — заплыв к точке.
   // едет вправо — иллюстрация как есть, влево — отражается (scaleX -1)
   function tick() {
+    const now = performance.now();
+    const s = stage.getBoundingClientRect();
     const z = zone.getBoundingClientRect();
-    const amp = z.width * 0.10;                        // размах ~10% ширины зоны
+    const amp = z.width * 0.10;                        // размах покачивания
+    const chasing = attract && now < attractUntil;
+    if (!chasing) attract = null;
+
     wob.forEach((st) => {
-      if (st.wait > 0) {
+      const el = st.el;
+      if (chasing) {
+        // цель = точка притяжения + индивидуальный разброс (собираются рядом, не в кучу)
+        const px = attract.x - s.left, py = attract.y - s.top;
+        const baseCx = el.offsetLeft + el.offsetWidth  / 2;
+        const baseCy = el.offsetTop  + el.offsetHeight / 2;
+        const c = clampOff(el, px + st.sx - baseCx, py + st.sy - baseCy, s, z);
+        st.targetX = c[0]; st.targetY = c[1];
+        st.wait = 0;
+      } else if (st.wait > 0) {
         st.wait -= 1;
       } else {
-        const dx = st.target - st.x;
-        if (Math.abs(dx) < 0.5) {
-          st.target = (Math.random() * 2 - 1) * amp;   // новое случайное расстояние
-          st.wait = 60 + Math.random() * 160;          // пауза перед следующим заплывом
-        } else {
-          const step = Math.sign(dx) * Math.min(Math.abs(dx), amp * 0.0025 + 0.04);
-          st.x += step;
-          st.dir = step > 0 ? 1 : -1;
+        const dx = st.targetX - st.x, dy = st.targetY - st.y;
+        if (Math.hypot(dx, dy) < 0.6) {               // доплыли — новая случайная цель
+          const c = clampOff(el,
+            st.x + (Math.random() * 2 - 1) * amp,
+            st.y + (Math.random() * 2 - 1) * amp * 0.5, s, z);
+          st.targetX = c[0]; st.targetY = c[1];
+          st.wait = 60 + Math.random() * 160;
         }
       }
-      st.el.style.transform = 'translateX(' + st.x.toFixed(2) + 'px) scaleX(' + st.dir + ')';
+      // шаг к цели: к точке — быстрее, покачивание — медленно
+      const dx = st.targetX - st.x, dy = st.targetY - st.y;
+      const spd = chasing ? (amp * 0.012 + 0.6) : (amp * 0.0025 + 0.04);
+      st.x += Math.sign(dx) * Math.min(Math.abs(dx), spd);
+      st.y += Math.sign(dy) * Math.min(Math.abs(dy), spd);
+      if (Math.abs(dx) > 0.5) st.dir = dx > 0 ? 1 : -1;  // разворот к направлению движения/точке
+      el.style.transform = 'translate(' + st.x.toFixed(2) + 'px,' + st.y.toFixed(2) + 'px) scaleX(' + st.dir + ')';
     });
     requestAnimationFrame(tick);
   }
+
+  // тап/наведение в зоне → утки плывут к точке
+  function setAttract(e) {
+    const z = zone.getBoundingClientRect();
+    if (e.clientX < z.left || e.clientX > z.right ||
+        e.clientY < z.top  || e.clientY > z.bottom) return;
+    const fresh = !attract;
+    attract = { x: e.clientX, y: e.clientY };
+    attractUntil = now2() + 2600;                     // держим цель ~2.6с после последнего события
+    if (fresh) wob.forEach((st) => {                  // разброс фиксируем на сессию притяжения
+      const sc = st.el.offsetWidth * 1.6;
+      st.sx = (Math.random() * 2 - 1) * sc;
+      st.sy = (Math.random() * 2 - 1) * sc;
+    });
+  }
+  function now2() { return performance.now(); }
+  stage.addEventListener('pointerdown', setAttract);
+  stage.addEventListener('pointermove', setAttract);
 
   const illo = stage.querySelector('img');            // основная иллюстрация — первая
   if (illo && !illo.complete) illo.addEventListener('load', place);
   if (!first.complete) first.addEventListener('load', place);
   window.addEventListener('load', place);
   place();
-  if (!reducedMotion) requestAnimationFrame(tick);    // покачивание (кроме reduce-motion)
+  if (!reducedMotion) requestAnimationFrame(tick);    // движение (кроме reduce-motion)
 })();
 
 /* ═══ DEV: настройка зоны утки (открыть страницу с #duckzone) ═══
