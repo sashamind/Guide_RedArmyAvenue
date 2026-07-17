@@ -914,3 +914,31 @@ if (hubStops.length && stopsEl) {
     center();
   });
 })();
+
+/* ═══ Утка: случайная позиция внутри заданной зоны (зона — в % от иллюстрации) ═══ */
+(() => {
+  const stage = document.querySelector('.nearby__river-stage');
+  const zone  = document.getElementById('riverDuckZone');
+  const duck  = document.querySelector('.nearby__river-duck');
+  if (!stage || !zone || !duck) return;
+
+  function place() {
+    const s = stage.getBoundingClientRect();
+    const z = zone.getBoundingClientRect();
+    const d = duck.getBoundingClientRect();
+    if (!s.width || !z.width || !d.width) return;      // ещё не отрисовано
+    const freeX = Math.max(0, z.width  - d.width);
+    const freeY = Math.max(0, z.height - d.height);
+    const leftPx = (z.left - s.left) + Math.random() * freeX;
+    const topPx  = (z.top  - s.top ) + Math.random() * freeY;
+    // позиция в % от иллюстрации → сохраняется во всех адаптивах
+    duck.style.left = (leftPx / s.width  * 100) + '%';
+    duck.style.top  = (topPx  / s.height * 100) + '%';
+  }
+
+  const illo = stage.querySelector('img');            // основная иллюстрация — первая
+  if (illo && !illo.complete) illo.addEventListener('load', place);
+  if (!duck.complete) duck.addEventListener('load', place);
+  window.addEventListener('load', place);
+  place();
+})();

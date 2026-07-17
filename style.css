@@ -2602,7 +2602,22 @@ figcaption {
 }
 .nearby__river-birds-anim { width: 100%; }
 .nearby__river-birds svg { display: block; width: 100%; height: auto; }
-/* утка на воде — тоже в % от иллюстрации */
+/* ЗОНА появления утки — координаты/размер в % от иллюстрации.
+   ⟵ ЭТИ ЧЕТЫРЕ ЗНАЧЕНИЯ настраиваешь. Рамка временная (для настройки). */
+.nearby__river-zone {
+  position: absolute;
+  top: 52%;
+  left: 58%;
+  width: 22%;
+  height: 12%;
+  z-index: 3;
+  pointer-events: none;
+  /* временная рамка — уберу, когда зафиксируешь область */
+  border: 2px solid #E5484D;
+  background: rgba(229, 72, 77, 0.12);
+}
+
+/* утка на воде — размер в % от иллюстрации; позицию внутри зоны ставит JS */
 .nearby__river-duck {
   position: absolute;
   top: 57%;
