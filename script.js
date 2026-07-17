@@ -930,6 +930,12 @@ if (hubStops.length && stopsEl) {
     first.parentNode.appendChild(c);
     ducks.push(c);
   }
+  // два вида уток — случайно duck_1 / duck_2
+  const DUCK_SRC = [
+    'https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/duck_1.png',
+    'https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/duck_2.png'
+  ];
+  ducks.forEach((d) => { d.src = DUCK_SRC[Math.random() < 0.5 ? 0 : 1]; });
 
   // состояние движения для каждой утки (смещения x/y в px поверх базовой позиции)
   const wob = ducks.map((el) => ({
