@@ -940,7 +940,7 @@ if (hubStops.length && stopsEl) {
   }));
 
   // точка притяжения (тап/наведение), в координатах вьюпорта
-  let attract = null, attractUntil = 0;
+  let attract = null, attractUntil = 0, lockUntil = 0;
 
   // ограничить смещение так, чтобы утка осталась внутри зоны
   function clampOff(el, ox, oy, s, z) {
@@ -1040,7 +1040,7 @@ if (hubStops.length && stopsEl) {
     requestAnimationFrame(tick);
   }
 
-  // «кусочек хлеба»: синяя точка в месте клика/тапа, сжимается до 0 за ~2с
+  // «кусочек хлеба»: синяя точка в месте клика/тапа — пару секунд на месте, потом сжимается до 0
   function spawnDot(clientX, clientY) {
     const s = stage.getBoundingClientRect();
     const dot = document.createElement('div');
@@ -1048,8 +1048,8 @@ if (hubStops.length && stopsEl) {
     dot.style.left = ((clientX - s.left) / s.width  * 100) + '%';
     dot.style.top  = ((clientY - s.top ) / s.height * 100) + '%';
     stage.appendChild(dot);
-    requestAnimationFrame(() => requestAnimationFrame(() => dot.classList.add('is-gone')));
-    setTimeout(() => dot.remove(), 2200);
+    setTimeout(() => dot.classList.add('is-gone'), 2000);  // держим ~2с, затем сжатие
+    setTimeout(() => dot.remove(), 2900);
   }
 
   // тап/клик/наведение в зоне → утки плывут к точке
@@ -1059,7 +1059,8 @@ if (hubStops.length && stopsEl) {
         e.clientY < z.top  || e.clientY > z.bottom) return;
     const fresh = !attract;
     attract = { x: e.clientX, y: e.clientY, fast: fast };
-    attractUntil = now2() + 2600;                     // держим цель ~2.6с после последнего события
+    // клик держит цель дольше (4с), наведение — коротко (обновляется каждым движением)
+    attractUntil = now2() + (fast ? 4000 : 2600);
     if (fresh) wob.forEach((st, i) => {               // тесная кучка вокруг точки — будто у кусочка хлеба
       const ang = (i / wob.length) * Math.PI * 2 + Math.random() * 1.2;
       const r = st.el.offsetWidth * (0.28 + Math.random() * 0.22);
@@ -1069,10 +1070,14 @@ if (hubStops.length && stopsEl) {
     if (withDot) spawnDot(e.clientX, e.clientY);
   }
   function now2() { return performance.now(); }
-  // клик/тап — точка + быстрый заплыв; наведение мышью — медленно следуют за курсором
-  stage.addEventListener('pointerdown', (e) => setAttract(e, true, true));
+  // клик/тап — точка + быстрый заплыв, и 4с не реагируем на движения мышью (кроме нового клика)
+  stage.addEventListener('pointerdown', (e) => {
+    setAttract(e, true, true);
+    lockUntil = now2() + 4000;
+  });
+  // наведение мышью — медленно следуют за курсором, но только вне «блокировки» после клика
   stage.addEventListener('pointermove', (e) => {
-    if (e.pointerType === 'mouse') setAttract(e, false, false);
+    if (e.pointerType === 'mouse' && now2() >= lockUntil) setAttract(e, false, false);
   });
 
   const illo = stage.querySelector('img');            // основная иллюстрация — первая
