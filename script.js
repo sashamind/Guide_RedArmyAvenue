@@ -1070,9 +1070,12 @@ if (hubStops.length && stopsEl) {
       dot.style.left = ((clientX - s.left + jx) / s.width  * 100) + '%';
       dot.style.top  = ((clientY - s.top  + jy) / s.height * 100) + '%';
       stage.appendChild(dot);
-      const hold = 1600 + Math.random() * 1300;            // держится ~1.6–2.9с
-      setTimeout(() => dot.classList.add('is-gone'), hold);
-      setTimeout(() => dot.remove(), hold + 900);
+      void dot.offsetWidth;                                // зафиксировать стартовый scale(0)
+      const delay = Math.random() * 450;                   // у каждой точки своя задержка появления
+      const hold  = 1600 + Math.random() * 1300;           // и своё время жизни ~1.6–2.9с
+      setTimeout(() => dot.classList.add('is-shown'), delay);          // вырастает 0→100%
+      setTimeout(() => dot.classList.add('is-gone'),  delay + hold);   // затем сжимается до 0
+      setTimeout(() => dot.remove(),                  delay + hold + 700);
     }
   }
 

@@ -2664,11 +2664,14 @@ figcaption {
   /* чуть кривая, «от руки» */
   border-radius: 47% 53% 50% 50% / 52% 48% 52% 48%;
   background: var(--blue);
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(0);   /* старт — 0, плавно вырастает */
   transform-origin: center;
   z-index: 1;
   pointer-events: none;
-  transition: transform 0.8s ease, opacity 0.8s ease;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+.nearby__river-dot.is-shown {
+  transform: translate(-50%, -50%) scale(1);
 }
 .nearby__river-dot.is-gone {
   transform: translate(-50%, -50%) scale(0);
