@@ -2900,7 +2900,8 @@ figcaption {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: var(--blue);
+  /* чуть темнее фонового --blue, чтобы кружок был виден и на синем разделе */
+  background: #4260C8;
   color: var(--cream);
   border: none;
   cursor: pointer;
