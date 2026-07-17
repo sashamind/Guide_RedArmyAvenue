@@ -2602,6 +2602,16 @@ figcaption {
 }
 .nearby__river-birds-anim { width: 100%; }
 .nearby__river-birds svg { display: block; width: 100%; height: auto; }
+/* утка на воде — тоже в % от иллюстрации */
+.nearby__river-duck {
+  position: absolute;
+  top: 51%;
+  left: 68%;
+  width: 3.8%;
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+}
 
 .river-hint { display: none; }   /* только на мобильном (см. медиазапрос) */
 
