@@ -1008,6 +1008,7 @@ if (hubStops.length && stopsEl) {
     const amp = z.width * 0.10;                        // размах покачивания
     const chasing = attract && now < attractUntil;
     if (!chasing) attract = null;
+    const mobileSlow = window.innerWidth <= 560 ? 0.6 : 1;  // на мобильном плывут медленнее
 
     wob.forEach((st, idx) => {
       const el = st.el;
@@ -1039,7 +1040,7 @@ if (hubStops.length && stopsEl) {
       const base = duckChase
         ? (attract.fast ? amp * 0.014 + 0.7 : amp * 0.006 + 0.28)
         : (amp * 0.0016 + 0.03);
-      const spd = base * st.speed / 1.5;   // общий темп в 1.5× медленнее
+      const spd = base * st.speed / 1.5 * mobileSlow;   // общий темп в 1.5× медленнее (моб. — ещё)
       st.x += Math.sign(dx) * Math.min(Math.abs(dx), spd);
       st.y += Math.sign(dy) * Math.min(Math.abs(dy), spd);
       if (Math.abs(dx) > 0.5) st.dir = dx > 0 ? 1 : -1;  // разворот к направлению движения/точке
