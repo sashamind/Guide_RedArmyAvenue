@@ -2733,7 +2733,7 @@ figcaption {
   line-height: 1.5;
   /* хвост снизу-слева стоит у точки; бабл раскрывается вверх-вправо */
   /* растёт из точки тапа (низ-слева, у хвостика) с лёгким поворотом */
-  transform: translate(-16%, calc(-100% - 26px)) scale(0) rotate(-7deg);
+  transform: translate(-16%, calc(-100% - 26px)) scale(0) rotate(-20deg);
   transform-origin: 16% 100%;
   opacity: 0;
   transition: opacity 0.2s ease,
