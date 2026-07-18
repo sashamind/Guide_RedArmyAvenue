@@ -1120,6 +1120,10 @@ if (hubStops.length && stopsEl) {
       r.style.left = leftPct + '%';
       r.style.top  = topPct + '%';
       r.style.animationDelay = (i * 227) + 'ms';
+      // каждый следующий круг чуть меньше предыдущего
+      const shrink = 1 - i * 0.22;                 // 100% → 78% → 56%
+      r.style.width  = (4   * shrink) + '%';
+      r.style.height = (1.8 * shrink) + '%';
       // сегменты распределены по кругу (~120° друг от друга) ± небольшой разброс
       const ang = baseAng + i * 120 + (Math.random() * 40 - 20);
       r.style.setProperty('--seg-from', Math.round(ang) + 'deg');
