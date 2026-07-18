@@ -2721,16 +2721,19 @@ figcaption {
 .river-bubble {
   position: absolute;
   z-index: 6;
-  min-width: 150px;
-  max-width: min(260px, 52%);
-  padding: 18px 22px 24px;
+  /* пока без текста — фиксированный размер пустого бабла */
+  width: 190px;
+  height: 92px;
+  background: #FAFAF5;
+  border: 2px solid var(--blue);
+  border-radius: 16px;
   color: var(--dark);
   font-family: var(--f-body);
   font-size: 14px;
   line-height: 1.5;
   /* хвост снизу-слева стоит у точки; бабл раскрывается вверх-вправо */
-  transform: translate(-14%, -100%) scale(0.96);
-  transform-origin: 14% 100%;
+  transform: translate(-16%, -100%) scale(0.96);
+  transform-origin: 16% 100%;
   opacity: 0;
   transition: opacity 0.25s ease, transform 0.25s ease;
   pointer-events: none;
@@ -2738,33 +2741,35 @@ figcaption {
 .river-bubble[hidden] { display: none; }
 .river-bubble.is-open {
   opacity: 1;
-  transform: translate(-14%, -100%) scale(1);
+  transform: translate(-16%, -100%) scale(1);
 }
-.river-bubble p { margin: 0; position: relative; z-index: 1; }
+.river-bubble p { margin: 0; }
 
-/* нарисованная «от руки» синяя рамка-овал с хвостиком */
-.river-bubble__frame {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  z-index: 0;
-}
-.river-bubble__fill { fill: #FAFAF5; }        /* светлая заливка — читается текст */
-.river-bubble__tail-fill {                     /* белая заливка хвостика (та же дрожь, что у линии) */
-  fill: #FAFAF5;
-  filter: url(#bubbleWobble);
-}
-.river-bubble__oval,
+/* хвостик снизу-слева — чистый, без дрожи */
 .river-bubble__tail {
+  position: absolute;
+  left: 22px;
+  top: 100%;
+  width: 30px;
+  height: 27px;
+  overflow: visible;
+}
+.river-bubble__tail-fill { fill: #FAFAF5; }
+.river-bubble__tail-line {
   fill: none;
   stroke: var(--blue);
-  stroke-width: 1.6;
+  stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;          /* толщина линии не искажается при растяжении */
-  filter: url(#bubbleWobble);                 /* лёгкая «дрожь» линии — как от руки */
+}
+/* маска — прячет кусок нижней рамки под ртом хвоста, чтобы контур был непрерывным */
+.river-bubble__notch {
+  position: absolute;
+  left: 22px;
+  bottom: -2px;
+  width: 26px;
+  height: 4px;
+  background: #FAFAF5;
 }
 
 /* панель координат точки-бабла (dev) */
