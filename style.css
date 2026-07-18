@@ -2701,18 +2701,18 @@ figcaption {
   position: absolute;
   top: 45.2%;
   left: 80.7%;
-  width: 1.1%;
+  width: 2.2%;                 /* зона клика вдвое больше */
   aspect-ratio: 1;
   padding: 0;
   transform: translate(-50%, -50%);
   border: none;
   border-radius: 50%;
-  background: var(--dark);
-  box-shadow: 0 0 0 4px rgba(28, 16, 7, 0.18);
+  background: transparent;     /* сам маркер скрыт — кликается прозрачная зона */
   cursor: pointer;
   z-index: 4;
 }
-.duckzone-dev .river-pt {                 /* в dev-режиме — виднее и можно таскать */
+.duckzone-dev .river-pt {                 /* в dev-режиме — виден и его можно таскать */
+  background: var(--dark);
   outline: 2px dashed #E5484D;
   outline-offset: 3px;
 }
