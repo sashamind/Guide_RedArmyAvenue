@@ -1108,6 +1108,22 @@ if (hubStops.length && stopsEl) {
     }
   }
 
+  // круги на воде — расходятся из точки тапа
+  function spawnRipple(clientX, clientY) {
+    const s = stage.getBoundingClientRect();
+    const leftPct = (clientX - s.left) / s.width  * 100;
+    const topPct  = (clientY - s.top ) / s.height * 100;
+    for (let i = 0; i < 2; i++) {
+      const r = document.createElement('div');
+      r.className = 'nearby__river-ripple';
+      r.style.left = leftPct + '%';
+      r.style.top  = topPct + '%';
+      r.style.animationDelay = (i * 200) + 'ms';
+      stage.appendChild(r);
+      setTimeout(() => r.remove(), 1700 + i * 200 + 200);
+    }
+  }
+
   // тап/клик/наведение в зоне → утки плывут к точке
   function setAttract(e, fast, withDot) {
     const z = zone.getBoundingClientRect();
@@ -1123,7 +1139,7 @@ if (hubStops.length && stopsEl) {
       st.sx = Math.cos(ang) * r;
       st.sy = Math.sin(ang) * r;
     });
-    if (withDot) spawnDot(e.clientX, e.clientY);
+    if (withDot) { spawnDot(e.clientX, e.clientY); spawnRipple(e.clientX, e.clientY); }
   }
   function now2() { return performance.now(); }
   // клик/тап — точка + быстрый заплыв, и 4с не реагируем на движения мышью (кроме нового клика)

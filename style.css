@@ -2709,6 +2709,24 @@ figcaption {
   transform: translate(-50%, -50%) scaleX(0.2);
 }
 
+/* круги на воде — расходятся из точки тапа */
+.nearby__river-ripple {
+  position: absolute;
+  width: 7%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1.5px solid var(--blue);
+  transform: translate(-50%, -50%) scale(0.1);
+  opacity: 0.5;
+  z-index: 1;                     /* под утками */
+  pointer-events: none;
+  animation: river-ripple 1.7s ease-out forwards;
+}
+@keyframes river-ripple {
+  0%   { transform: translate(-50%, -50%) scale(0.1); opacity: 0.5; }
+  100% { transform: translate(-50%, -50%) scale(1);   opacity: 0; }
+}
+
 /* точка-триггер бабла на иллюстрации (позиция — в % от иллюстрации) */
 .river-pt {
   position: absolute;
