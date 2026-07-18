@@ -2948,6 +2948,47 @@ figcaption {
   opacity: 0.5;
 }
 
+/* блок «Поддержать» */
+.credits__support {
+  margin-top: clamp(48px, 6vw, 80px);
+  padding-top: clamp(28px, 4vw, 44px);
+  border-top: 1px solid rgba(28, 16, 7, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 64px);
+}
+.credits__support-text {
+  font-family: var(--f-body);
+  font-size: 14px;
+  line-height: 1.75;
+  max-width: 480px;
+  opacity: 0.75;
+}
+.credits__support-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+  font-family: var(--f-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--blue);
+  padding: 16px 28px;
+  border-radius: 100px;
+  transition: background 0.25s ease, gap 0.3s ease;
+}
+.credits__support-btn:hover {
+  background: var(--blue-dk);
+  gap: 20px;
+}
+@media (max-width: 720px) {
+  .credits__support { flex-direction: column; align-items: flex-start; }
+}
+
 /* ссылка singzings.ru */
 .credits__link { transition: opacity 0.2s ease; }
 .credits__link:hover { text-decoration: underline; }
