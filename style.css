@@ -2681,7 +2681,7 @@ figcaption {
 /* шлейф от движения утки — тонкая линия позади, тает */
 .nearby__river-wake {
   position: absolute;
-  height: 1.5px;
+  height: 2.5px;
   border-radius: 2px;
   background: var(--blue);
   opacity: 0.4;

@@ -956,9 +956,9 @@ if (hubStops.length && stopsEl) {
     const cy = el.offsetTop  + st.y + el.offsetHeight / 2;
     const behind = -st.dir * w * 0.85;               // позади по ходу движения
     const wake = document.createElement('div');
-    // направление «прочерчивания» — по ходу движения утки
-    wake.className = 'nearby__river-wake' + (st.dir < 0 ? ' nearby__river-wake--rtl' : '');
-    wake.style.width = (w * 1.1 / s.width * 100) + '%';
+    // направление «прочерчивания» — обратное ходу движения утки
+    wake.className = 'nearby__river-wake' + (st.dir > 0 ? ' nearby__river-wake--rtl' : '');
+    wake.style.width = (w * 0.7 / s.width * 100) + '%';
     wake.style.left  = ((cx + behind) / s.width  * 100) + '%';
     wake.style.top   = ((cy + el.offsetHeight * 0.3) / s.height * 100) + '%';
     stage.appendChild(wake);
