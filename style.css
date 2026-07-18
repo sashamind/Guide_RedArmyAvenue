@@ -2715,7 +2715,7 @@ figcaption {
   width: 4%;
   height: 1.8%;                  /* сплющенный по вертикали овал */
   border-radius: 50%;
-  border: 2.2px solid var(--blue);
+  border: 1.5px solid var(--blue);
   transform: translate(-50%, -50%) scale(0.15);
   z-index: 0;                     /* под утками и под крошками */
   pointer-events: none;
