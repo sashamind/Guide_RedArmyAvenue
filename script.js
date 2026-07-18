@@ -1100,23 +1100,34 @@ if (hubStops.length && stopsEl) {
     requestAnimationFrame(tick);
   }
 
-  // «кусочки хлеба»: 1–3 синих точки рядом с местом тапа, каждая висит чуть разное время
+  // «кусочки хлеба»: 1–3 точки появляются в месте тапа и слегка расплываются в стороны
   function spawnDot(clientX, clientY) {
     const s = stage.getBoundingClientRect();
     const n = 1 + Math.floor(Math.random() * 3);           // от 1 до 3
-    const jit = s.width * 0.005;                            // совсем небольшой разброс — точки рядышком
+    const jit = s.width * 0.006;                            // насколько расплываются
+    const baseL = (clientX - s.left) / s.width  * 100;
+    const baseT = (clientY - s.top ) / s.height * 100;
     for (let i = 0; i < n; i++) {
-      const jx = (Math.random() * 2 - 1) * jit;
-      const jy = (Math.random() * 2 - 1) * jit;
+      const jx = (Math.random() * 2 - 1) * jit / s.width  * 100;
+      const jy = (Math.random() * 2 - 1) * jit / s.height * 100;
       const dot = document.createElement('div');
       dot.className = 'nearby__river-dot';
-      dot.style.left = ((clientX - s.left + jx) / s.width  * 100) + '%';
-      dot.style.top  = ((clientY - s.top  + jy) / s.height * 100) + '%';
+      // старт — все в одной точке тапа
+      dot.style.left = baseL + '%';
+      dot.style.top  = baseT + '%';
+      // left/top плавно уезжают к случайному смещению — «расплываются»
+      dot.style.transition = 'transform 0.6s ease, opacity 0.6s ease, ' +
+                             'left 1.6s cubic-bezier(0.22, 0.61, 0.36, 1), ' +
+                             'top 1.6s cubic-bezier(0.22, 0.61, 0.36, 1)';
       stage.appendChild(dot);
       void dot.offsetWidth;                                // зафиксировать стартовый scale(0)
       const delay = Math.random() * 450;                   // у каждой точки своя задержка появления
       const hold  = 1600 + Math.random() * 1300;           // и своё время жизни ~1.6–2.9с
-      setTimeout(() => dot.classList.add('is-shown'), delay);          // вырастает 0→100%
+      setTimeout(() => {                                   // вырастает 0→100% и плывёт в сторону
+        dot.classList.add('is-shown');
+        dot.style.left = (baseL + jx) + '%';
+        dot.style.top  = (baseT + jy) + '%';
+      }, delay);
       setTimeout(() => dot.classList.add('is-gone'),  delay + hold);   // затем сжимается до 0
       setTimeout(() => dot.remove(),                  delay + hold + 700);
     }
