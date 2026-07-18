@@ -2950,14 +2950,23 @@ figcaption {
 
 /* блок «Поддержать» */
 .credits__support {
+  position: relative;
   margin-top: clamp(48px, 6vw, 80px);
-  padding-top: clamp(28px, 4vw, 44px);
-  border-top: 1px solid rgba(28, 16, 7, 0.1);
+  padding: clamp(32px, 4.5vw, 52px) clamp(20px, 4vw, 56px);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: clamp(20px, 3vw, 28px);
+}
+/* неровная синяя рамка — как у квадрата карты на главной */
+.credits__support::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--blue);
+  filter: url(#bubbleWobble);
+  pointer-events: none;
 }
 .credits__support-text {
   font-family: var(--f-body);
