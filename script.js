@@ -1113,14 +1113,16 @@ if (hubStops.length && stopsEl) {
     const s = stage.getBoundingClientRect();
     const leftPct = (clientX - s.left) / s.width  * 100;
     const topPct  = (clientY - s.top ) / s.height * 100;
+    const baseAng = Math.random() * 360;           // ориентация первого сегмента
     for (let i = 0; i < 2; i++) {
       const r = document.createElement('div');
       r.className = 'nearby__river-ripple';
       r.style.left = leftPct + '%';
       r.style.top  = topPct + '%';
       r.style.animationDelay = (i * 340) + 'ms';
-      // случайная ориентация и длина сегмента дуги
-      r.style.setProperty('--seg-from', Math.floor(Math.random() * 360) + 'deg');
+      // второй сегмент — примерно напротив первого (180° ± небольшой разброс)
+      const ang = baseAng + i * 180 + (Math.random() * 50 - 25);
+      r.style.setProperty('--seg-from', Math.round(ang) + 'deg');
       r.style.setProperty('--seg', (95 + Math.floor(Math.random() * 75)) + 'deg');
       stage.appendChild(r);
       setTimeout(() => r.remove(), 1700 + i * 340 + 200);
