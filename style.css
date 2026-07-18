@@ -2685,13 +2685,26 @@ figcaption {
   border-radius: 2px;
   background: var(--blue);
   opacity: 0.4;
-  transform: translate(-50%, -50%) scaleX(1);
+  transform: translate(-50%, -50%);
   transform-origin: center;
   z-index: 1;                     /* под утками */
   pointer-events: none;
-  transition: opacity 2.4s ease, transform 2.4s ease;
+  /* trim-path: прочерчивается с левого края и уходит в правый */
+  animation: wake-trim 2.4s ease forwards;
 }
-.nearby__river-wake.is-gone {
+/* зеркальный вариант — уходит в другую сторону (ставится из JS по направлению) */
+.nearby__river-wake--rtl { animation-name: wake-trim-rtl; }
+@keyframes wake-trim {
+  0%   { clip-path: inset(0 100% 0 0); }   /* ничего, прижато к левому краю */
+  40%  { clip-path: inset(0 0 0 0); }      /* прочерчено целиком */
+  100% { clip-path: inset(0 0 0 100%); }   /* стёрлось в правый край */
+}
+@keyframes wake-trim-rtl {
+  0%   { clip-path: inset(0 0 0 100%); }
+  40%  { clip-path: inset(0 0 0 0); }
+  100% { clip-path: inset(0 100% 0 0); }
+}
+.nearby__river-wake--legacy {
   opacity: 0;
   transform: translate(-50%, -50%) scaleX(0.2);
 }

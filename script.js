@@ -956,14 +956,13 @@ if (hubStops.length && stopsEl) {
     const cy = el.offsetTop  + st.y + el.offsetHeight / 2;
     const behind = -st.dir * w * 0.85;               // позади по ходу движения
     const wake = document.createElement('div');
-    wake.className = 'nearby__river-wake';
+    // направление «прочерчивания» — по ходу движения утки
+    wake.className = 'nearby__river-wake' + (st.dir < 0 ? ' nearby__river-wake--rtl' : '');
     wake.style.width = (w * 1.1 / s.width * 100) + '%';
     wake.style.left  = ((cx + behind) / s.width  * 100) + '%';
     wake.style.top   = ((cy + el.offsetHeight * 0.3) / s.height * 100) + '%';
     stage.appendChild(wake);
-    void wake.offsetWidth;
-    requestAnimationFrame(() => wake.classList.add('is-gone'));
-    setTimeout(() => wake.remove(), 2900);
+    setTimeout(() => wake.remove(), 2500);   // после проигрыша trim-анимации
   }
 
   // точка притяжения (тап/наведение), в координатах вьюпорта
