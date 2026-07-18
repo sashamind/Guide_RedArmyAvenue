@@ -2962,9 +2962,10 @@ figcaption {
 .credits__support-text {
   font-family: var(--f-body);
   font-size: 14px;
+  font-weight: 600;
   line-height: 1.75;
   max-width: 480px;
-  opacity: 0.75;
+  color: var(--blue);
 }
 .credits__support-btn {
   display: inline-flex;
