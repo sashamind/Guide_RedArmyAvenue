@@ -1135,7 +1135,7 @@ if (hubStops.length && stopsEl) {
       r.style.top  = topPct + '%';
       r.style.animationDelay = (i * 227) + 'ms';
       // каждый следующий круг чуть меньше предыдущего
-      const shrink = 1 - i * 0.22;                 // 100% → 78% → 56%
+      const shrink = 1 - i * 0.4;                  // 100% → 60%
       r.style.width  = (3   * shrink) + '%';
       r.style.height = (1.35 * shrink) + '%';
       // сегмент второго — примерно напротив первого ± небольшой разброс
