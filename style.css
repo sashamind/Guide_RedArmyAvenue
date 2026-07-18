@@ -2723,8 +2723,7 @@ figcaption {
   z-index: 6;
   min-width: 150px;
   max-width: min(260px, 52%);
-  /* внутренние поля — крупнее, т.к. рамка овальная и «съедает» углы */
-  padding: 26px 30px 30px;
+  padding: 18px 22px 24px;
   color: var(--dark);
   font-family: var(--f-body);
   font-size: 14px;
@@ -2757,7 +2756,7 @@ figcaption {
 .river-bubble__tail {
   fill: none;
   stroke: var(--blue);
-  stroke-width: 3;
+  stroke-width: 1.6;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;          /* толщина линии не искажается при растяжении */
