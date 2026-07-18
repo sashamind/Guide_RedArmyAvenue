@@ -2712,8 +2712,8 @@ figcaption {
 /* круги на воде — расходятся из точки тапа */
 .nearby__river-ripple {
   position: absolute;
-  width: 7%;
-  aspect-ratio: 1;
+  width: 4%;
+  height: 1.8%;                  /* сплющенный по вертикали овал */
   border-radius: 50%;
   border: 1.5px solid var(--blue);
   transform: translate(-50%, -50%) scale(0.1);
