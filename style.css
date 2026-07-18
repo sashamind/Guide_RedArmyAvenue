@@ -3591,6 +3591,11 @@ figcaption {
 @media (max-width: 560px) {
   :root { --pad-x: 18px; --pad-y: 48px; }
 
+  /* бабл на реке — чуть меньше */
+  .river-bubble { width: 150px; height: 74px; border-radius: 13px; }
+  .river-bubble__tail { left: 18px; width: 24px; height: 22px; }
+  .river-bubble__notch { left: 18px; width: 21px; }
+
   /* ── Hub hero title: уменьшаем и ограничиваем, чтобы влезало по ширине ── */
   .hub-hero__title { font-size: clamp(32px, 11vw, 46px); }
   .hub-hero__desc { font-size: 14px; }
