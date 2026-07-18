@@ -945,7 +945,7 @@ if (hubStops.length && stopsEl) {
     dir: Math.random() < 0.5 ? -1 : 1, wait: Math.random() * 60,
     sx: 0, sy: 0,                                    // индивидуальный разброс при сборе к точке
     speed: 0.5 + Math.random() * 1.3,               // у каждой утки заметно своя скорость
-    lastWake: 0, wakeEvery: 700 + Math.random() * 900   // периодичность шлейфа
+    lastWake: 0, wakeEvery: 2100 + Math.random() * 2700   // периодичность шлейфа
   }));
 
   // тонкий след позади утки — «шлейф» от движения
@@ -963,7 +963,7 @@ if (hubStops.length && stopsEl) {
     stage.appendChild(wake);
     void wake.offsetWidth;
     requestAnimationFrame(() => wake.classList.add('is-gone'));
-    setTimeout(() => wake.remove(), 1300);
+    setTimeout(() => wake.remove(), 2900);
   }
 
   // точка притяжения (тап/наведение), в координатах вьюпорта
@@ -1071,7 +1071,7 @@ if (hubStops.length && stopsEl) {
       // пока утка реально плывёт — периодически оставляем позади тонкий след
       if (Math.abs(stepX) + Math.abs(stepY) > 0.06 && now - st.lastWake > st.wakeEvery) {
         st.lastWake = now;
-        st.wakeEvery = 700 + Math.random() * 900;
+        st.wakeEvery = 2100 + Math.random() * 2700;
         spawnWake(st, s);
       }
       el.style.transform = 'translate(' + st.x.toFixed(2) + 'px,' + st.y.toFixed(2) + 'px) scaleX(' + st.dir + ')';
