@@ -2951,8 +2951,10 @@ figcaption {
 /* блок «Поддержать» */
 .credits__support {
   position: relative;
-  margin-top: clamp(48px, 6vw, 80px);
-  padding: clamp(32px, 4.5vw, 52px) clamp(20px, 4vw, 56px);
+  width: fit-content;          /* рамка только вокруг содержимого, не на весь экран */
+  max-width: 100%;
+  margin: clamp(48px, 6vw, 80px) auto 0;
+  padding: clamp(32px, 4.5vw, 52px) clamp(28px, 5vw, 72px);
   display: flex;
   flex-direction: column;
   align-items: center;
