@@ -1141,7 +1141,7 @@ if (hubStops.length && stopsEl) {
       // сегмент второго — примерно напротив первого ± небольшой разброс
       const ang = baseAng + i * 180 + (Math.random() * 40 - 20);
       r.style.setProperty('--seg-from', Math.round(ang) + 'deg');
-      r.style.setProperty('--seg', (144 + Math.floor(Math.random() * 144)) + 'deg'); // 40–80% круга
+      r.style.setProperty('--seg', (180 + Math.floor(Math.random() * 144)) + 'deg'); // 50–90% круга
       stage.appendChild(r);
       setTimeout(() => r.remove(), 1130 + i * 227 + 200);
     }
