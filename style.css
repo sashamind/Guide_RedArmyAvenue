@@ -2732,16 +2732,18 @@ figcaption {
   font-size: 14px;
   line-height: 1.5;
   /* хвост снизу-слева стоит у точки; бабл раскрывается вверх-вправо */
-  transform: translate(-16%, calc(-100% - 26px)) scale(0.96);
+  /* растёт из точки тапа (низ-слева, у хвостика) с лёгким поворотом */
+  transform: translate(-16%, calc(-100% - 26px)) scale(0) rotate(-7deg);
   transform-origin: 16% 100%;
   opacity: 0;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.2s ease,
+              transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);  /* едва заметный bounce */
   pointer-events: none;
 }
 .river-bubble[hidden] { display: none; }
 .river-bubble.is-open {
   opacity: 1;
-  transform: translate(-16%, calc(-100% - 26px)) scale(1);
+  transform: translate(-16%, calc(-100% - 26px)) scale(1) rotate(0deg);
 }
 .river-bubble p { margin: 0; }
 
