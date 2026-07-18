@@ -1257,6 +1257,8 @@ if (hubStops.length && stopsEl) {
   document.addEventListener('click', (e) => {
     if (open && e.target !== pt && !bubble.contains(e.target)) closeBubble();
   });
+  // начали скроллить страницу (вверх/вниз) — бабл сворачивается
+  window.addEventListener('scroll', () => { if (open) closeBubble(); }, { passive: true });
 
   /* ── dev (#duckzone): перетаскивание точки + координаты в панели ── */
   function show() {
