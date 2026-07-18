@@ -2717,13 +2717,13 @@ figcaption {
   border-radius: 50%;
   border: 1.5px solid var(--blue);
   transform: translate(-50%, -50%) scale(0.1);
-  opacity: 0.5;
-  z-index: 1;                     /* под утками */
+  opacity: 1;
+  z-index: 0;                     /* под утками и под крошками */
   pointer-events: none;
   animation: river-ripple 1.7s ease-out forwards;
 }
 @keyframes river-ripple {
-  0%   { transform: translate(-50%, -50%) scale(0.1); opacity: 0.5; }
+  0%   { transform: translate(-50%, -50%) scale(0.1); opacity: 1; }
   100% { transform: translate(-50%, -50%) scale(1);   opacity: 0; }
 }
 
