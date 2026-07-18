@@ -2720,6 +2720,11 @@ figcaption {
   opacity: 1;                     /* прозрачность не анимируется */
   z-index: 0;                     /* под утками и под крошками */
   pointer-events: none;
+  /* оставляем только сегмент дуги — как обрезка trim-path (угол задаёт JS) */
+  -webkit-mask: conic-gradient(from var(--seg-from, -40deg),
+                #000 0 var(--seg, 130deg), transparent 0);
+          mask: conic-gradient(from var(--seg-from, -40deg),
+                #000 0 var(--seg, 130deg), transparent 0);
   animation: river-ripple 1.7s ease-out forwards;
 }
 /* появляется ростом, исчезает истончением линии (без opacity) */

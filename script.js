@@ -1119,6 +1119,9 @@ if (hubStops.length && stopsEl) {
       r.style.left = leftPct + '%';
       r.style.top  = topPct + '%';
       r.style.animationDelay = (i * 200) + 'ms';
+      // случайная ориентация и длина сегмента дуги
+      r.style.setProperty('--seg-from', Math.floor(Math.random() * 360) + 'deg');
+      r.style.setProperty('--seg', (95 + Math.floor(Math.random() * 75)) + 'deg');
       stage.appendChild(r);
       setTimeout(() => r.remove(), 1700 + i * 200 + 200);
     }
