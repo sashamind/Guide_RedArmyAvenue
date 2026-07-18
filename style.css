@@ -2752,6 +2752,10 @@ figcaption {
   z-index: 0;
 }
 .river-bubble__fill { fill: #FAFAF5; }        /* светлая заливка — читается текст */
+.river-bubble__tail-fill {                     /* белая заливка хвостика (та же дрожь, что у линии) */
+  fill: #FAFAF5;
+  filter: url(#bubbleWobble);
+}
 .river-bubble__oval,
 .river-bubble__tail {
   fill: none;
