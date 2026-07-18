@@ -1128,7 +1128,7 @@ if (hubStops.length && stopsEl) {
     const leftPct = (clientX - s.left) / s.width  * 100;
     const topPct  = (clientY - s.top ) / s.height * 100;
     const baseAng = Math.random() * 360;           // ориентация первого сегмента
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 2; i++) {
       const r = document.createElement('div');
       r.className = 'nearby__river-ripple';
       r.style.left = leftPct + '%';
@@ -1138,8 +1138,8 @@ if (hubStops.length && stopsEl) {
       const shrink = 1 - i * 0.22;                 // 100% → 78% → 56%
       r.style.width  = (3   * shrink) + '%';
       r.style.height = (1.35 * shrink) + '%';
-      // сегменты распределены по кругу (~120° друг от друга) ± небольшой разброс
-      const ang = baseAng + i * 120 + (Math.random() * 40 - 20);
+      // сегмент второго — примерно напротив первого ± небольшой разброс
+      const ang = baseAng + i * 180 + (Math.random() * 40 - 20);
       r.style.setProperty('--seg-from', Math.round(ang) + 'deg');
       r.style.setProperty('--seg', (144 + Math.floor(Math.random() * 144)) + 'deg'); // 40–80% круга
       stage.appendChild(r);
