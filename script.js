@@ -1073,7 +1073,21 @@ if (hubStops.length && stopsEl) {
         st.wakeEvery = 2100 + Math.random() * 2700;
         spawnWake(st, s);
       }
-      el.style.transform = 'translate(' + st.x.toFixed(2) + 'px,' + st.y.toFixed(2) + 'px) scaleX(' + st.dir + ')';
+
+      // «клёв»: выбранная утка, доплыв до точки, быстро наклоняется к ней и возвращается
+      let tilt = 0;
+      if (duckChase && attract.fast && idx === attract.peckIdx && !st.peckAt &&
+          Math.hypot(dx, dy) < 2) {
+        st.peckAt = now;                       // доплыла — старт наклона
+      }
+      if (st.peckAt) {
+        const pr = (now - st.peckAt) / 450;    // наклон-возврат за ~0.45с
+        if (pr >= 1) { st.peckAt = 0; }
+        // синус 0→10°→0; в зеркальном scaleX поворот сам отзеркалится в сторону точки
+        else tilt = Math.sin(Math.PI * pr) * 10;
+      }
+      el.style.transform = 'translate(' + st.x.toFixed(2) + 'px,' + st.y.toFixed(2) + 'px) scaleX(' + st.dir + ')' +
+                           (tilt ? ' rotate(' + tilt.toFixed(1) + 'deg)' : '');
     });
 
     // слои по глубине в реальном времени: кто ниже по экрану (больше Y с учётом смещения) —
@@ -1142,6 +1156,13 @@ if (hubStops.length && stopsEl) {
     attract = { x: e.clientX, y: e.clientY, fast: fast };
     // клик держит цель дольше (4с), наведение — коротко (обновляется каждым движением)
     attractUntil = now2() + (fast ? 4000 : 2600);
+    if (fast) {
+      // выбираем утку, которая «клюнет» точку (не одиночку), и сбрасываем прошлые клевки
+      let n;
+      do { n = Math.floor(Math.random() * wob.length); } while (n === loner && wob.length > 1);
+      attract.peckIdx = n;
+      wob.forEach((st) => { st.peckAt = 0; });
+    }
     if (fresh) wob.forEach((st, i) => {               // тесная кучка вокруг точки — будто у кусочка хлеба
       const ang = (i / wob.length) * Math.PI * 2 + Math.random() * 1.2;
       const r = st.el.offsetWidth * (0.28 + Math.random() * 0.22);
