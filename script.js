@@ -1318,7 +1318,8 @@ if (hubStops.length && stopsEl) {
     items.forEach((it) => {
       // u — расстояние от левого края в «шагах» карточек: 0, 1, 2…
       const u = Math.max(0, Math.min(2, (it.offsetLeft - sl) / step));
-      const opacity = u <= 1 ? 1 - 0.5 * u : 0.5 - 0.25 * (u - 1);
+      // 1-я — 100%, 2-я — 25%, 3-я — 12.5%
+      const opacity = u <= 1 ? 1 - 0.75 * u : 0.25 - 0.125 * (u - 1);
       it.style.setProperty('--tlo', opacity.toFixed(3));
     });
   }
