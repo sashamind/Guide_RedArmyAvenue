@@ -2742,6 +2742,33 @@ figcaption {
   display: block;
   border-radius: 2px;
 }
+/* витражи: тот же приём — кривая повёрнутая рамка + фото с обратным наклоном
+   (обёртка .nearby__photo-frame по размеру фото внутри центрирующего figure) */
+.nearby__photo-frame {
+  position: relative;
+  width: min(400px, 100%);
+}
+.nearby__photo-frame img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  transform: rotate(1.6deg);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.nearby__photo-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--blue);
+  filter: url(#bubbleWobble);
+  transform: rotate(-2.4deg);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .nearby__photo-frame:hover::before { transform: rotate(0deg); }
+  .nearby__photo-frame:hover img     { transform: rotate(0deg); }
+}
 /* фото под текстом про Иверскую церковь — во всю ширину левой текстовой колонки */
 .nearby__photo--left {
   position: relative;
