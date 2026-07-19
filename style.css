@@ -2538,7 +2538,7 @@ figcaption {
 /* вывод-абзац — вне скролла, ниже слайдера и по центру; весь розовый, жирный, крупнее */
 .timeline-coda {
   max-width: 720px;
-  margin: clamp(156px, 12vw, 210px) auto 0;
+  margin: clamp(156px, 12vw, 210px) auto clamp(80px, 9vw, 150px);
   padding-top: 24px;
   border-top: 1px solid var(--border-lt);
   font-family: var(--f-body);
