@@ -2678,6 +2678,24 @@ figcaption {
   opacity: 0;
 }
 
+/* текст-история в блоке «Что ещё посмотреть» — справа, под заголовком */
+.nearby__story {
+  display: flex;
+  justify-content: flex-end;
+}
+.nearby__story p {
+  max-width: 560px;
+  font-family: var(--f-body);
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--dark);
+  opacity: 0.85;
+}
+.nearby__story strong { color: var(--blue); }
+@media (max-width: 720px) {
+  .nearby__story { justify-content: flex-start; }
+}
+
 /* шлейф от движения утки — тонкая линия позади, тает */
 .nearby__river-wake {
   position: absolute;
