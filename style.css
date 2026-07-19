@@ -2399,6 +2399,12 @@ figcaption {
   scroll-snap-type: x proximity;
   cursor: grab;
   padding-bottom: 8px;
+  /* скролл обрезается краями экрана, а не полями контейнера */
+  margin-left: calc(-1 * var(--pad-x));
+  margin-right: calc(-1 * var(--pad-x));
+  padding-left: var(--pad-x);
+  padding-right: var(--pad-x);
+  scroll-padding-left: var(--pad-x);
 }
 .timeline::-webkit-scrollbar { display: none; }   /* WebKit: скрыть полосу */
 .timeline.is-dragging { cursor: grabbing; scroll-snap-type: none; }
