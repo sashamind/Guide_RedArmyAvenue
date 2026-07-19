@@ -2692,6 +2692,11 @@ figcaption {
   opacity: 0.85;
 }
 .nearby__story strong { color: var(--blue); }
+/* второй абзац — слева, с отступом от первого */
+.nearby__story--left {
+  justify-content: flex-start;
+  margin-top: clamp(48px, 6vw, 96px);
+}
 @media (max-width: 720px) {
   .nearby__story { justify-content: flex-start; }
 }
