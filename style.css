@@ -2742,9 +2742,9 @@ figcaption {
   display: block;
   border-radius: 2px;
 }
-/* фото под текстом про Иверскую церковь — по центру левой текстовой колонки */
+/* фото под текстом про Иверскую церковь — во всю ширину левой текстовой колонки */
 .nearby__photo--left { margin-left: 0; margin-right: auto; }
-.nearby__photo--left img { width: min(480px, 100%); }
+.nearby__photo--left img { width: 100%; }
 @media (max-width: 720px) {
   .nearby__story { justify-content: flex-start; }
 }
