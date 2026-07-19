@@ -2787,6 +2787,7 @@ figcaption {
 /* фото под текстом про Иверскую церковь — во всю ширину левой текстовой колонки */
 .nearby__photo--left {
   position: relative;
+  margin-top: clamp(56px, 6.5vw, 96px);   /* пониже от текста */
   margin-left: 0;
   margin-right: auto;
 }
