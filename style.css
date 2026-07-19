@@ -3292,6 +3292,20 @@ figcaption {
     opacity: 1;
     transition: opacity 0.25s ease;
   }
+  /* невидимый «мостик» через gap — курсор между карточками не сбрасывает ховер */
+  .tl-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 100%;
+    width: clamp(48px, 6vw, 110px);
+  }
+  /* во время перетаскивания ховер не вмешивается — только фокус по позиции */
+  .timeline.is-dragging > .tl-item,
+  .timeline[data-animate="stagger"].is-visible.is-dragging > .tl-item {
+    opacity: var(--tlo, 1);
+  }
 }
 
 /* Stagger child delays */
