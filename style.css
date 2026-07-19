@@ -3284,11 +3284,11 @@ figcaption {
 }
 /* наведение: карточка под курсором — активная, все остальные гаснут */
 @media (hover: hover) {
-  .timeline[data-animate="stagger"].is-visible:has(.tl-item:hover) > .tl-item {
+  .timeline[data-animate="stagger"].is-visible:has(.tl-item:hover) > .tl-item:not(:hover) {
     opacity: min(var(--tlo, 1), 0.35);
     transition: opacity 0.25s ease;
   }
-  .timeline[data-animate="stagger"].is-visible > .tl-item:hover {
+  .timeline[data-animate="stagger"].is-visible:has(.tl-item:hover) > .tl-item:hover {
     opacity: 1;
     transition: opacity 0.25s ease;
   }
