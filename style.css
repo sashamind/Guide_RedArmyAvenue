@@ -2729,6 +2729,21 @@ figcaption {
   justify-content: flex-end;
   margin-top: clamp(48px, 6vw, 96px);
 }
+/* фото под текстом про витражи — справа, той же колонкой */
+.nearby__photo {
+  display: flex;
+  justify-content: flex-end;
+  margin: clamp(28px, 3.5vw, 48px) 0 0;
+}
+.nearby__photo img {
+  width: min(400px, 100%);
+  height: auto;
+  display: block;
+  border-radius: 2px;
+}
+@media (max-width: 720px) {
+  .nearby__photo { justify-content: flex-start; }
+}
 @media (max-width: 720px) {
   .nearby__story { justify-content: flex-start; }
 }
