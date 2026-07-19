@@ -2540,7 +2540,9 @@ figcaption {
   max-width: 720px;
   margin: clamp(156px, 12vw, 210px) auto clamp(80px, 9vw, 150px);
   padding-top: 24px;
+  padding-bottom: 24px;
   border-top: 1px solid var(--border-lt);
+  border-bottom: 1px solid var(--border-lt);
   font-family: var(--f-body);
   font-size: clamp(17px, 1.6vw, 20px);
   font-weight: 600;
