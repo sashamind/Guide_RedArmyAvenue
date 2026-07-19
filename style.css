@@ -2495,23 +2495,27 @@ figcaption {
   filter: grayscale(35%) contrast(1.04) brightness(0.96);
 }
 
-/* фото + вывод-абзац в последнем слайде */
 .tl-item__side {
   display: flex;
   flex-direction: column;
 }
-.tl-item__coda {
-  margin-top: 26px;
-  padding-top: 22px;
+
+/* вывод-абзац — вне скролла, ниже слайдера и по центру */
+.timeline-coda {
+  max-width: 620px;
+  margin: clamp(56px, 7vw, 110px) auto 0;
+  padding-top: 24px;
   border-top: 1px solid var(--border-lt);
   font-family: var(--f-body);
   font-size: 15px;
   line-height: 1.75;
+  text-align: center;
   color: rgba(216, 223, 247, 0.62);
 }
 
 @media (max-width: 720px) {
   .tl-item { width: 84vw; }
+  .timeline-coda { text-align: left; margin-top: 44px; }
 }
 
 /* ═══════════════════════════════════════
