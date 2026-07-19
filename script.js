@@ -1305,16 +1305,23 @@ if (hubStops.length && stopsEl) {
   // после перетаскивания гасим случайный клик по карточке
   track.addEventListener('click', (e) => { if (moved) e.stopPropagation(); }, true);
 
-  // фокус на левой карточке: правые прозрачнее и чуть меньше (--tlf: 0 в фокусе … 1)
+  // фокус на левой карточке: 1-я — 100%/100%, 2-я — 50%/80%, 3-я — 25%/60%
+  // (интерполируется плавно по позиции; --tlo прозрачность, --tls масштаб)
   const items = Array.prototype.slice.call(track.querySelectorAll('.tl-item'));
   let focusRaf = 0;
   function updateFocus() {
     focusRaf = 0;
     const sl = track.scrollLeft;
+    const step = items.length > 1
+      ? items[1].offsetLeft - items[0].offsetLeft
+      : track.clientWidth;
     items.forEach((it) => {
-      const d = (it.offsetLeft - sl) / (it.offsetWidth * 0.9);
-      const f = Math.max(0, Math.min(1, d));
-      it.style.setProperty('--tlf', f.toFixed(3));
+      // u — расстояние от левого края в «шагах» карточек: 0, 1, 2…
+      const u = Math.max(0, Math.min(2, (it.offsetLeft - sl) / step));
+      const opacity = u <= 1 ? 1 - 0.5 * u : 0.5 - 0.25 * (u - 1);
+      const scale   = 1 - 0.2 * u;
+      it.style.setProperty('--tlo', opacity.toFixed(3));
+      it.style.setProperty('--tls', scale.toFixed(3));
     });
   }
   track.addEventListener('scroll', () => {

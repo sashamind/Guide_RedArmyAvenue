@@ -2428,14 +2428,15 @@ figcaption {
   flex: 0 0 auto;
   width: min(460px, 82vw);
   scroll-snap-align: start;
-  /* фокус на левой карточке: правые прозрачнее (--tlf: 0 в фокусе … 1 справа, ставит JS) */
-  opacity: calc(1 - 0.6 * var(--tlf, 0));
+  /* фокус на левой карточке: 1-я — 100%, 2-я — 50%, 3-я — 25% (--tlo ставит JS) */
+  opacity: var(--tlo, 1);
 }
-/* и чуть меньше — масштабируем контент, но не маркер (линия остаётся непрерывной) */
+/* и меньше: 1-я — 100%, 2-я — 80%, 3-я — 60% размера; маркер не масштабируем —
+   линия остаётся непрерывной */
 .tl-item__head,
 .tl-item__figure,
 .tl-item__text {
-  transform: scale(calc(1 - 0.05 * var(--tlf, 0)));
+  transform: scale(var(--tls, 1));
   transform-origin: left top;
 }
 
@@ -3283,9 +3284,9 @@ figcaption {
   opacity: 1;
   transform: translateY(0);
 }
-/* таймлайн: после появления прозрачностью управляет фокус (--tlf), а не stagger */
+/* таймлайн: после появления прозрачностью управляет фокус (--tlo), а не stagger */
 .timeline[data-animate="stagger"].is-visible > .tl-item {
-  opacity: calc(1 - 0.6 * var(--tlf, 0));
+  opacity: var(--tlo, 1);
   transition: opacity 0.15s linear,
               transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
