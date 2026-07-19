@@ -3282,6 +3282,13 @@ figcaption {
   transition: opacity 0.15s linear,
               transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
+/* наведение делает карточку активной (полностью яркой) */
+@media (hover: hover) {
+  .timeline[data-animate="stagger"].is-visible > .tl-item:hover {
+    opacity: 1;
+    transition: opacity 0.25s ease;
+  }
+}
 
 /* Stagger child delays */
 [data-animate="stagger"].is-visible > *:nth-child(1) { transition-delay: 0.00s; }
