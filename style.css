@@ -2535,17 +2535,18 @@ figcaption {
 
 .tl-item__head .tl-item__title { margin-bottom: 0; }
 
-/* вывод-абзац — вне скролла, ниже слайдера и по центру */
+/* вывод-абзац — вне скролла, ниже слайдера и по центру; весь розовый, жирный, крупнее */
 .timeline-coda {
-  max-width: 620px;
+  max-width: 720px;
   margin: clamp(56px, 7vw, 110px) auto 0;
   padding-top: 24px;
   border-top: 1px solid var(--border-lt);
   font-family: var(--f-body);
-  font-size: 15px;
-  line-height: 1.75;
+  font-size: clamp(17px, 1.6vw, 20px);
+  font-weight: 600;
+  line-height: 1.7;
   text-align: center;
-  color: rgba(216, 223, 247, 0.62);
+  color: var(--amber);
 }
 
 @media (max-width: 720px) {
