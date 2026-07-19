@@ -1319,9 +1319,7 @@ if (hubStops.length && stopsEl) {
       // u — расстояние от левого края в «шагах» карточек: 0, 1, 2…
       const u = Math.max(0, Math.min(2, (it.offsetLeft - sl) / step));
       const opacity = u <= 1 ? 1 - 0.5 * u : 0.5 - 0.25 * (u - 1);
-      const scale   = 1 - 0.2 * u;
       it.style.setProperty('--tlo', opacity.toFixed(3));
-      it.style.setProperty('--tls', scale.toFixed(3));
     });
   }
   track.addEventListener('scroll', () => {
