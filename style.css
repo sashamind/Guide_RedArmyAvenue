@@ -2737,7 +2737,7 @@ figcaption {
   gap: clamp(28px, 5vw, 80px);
   margin-top: clamp(28px, 3.5vw, 48px);
 }
-.nearby__booth { flex: 0 1 min(434px, 32%); }
+.nearby__booth { flex: 0 1 min(434px, 32%); margin-left: clamp(32px, 7vw, 130px); }
 .nearby__booth img { width: 100%; height: auto; display: block; }
 @media (max-width: 720px) {
   .nearby__row { flex-direction: column; align-items: flex-start; }
