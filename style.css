@@ -3282,8 +3282,12 @@ figcaption {
   transition: opacity 0.15s linear,
               transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
-/* наведение делает карточку активной (полностью яркой) */
+/* наведение: карточка под курсором — активная, все остальные гаснут */
 @media (hover: hover) {
+  .timeline[data-animate="stagger"].is-visible:has(.tl-item:hover) > .tl-item {
+    opacity: min(var(--tlo, 1), 0.35);
+    transition: opacity 0.25s ease;
+  }
   .timeline[data-animate="stagger"].is-visible > .tl-item:hover {
     opacity: 1;
     transition: opacity 0.25s ease;
