@@ -1282,6 +1282,30 @@ if (hubStops.length && stopsEl) {
   window.addEventListener('load', activate);
 })();
 
+/* ═══ Таймлайн: горизонтальный скролл — перетаскивание мышью (desktop) ═══ */
+(() => {
+  const track = document.querySelector('.timeline');
+  if (!track) return;
+  let down = false, startX = 0, startL = 0, moved = false;
+  track.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== 'mouse') return;      // тач скроллит нативно
+    down = true; moved = false;
+    startX = e.clientX; startL = track.scrollLeft;
+  });
+  window.addEventListener('pointermove', (e) => {
+    if (!down) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 4) { moved = true; track.classList.add('is-dragging'); }
+    track.scrollLeft = startL - dx;
+  });
+  window.addEventListener('pointerup', () => {
+    down = false;
+    track.classList.remove('is-dragging');
+  });
+  // после перетаскивания гасим случайный клик по карточке
+  track.addEventListener('click', (e) => { if (moved) e.stopPropagation(); }, true);
+})();
+
 /* ═══ Точка-бабл на реке: тап → тёмный «кривой» бабл; в dev — точку можно двигать ═══ */
 (() => {
   const stage  = document.querySelector('.nearby__river-stage');
