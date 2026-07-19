@@ -886,7 +886,17 @@ figcaption {
 /* стопка слоёв облика: build-1 базовый, 2 и 3 накладываются поверх */
 .portico-stack { position: relative; }
 
+/* базовый слой (vokzal-build-5): всегда виден, под всеми остальными */
+.portico-base {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .portico-layer {
+  position: relative;   /* позиционирован → рисуется поверх базового слоя */
   width: 100%;
   height: auto;
   display: block;
