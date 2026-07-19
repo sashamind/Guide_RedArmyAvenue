@@ -2743,8 +2743,26 @@ figcaption {
   border-radius: 2px;
 }
 /* фото под текстом про Иверскую церковь — во всю ширину левой текстовой колонки */
-.nearby__photo--left { margin-left: 0; margin-right: auto; }
-.nearby__photo--left img { width: 100%; }
+.nearby__photo--left {
+  position: relative;
+  margin-left: 0;
+  margin-right: auto;
+}
+.nearby__photo--left img {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+/* слегка кривой (как на главной) и чуть повёрнутый прямоугольник под фото */
+.nearby__photo--left::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--blue);
+  filter: url(#bubbleWobble);
+  transform: rotate(-2.4deg);
+  pointer-events: none;
+}
 @media (max-width: 720px) {
   .nearby__story { justify-content: flex-start; }
 }
