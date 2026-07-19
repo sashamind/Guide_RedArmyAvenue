@@ -2434,7 +2434,7 @@ figcaption {
   height: 2px;
   background: var(--amber);
   opacity: 0.28;
-  filter: url(#routeWobble);
+  filter: url(#tlWobbleH);   /* мягкая волна: линия не уходит из центров точек */
 }
 .tl-item:last-child .tl-item__marker::before { width: calc(100% - 6px); }
 .tl-item__dot {
