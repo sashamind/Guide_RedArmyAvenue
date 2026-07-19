@@ -2458,7 +2458,8 @@ figcaption {
   opacity: 0.28;
   filter: url(#tlWobbleH);   /* мягкая волна: линия не уходит из центров точек */
 }
-.tl-item:last-child .tl-item__marker::before { width: calc(100% - 6px); }
+/* линия заканчивается на точке «Современность» — у последней карточки сегмента нет */
+.tl-item:last-child .tl-item__marker::before { display: none; }
 .tl-item__dot {
   position: relative;
   display: block;
