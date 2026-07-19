@@ -2407,11 +2407,25 @@ figcaption {
   position: relative;
   flex: 0 0 auto;
   width: min(460px, 82vw);
-  padding-top: 44px;                   /* место под точку и линию */
   scroll-snap-align: start;
 }
-/* горизонтальная линия времени: каждый слайд рисует свой сегмент (с перекрытием gap) */
-.tl-item::before {
+
+/* шапка (год + заголовок) — над линией; фикс. высота, чтобы линии всех слайдов совпадали */
+.tl-item__head {
+  min-height: clamp(84px, 9vw, 104px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: 18px;
+}
+
+/* маркер в потоке: точка + горизонтальный сегмент линии (с перекрытием gap) */
+.tl-item__marker {
+  position: relative;
+  height: 26px;
+  margin-bottom: 24px;
+}
+.tl-item__marker::before {
   content: '';
   position: absolute;
   top: 12px;
@@ -2422,9 +2436,7 @@ figcaption {
   opacity: 0.28;
   filter: url(#routeWobble);
 }
-.tl-item:last-child::before { width: calc(100% - 6px); }
-
-.tl-item__marker { position: absolute; top: 0; left: 0; }
+.tl-item:last-child .tl-item__marker::before { width: calc(100% - 6px); }
 .tl-item__dot {
   position: relative;
   display: block;
@@ -2436,8 +2448,6 @@ figcaption {
   box-shadow: 0 0 0 5px var(--dark);   /* «разрыв» линии вокруг точки */
   z-index: 1;
 }
-
-.tl-item__content { display: block; }
 
 .tl-item__year {
   display: block;
@@ -2477,7 +2487,7 @@ figcaption {
 }
 
 .tl-item__figure {
-  margin: 26px 0 0;
+  margin: 0 0 24px;         /* фото над текстом */
   overflow: hidden;
   border-radius: 2px;
   aspect-ratio: 3 / 2;      /* резервирует место — колонка не схлопывается до загрузки фото */
@@ -2495,10 +2505,7 @@ figcaption {
   filter: grayscale(35%) contrast(1.04) brightness(0.96);
 }
 
-.tl-item__side {
-  display: flex;
-  flex-direction: column;
-}
+.tl-item__head .tl-item__title { margin-bottom: 0; }
 
 /* вывод-абзац — вне скролла, ниже слайдера и по центру */
 .timeline-coda {
