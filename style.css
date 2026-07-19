@@ -2761,7 +2761,11 @@ figcaption {
   border: 2px solid var(--blue);
   filter: url(#bubbleWobble);
   transform: rotate(-2.4deg);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
+}
+@media (hover: hover) {
+  .nearby__photo--left:hover::before { transform: rotate(0deg); }
 }
 @media (max-width: 720px) {
   .nearby__story { justify-content: flex-start; }
