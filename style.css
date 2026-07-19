@@ -2408,6 +2408,15 @@ figcaption {
   flex: 0 0 auto;
   width: min(460px, 82vw);
   scroll-snap-align: start;
+  /* фокус на левой карточке: правые прозрачнее (--tlf: 0 в фокусе … 1 справа, ставит JS) */
+  opacity: calc(1 - 0.6 * var(--tlf, 0));
+}
+/* и чуть меньше — масштабируем контент, но не маркер (линия остаётся непрерывной) */
+.tl-item__head,
+.tl-item__figure,
+.tl-item__text {
+  transform: scale(calc(1 - 0.05 * var(--tlf, 0)));
+  transform-origin: left top;
 }
 
 /* шапка (год + заголовок) — над линией; фикс. высота, чтобы линии всех слайдов совпадали */

@@ -1304,6 +1304,24 @@ if (hubStops.length && stopsEl) {
   });
   // после перетаскивания гасим случайный клик по карточке
   track.addEventListener('click', (e) => { if (moved) e.stopPropagation(); }, true);
+
+  // фокус на левой карточке: правые прозрачнее и чуть меньше (--tlf: 0 в фокусе … 1)
+  const items = Array.prototype.slice.call(track.querySelectorAll('.tl-item'));
+  let focusRaf = 0;
+  function updateFocus() {
+    focusRaf = 0;
+    const sl = track.scrollLeft;
+    items.forEach((it) => {
+      const d = (it.offsetLeft - sl) / (it.offsetWidth * 0.9);
+      const f = Math.max(0, Math.min(1, d));
+      it.style.setProperty('--tlf', f.toFixed(3));
+    });
+  }
+  track.addEventListener('scroll', () => {
+    if (!focusRaf) focusRaf = requestAnimationFrame(updateFocus);
+  }, { passive: true });
+  window.addEventListener('resize', updateFocus);
+  updateFocus();
 })();
 
 /* ═══ Точка-бабл на реке: тап → тёмный «кривой» бабл; в dev — точку можно двигать ═══ */
