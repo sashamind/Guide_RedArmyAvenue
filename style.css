@@ -2442,7 +2442,7 @@ figcaption {
   display: block;
   width: 14px;
   height: 14px;
-  margin-top: 6px;
+  top: 6px;                            /* не margin: он схлопывался, и точка уезжала выше линии */
   border-radius: 50%;
   background: var(--amber);
   box-shadow: 0 0 0 5px var(--dark);   /* «разрыв» линии вокруг точки */
