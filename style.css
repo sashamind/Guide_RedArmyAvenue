@@ -2399,12 +2399,26 @@ figcaption {
   scroll-snap-type: x proximity;
   cursor: grab;
   padding-bottom: 8px;
-  /* скролл обрезается краями экрана, а не полями контейнера */
-  margin-left: calc(-1 * var(--pad-x));
-  margin-right: calc(-1 * var(--pad-x));
   padding-left: var(--pad-x);
   padding-right: var(--pad-x);
   scroll-padding-left: var(--pad-x);
+}
+/* обёртка: во всю ширину экрана + неподвижный градиент справа (сливает карточки с фоном) */
+.timeline-wrap {
+  position: relative;
+  margin-left: calc(-1 * var(--pad-x));
+  margin-right: calc(-1 * var(--pad-x));
+}
+.timeline-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 8px;
+  width: clamp(70px, 11vw, 180px);
+  background: linear-gradient(to right, rgba(28, 16, 7, 0), var(--dark));
+  pointer-events: none;
+  z-index: 2;
 }
 .timeline::-webkit-scrollbar { display: none; }   /* WebKit: скрыть полосу */
 .timeline.is-dragging { cursor: grabbing; scroll-snap-type: none; }
