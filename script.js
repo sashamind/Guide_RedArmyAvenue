@@ -199,6 +199,12 @@ window.addEventListener('load', function () {
   initStopMotionLottie(document.getElementById('riverBirds'), SB + 'birds_lottie.json', {
     className: 'nearby__river-birds-anim', hideImg: false, pauseMs: 3000
   });
+
+  // киоск прессы + телефонная будка: покадрово, цикл без пауз (pauseMs 0)
+  initStopMotionLottie(document.querySelector('.nearby__booth'),
+    SB + 'press-and-phone-booth_lottie.json', {
+      className: 'nearby__booth-anim', hideImg: true, pauseMs: 0
+    });
 });
 
 /* ─── 3b. HERO TITLE FIT (мобильный): максимально крупный, но в экран ─── */

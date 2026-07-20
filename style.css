@@ -2740,8 +2740,15 @@ figcaption {
   gap: clamp(28px, 5vw, 80px);
   margin-top: clamp(28px, 3.5vw, 48px);
 }
-.nearby__booth { flex: 0 1 min(434px, 32%); margin-left: clamp(32px, 7vw, 130px); }
-.nearby__booth img { width: 100%; height: auto; display: block; }
+.nearby__booth {
+  flex: 0 1 min(434px, 32%);
+  margin-left: clamp(32px, 7vw, 130px);
+  position: relative;
+  aspect-ratio: 1118 / 549;   /* держит высоту, когда статичный PNG скрыт под анимацией */
+}
+.nearby__booth img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.nearby__booth-anim { position: absolute; inset: 0; }
+.nearby__booth-anim svg { width: 100%; height: 100%; display: block; }
 @media (max-width: 720px) {
   .nearby__row { flex-direction: column; align-items: flex-start; }
   .nearby__booth { flex: none; width: 100%; margin-left: 0; }
