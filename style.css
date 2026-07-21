@@ -2904,6 +2904,14 @@ figcaption {
   outline: 2px dashed #E5484D;
   outline-offset: 3px;
 }
+/* точка-триггер на иллюстрации киоска (позиция в % от .nearby__booth) */
+.booth-pt {
+  top: 50%;
+  left: 50%;
+  width: 12%;
+}
+/* вторая dev-панель (координаты точки киоска) — ниже панелей реки */
+.duckzone-dev #boothPtReadout { top: 214px; }
 
 /* тёмный «кривой» бабл, появляется по тапу на точку */
 .river-bubble {

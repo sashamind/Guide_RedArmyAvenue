@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://i.postimg.cc" />
   <link rel="preconnect" href="https://vxxzyggeogbjxjlrhcus.supabase.co" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260717za13" />
+  <link rel="stylesheet" href="style.css?v=20260717za14" />
 
   <!-- Lottie (лёгкая SVG-сборка) — анимация птиц в hero -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie_light.min.js" defer></script>
@@ -605,10 +605,21 @@
         </p>
       </div>
       <div class="nearby__row">
-        <figure class="nearby__booth" data-animate="fade-up" aria-hidden="true">
+        <figure class="nearby__booth" data-animate="fade-up">
           <img src="https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/press-and-phone-booth.png"
-               alt="" width="1118" height="549" loading="lazy" />
+               alt="Киоск прессы и телефонная будка — иллюстрация" width="1118" height="549" loading="lazy" />
+          <!-- точка-триггер бабла (позицию выставляем в dev-режиме #duckzone) -->
+          <button class="river-pt booth-pt" id="boothBubblePt" type="button" aria-label="Показать подсказку"></button>
+          <div class="river-bubble booth-bubble" id="boothBubble" role="status" hidden>
+            <span class="river-bubble__notch"></span>
+            <svg class="river-bubble__tail" viewBox="0 0 30 27" aria-hidden="true">
+              <polygon class="river-bubble__tail-fill" points="0,0 26,0 4,27" />
+              <path class="river-bubble__tail-line" d="M0 0 L4 27 L26 0" />
+            </svg>
+          </div>
         </figure>
+        <!-- панель координат точки-бабла киоска (dev) -->
+        <div class="duckpt-readout" id="boothPtReadout"></div>
         <figure class="nearby__photo" data-animate="fade-up">
           <span class="nearby__photo-frame">
             <img src="https://vxxzyggeogbjxjlrhcus.supabase.co/storage/v1/object/public/images/vitrazhi-moskva-photo.jpg"
@@ -849,7 +860,7 @@
     </svg>
   </button>
 
-  <script src="script.js?v=20260719c"></script>
+  <script src="script.js?v=20260719d"></script>
   <!-- DEV временно выключен. Вернуть — раскомментировать строку ниже
        и удалить правило-переключатель в конце style.css (метка «DEV OFF»). -->
   <!-- <script src="dev-adjust.js"></script> -->

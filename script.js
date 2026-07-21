@@ -1368,16 +1368,13 @@ if (hubStops.length && stopsEl) {
   updateFocus();
 })();
 
-/* ═══ Точка-бабл на реке: тап → тёмный «кривой» бабл; в dev — точку можно двигать ═══ */
-(() => {
-  const stage  = document.querySelector('.nearby__river-stage');
-  const pt      = document.getElementById('riverBubblePt');
-  const bubble  = document.getElementById('riverBubble');
+/* ═══ Точка-бабл: тап → бабл; в dev (#duckzone) точку можно двигать.
+   Переиспользуется для реки и для киоска прессы. ═══ */
+function setupBubblePoint(stage, pt, bubble, readout, label) {
   if (!stage || !pt || !bubble) return;
-  const readout = document.getElementById('duckPtReadout');
   const isDev = () => document.documentElement.classList.contains('duckzone-dev');
 
-  // тап по точке не должен шевелить уток
+  // тап по точке не должен шевелить уток / другой интерактив
   pt.addEventListener('pointerdown', (e) => e.stopPropagation());
 
   function positionBubble() {
@@ -1410,7 +1407,7 @@ if (hubStops.length && stopsEl) {
     const sr = stage.getBoundingClientRect();
     const leftPct = (pr.left + pr.width / 2 - sr.left) / sr.width  * 100;
     const topPct  = (pr.top  + pr.height / 2 - sr.top) / sr.height * 100;
-    readout.textContent = 'точка-бабл\ntop:  ' + topPct.toFixed(1) +
+    readout.textContent = label + '\ntop:  ' + topPct.toFixed(1) +
                           '%\nleft: ' + leftPct.toFixed(1) + '%';
   }
   let drag = false, sx = 0, sy = 0, sLeft = 0, sTop = 0;
@@ -1440,4 +1437,21 @@ if (hubStops.length && stopsEl) {
   window.addEventListener('hashchange', show);
   window.addEventListener('load', show);
   show();
+}
+
+(() => {
+  setupBubblePoint(
+    document.querySelector('.nearby__river-stage'),
+    document.getElementById('riverBubblePt'),
+    document.getElementById('riverBubble'),
+    document.getElementById('duckPtReadout'),
+    'точка-бабл (река)'
+  );
+  setupBubblePoint(
+    document.querySelector('.nearby__booth'),
+    document.getElementById('boothBubblePt'),
+    document.getElementById('boothBubble'),
+    document.getElementById('boothPtReadout'),
+    'точка-бабл (киоск)'
+  );
 })();
