@@ -2942,6 +2942,19 @@ figcaption {
   transform: translate(-16%, calc(-100% - 26px)) scale(1) rotate(0deg);
 }
 .river-bubble p { margin: 0; }
+/* надпись внутри бабла — по центру */
+.river-bubble__text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--f-display);
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 700;
+  color: var(--blue);
+  pointer-events: none;
+}
 
 /* хвостик снизу-слева — чистый, без дрожи */
 .river-bubble__tail {
