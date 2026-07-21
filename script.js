@@ -231,10 +231,11 @@ function initDonateFace(SB) {
     btn.addEventListener('mouseenter', fwd);
     btn.addEventListener('mouseleave', bwd);
   } else {
-    // мобильный: доскроллили до кнопки → вперёд, ушли дальше → назад
+    // мобильный: срабатывает, когда кнопка входит в центральную область экрана
+    // (rootMargin сжимает зону наблюдения до узкой полосы по центру вьюпорта)
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { e.isIntersecting ? fwd() : bwd(); });
-    }, { threshold: 0.6 });
+    }, { threshold: 0, rootMargin: '-42% 0px -42% 0px' });
     io.observe(btn);
   }
 }
