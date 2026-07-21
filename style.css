@@ -2762,7 +2762,7 @@ figcaption {
   .nearby__booth {
     flex: none;
     width: min(74%, 320px);
-    margin: 0 auto clamp(12px, 3vw, 28px);
+    margin: 0 auto clamp(28px, 7vw, 60px);
   }
 }
 
