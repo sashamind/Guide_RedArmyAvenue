@@ -3138,8 +3138,9 @@ figcaption {
   left: 100%;
   top: 50%;
   transform: translateY(-50%);
-  margin-left: clamp(14px, 2vw, 30px);
-  width: clamp(40px, 4.2vw, 56px);   /* на 30% меньше */
+  margin-left: clamp(28px, 3.5vw, 56px);   /* чуть правее */
+  margin-top: 14px;                        /* чуть ниже */
+  width: clamp(36px, 3.8vw, 50px);         /* ещё на 10% меньше */
   aspect-ratio: 109 / 111;
   pointer-events: none;   /* ховер ловит кнопка, не мешаем ей */
 }
