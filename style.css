@@ -2752,8 +2752,18 @@ figcaption {
 /* пока открыт бабл — Lottie скрыта (остаётся статичная иллюстрация) */
 .nearby__booth:has(.booth-bubble.is-open) .nearby__booth-anim { opacity: 0; }
 @media (max-width: 720px) {
-  .nearby__row { flex-direction: column; align-items: flex-start; }
-  .nearby__booth { flex: none; width: 100%; margin-left: 0; }
+  /* ряд «раскрывается» — booth и фото становятся элементами колонки секции */
+  .nearby__row { display: contents; }
+  /* колонка секции с управляемым порядком */
+  .nearby .container { display: flex; flex-direction: column; }
+  .nearby__hdr   { order: -2; }
+  .nearby__booth { order: -1; }   /* телефонная будка — над текстом «Витражи» */
+  /* booth по центру экрана */
+  .nearby__booth {
+    flex: none;
+    width: min(74%, 320px);
+    margin: 0 auto clamp(12px, 3vw, 28px);
+  }
 }
 
 /* фото под текстом про витражи — по центру текстовой колонки (колонка справа) */
@@ -3904,6 +3914,12 @@ figcaption {
 
 @media (max-width: 560px) {
   :root { --pad-x: 18px; --pad-y: 48px; }
+
+  /* donate-face у кнопки «Поддержать»: чуть больше и левее */
+  .credits__donate {
+    width: 58px;
+    margin-left: clamp(16px, 4vw, 28px);
+  }
 
   /* бабл на реке — чуть меньше */
   .river-bubble { width: 150px; height: 74px; border-radius: 13px; }
