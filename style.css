@@ -3127,14 +3127,19 @@ figcaption {
   max-width: 480px;
   color: var(--blue);
 }
+/* только кнопка в потоке (центрируется), donate-face — абсолютом справа от неё */
 .credits__support-actions {
-  display: flex;
-  align-items: center;
-  gap: clamp(16px, 2.5vw, 36px);
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
 }
 .credits__donate {
-  flex: none;
-  width: clamp(58px, 6vw, 80px);
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: clamp(14px, 2vw, 30px);
+  width: clamp(40px, 4.2vw, 56px);   /* на 30% меньше */
   aspect-ratio: 109 / 111;
   pointer-events: none;   /* ховер ловит кнопка, не мешаем ей */
 }
