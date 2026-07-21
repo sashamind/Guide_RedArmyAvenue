@@ -3929,6 +3929,7 @@ figcaption {
     transform: none;
     margin: 0;
     width: 46px;
+    order: -1;   /* над кнопкой — между текстом и кнопкой */
   }
 
   /* бабл на реке — чуть меньше */
