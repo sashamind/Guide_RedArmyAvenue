@@ -3140,7 +3140,7 @@ figcaption {
   transform: translateY(-50%);
   margin-left: clamp(56px, 6vw, 104px);    /* правее */
   margin-top: 14px;                        /* чуть ниже */
-  width: clamp(36px, 3.8vw, 50px);         /* ещё на 10% меньше */
+  width: clamp(32px, 3.4vw, 45px);         /* ещё на 10% меньше */
   aspect-ratio: 109 / 111;
   pointer-events: none;   /* ховер ловит кнопка, не мешаем ей */
 }
