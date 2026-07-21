@@ -2815,6 +2815,8 @@ figcaption {
   margin-left: 0;
   margin-right: auto;
 }
+/* picture — блок на всю ширину: иначе в моб. Safari картинка схлопывается (flex-баг) */
+.nearby__photo--left picture { display: block; width: 100%; line-height: 0; }
 .nearby__photo--left img {
   width: 100%;
   position: relative;
