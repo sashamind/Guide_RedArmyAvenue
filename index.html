@@ -26,7 +26,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://i.postimg.cc" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260717za6" />
+  <link rel="stylesheet" href="style.css?v=20260717za7" />
+
+  <!-- Lottie (лёгкая SVG-сборка) — анимация donate-face у кнопки «Поддержать» -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie_light.min.js" defer></script>
 
   <script type="application/ld+json">
   {
@@ -232,10 +235,13 @@
           и&nbsp;хотим, чтобы таких проектов стало больше.
           Поддержите нас, чтобы следующие вышли быстрее.
         </p>
-        <a class="credits__support-btn" href="#" target="_blank" rel="noopener">
-          <span>Поддержать</span>
-          <span class="credits__support-arrow" aria-hidden="true">→</span>
-        </a>
+        <div class="credits__support-actions">
+          <a class="credits__support-btn" href="#" target="_blank" rel="noopener">
+            <span>Поддержать</span>
+            <span class="credits__support-arrow" aria-hidden="true">→</span>
+          </a>
+          <div class="credits__donate" id="donateFace" aria-hidden="true"></div>
+        </div>
       </div>
 
       <span class="label" data-animate="fade-up">Об этом путеводителе</span>
@@ -317,6 +323,6 @@
     </svg>
   </button>
 
-  <script src="script.js?v=20260716i"></script>
+  <script src="script.js?v=20260719c"></script>
 </body>
 </html>

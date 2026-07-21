@@ -3127,6 +3127,19 @@ figcaption {
   max-width: 480px;
   color: var(--blue);
 }
+.credits__support-actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2.5vw, 36px);
+}
+.credits__donate {
+  flex: none;
+  width: clamp(58px, 6vw, 80px);
+  aspect-ratio: 109 / 111;
+  pointer-events: none;   /* ховер ловит кнопка, не мешаем ей */
+}
+.credits__donate svg { width: 100%; height: 100%; display: block; }
+
 .credits__support-btn {
   display: inline-flex;
   align-items: center;

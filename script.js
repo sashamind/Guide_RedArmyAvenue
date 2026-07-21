@@ -206,7 +206,38 @@ window.addEventListener('load', function () {
     SB + 'press-and-phone-booth_lottie.json', {
       className: 'nearby__booth-anim', hideImg: false, pauseMs: 0
     });
+
+  // donate-face у кнопки «Поддержать»: наведение → проигрывается вперёд до конца,
+  // увели курсор → отматывается назад к первому кадру; на мобильном — по скроллу
+  initDonateFace(SB);
 });
+
+function initDonateFace(SB) {
+  var box = document.getElementById('donateFace');
+  var btn = document.querySelector('.credits__support-btn');
+  if (!box || !btn || !window.lottie || reducedMotion) return;
+
+  var anim = window.lottie.loadAnimation({
+    container: box, renderer: 'svg', loop: false, autoplay: false,
+    path: SB + 'donate_face_lottie.json'
+  });
+  var ready = false;
+  anim.addEventListener('DOMLoaded', function () { ready = true; anim.goToAndStop(0, true); });
+
+  function fwd() { if (ready) { anim.setDirection(1);  anim.play(); } }
+  function bwd() { if (ready) { anim.setDirection(-1); anim.play(); } }
+
+  if (window.matchMedia('(hover: hover)').matches) {
+    btn.addEventListener('mouseenter', fwd);
+    btn.addEventListener('mouseleave', bwd);
+  } else {
+    // мобильный: доскроллили до кнопки → вперёд, ушли дальше → назад
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { e.isIntersecting ? fwd() : bwd(); });
+    }, { threshold: 0.6 });
+    io.observe(btn);
+  }
+}
 
 /* ─── 3b. HERO TITLE FIT (мобильный): максимально крупный, но в экран ─── */
 
