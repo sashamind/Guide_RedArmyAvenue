@@ -3915,9 +3915,9 @@ figcaption {
 @media (max-width: 560px) {
   :root { --pad-x: 18px; --pad-y: 48px; }
 
-  /* donate-face у кнопки «Поддержать»: чуть больше и левее */
+  /* donate-face у кнопки «Поддержать»: левее, размер −20% */
   .credits__donate {
-    width: 58px;
+    width: 46px;
     margin-left: clamp(16px, 4vw, 28px);
   }
 
