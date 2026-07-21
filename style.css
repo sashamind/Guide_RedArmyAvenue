@@ -2747,8 +2747,10 @@ figcaption {
   aspect-ratio: 1118 / 549;   /* держит высоту, когда статичный PNG скрыт под анимацией */
 }
 .nearby__booth img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.nearby__booth-anim { position: absolute; inset: 0; }
+.nearby__booth-anim { position: absolute; inset: 0; transition: opacity 0.25s ease; }
 .nearby__booth-anim svg { width: 100%; height: 100%; display: block; }
+/* пока открыт бабл — Lottie скрыта (остаётся статичная иллюстрация) */
+.nearby__booth:has(.booth-bubble.is-open) .nearby__booth-anim { opacity: 0; }
 @media (max-width: 720px) {
   .nearby__row { flex-direction: column; align-items: flex-start; }
   .nearby__booth { flex: none; width: 100%; margin-left: 0; }
